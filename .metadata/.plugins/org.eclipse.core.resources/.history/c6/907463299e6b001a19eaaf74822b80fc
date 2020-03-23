@@ -1,0 +1,12 @@
+module snakus-master {
+	exports Game.Classes.Main;
+	exports Game.Classes.Menu;
+	exports Game.Classes.Snake;
+	exports Game.Classes.Skin;
+
+	requires javafx.base;
+	requires javafx.controls;
+	requires javafx.fxml;
+	requires javafx.graphics;
+	requires javafx.media;
+}

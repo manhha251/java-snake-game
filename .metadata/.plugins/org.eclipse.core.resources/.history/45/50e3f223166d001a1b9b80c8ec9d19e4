@@ -1,0 +1,60 @@
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.GridLayout;
+import net.miginfocom.swing.MigLayout;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
+import java.awt.GridBagLayout;
+
+public class main extends JFrame {
+
+	/**
+	 * Launch the application.
+	 */
+	
+	private JPanel contentPane;
+	
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					main frame = new main();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public main() {
+		/*JPanel p = new ScorePanel();
+		//JPanel game = new JPanel();
+		//game.setPreferredSize(new Dimension(400, 400));
+		
+		getContentPane().setLayout(new BorderLayout());
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
+		
+		getContentPane().add(p, BorderLayout.EAST);
+		//getContentPane().add(game, BorderLayout.CENTER);
+		
+		pack(); // size of the frame
+        setLocationRelativeTo(null); // if the argument is null, the window is centered onscreen*/
+
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
+		contentPane = new JPanel();
+		contentPane.add(new ScorePanel());
+		add(contentPane);
+	}
+
+}

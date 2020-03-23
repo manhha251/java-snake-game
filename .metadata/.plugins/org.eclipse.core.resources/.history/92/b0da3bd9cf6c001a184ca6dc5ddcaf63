@@ -1,0 +1,121 @@
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+import java.awt.GridLayout;
+import javax.swing.JLayeredPane;
+import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import javax.swing.BoxLayout;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JLabel;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JSeparator;
+import java.awt.Font;
+import java.awt.Insets;
+
+public class ScorePanel extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3919165149509621102L;
+
+	/**
+	 * Create the panel.
+	 */
+	public ScorePanel() {
+		setLayout(null);
+		
+		JPanel side_panel = new JPanel();
+		side_panel.setBounds(0, 0, 450, 300);
+		add(side_panel);
+		GridBagLayout gbl_side_panel = new GridBagLayout();
+		gbl_side_panel.columnWidths = new int[]{125, 0};
+		gbl_side_panel.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
+		gbl_side_panel.columnWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_side_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		side_panel.setLayout(gbl_side_panel);
+		
+		JLabel lb_player_name = new JLabel("Player Name:");
+		GridBagConstraints gbc_lb_player_name = new GridBagConstraints();
+		gbc_lb_player_name.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lb_player_name.insets = new Insets(0, 0, 5, 0);
+		gbc_lb_player_name.gridx = 0;
+		gbc_lb_player_name.gridy = 0;
+		side_panel.add(lb_player_name, gbc_lb_player_name);
+		
+		JLabel lb_high_score = new JLabel("High Score:");
+		GridBagConstraints gbc_lb_high_score = new GridBagConstraints();
+		gbc_lb_high_score.fill = GridBagConstraints.BOTH;
+		gbc_lb_high_score.insets = new Insets(0, 0, 5, 0);
+		gbc_lb_high_score.gridx = 0;
+		gbc_lb_high_score.gridy = 1;
+		side_panel.add(lb_high_score, gbc_lb_high_score);
+		
+		JLabel lb_score = new JLabel("Score:");
+		GridBagConstraints gbc_lb_score = new GridBagConstraints();
+		gbc_lb_score.fill = GridBagConstraints.BOTH;
+		gbc_lb_score.insets = new Insets(0, 0, 5, 0);
+		gbc_lb_score.gridx = 0;
+		gbc_lb_score.gridy = 2;
+		side_panel.add(lb_score, gbc_lb_score);
+		
+		JLabel lb_apples = new JLabel("Apples Eaten:");
+		GridBagConstraints gbc_lb_apples = new GridBagConstraints();
+		gbc_lb_apples.fill = GridBagConstraints.BOTH;
+		gbc_lb_apples.insets = new Insets(0, 0, 5, 0);
+		gbc_lb_apples.gridx = 0;
+		gbc_lb_apples.gridy = 3;
+		side_panel.add(lb_apples, gbc_lb_apples);
+		
+		JSeparator separator = new JSeparator();
+		GridBagConstraints gbc_separator = new GridBagConstraints();
+		gbc_separator.fill = GridBagConstraints.BOTH;
+		gbc_separator.insets = new Insets(0, 0, 5, 0);
+		gbc_separator.gridx = 0;
+		gbc_separator.gridy = 4;
+		side_panel.add(separator, gbc_separator);
+		
+		JLabel lb_controls = new JLabel("CONTROLS");
+		lb_controls.setFont(new Font("Tahoma", Font.BOLD, 16));
+		GridBagConstraints gbc_lb_controls = new GridBagConstraints();
+		gbc_lb_controls.fill = GridBagConstraints.BOTH;
+		gbc_lb_controls.insets = new Insets(0, 0, 5, 0);
+		gbc_lb_controls.gridx = 0;
+		gbc_lb_controls.gridy = 5;
+		side_panel.add(lb_controls, gbc_lb_controls);
+		
+		JLabel lb_up = new JLabel("Up: Up Arrow Key/W");
+		GridBagConstraints gbc_lb_up = new GridBagConstraints();
+		gbc_lb_up.fill = GridBagConstraints.BOTH;
+		gbc_lb_up.insets = new Insets(0, 0, 5, 0);
+		gbc_lb_up.gridx = 0;
+		gbc_lb_up.gridy = 6;
+		side_panel.add(lb_up, gbc_lb_up);
+		
+		JLabel lb_down = new JLabel("Down: Down Arrow Key/S");
+		GridBagConstraints gbc_lb_down = new GridBagConstraints();
+		gbc_lb_down.fill = GridBagConstraints.BOTH;
+		gbc_lb_down.insets = new Insets(0, 0, 5, 0);
+		gbc_lb_down.gridx = 0;
+		gbc_lb_down.gridy = 7;
+		side_panel.add(lb_down, gbc_lb_down);
+		
+		JLabel lb_left = new JLabel("Left: Left Arrow Key/A");
+		GridBagConstraints gbc_lb_left = new GridBagConstraints();
+		gbc_lb_left.fill = GridBagConstraints.BOTH;
+		gbc_lb_left.insets = new Insets(0, 0, 5, 0);
+		gbc_lb_left.gridx = 0;
+		gbc_lb_left.gridy = 8;
+		side_panel.add(lb_left, gbc_lb_left);
+		
+		JLabel lb_right = new JLabel("Right: Right Arrow Key/D");
+		GridBagConstraints gbc_lb_right = new GridBagConstraints();
+		gbc_lb_right.fill = GridBagConstraints.BOTH;
+		gbc_lb_right.gridx = 0;
+		gbc_lb_right.gridy = 9;
+		side_panel.add(lb_right, gbc_lb_right);
+		
+	}
+}

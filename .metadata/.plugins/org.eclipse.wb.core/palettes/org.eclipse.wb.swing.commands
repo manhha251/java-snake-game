@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<commands>
+	<moveEntry
+		id="org.eclipse.wb.swing.layouts java.awt.GridLayout"
+		category="org.eclipse.wb.swing.layouts"
+		nextEntry="system.layout.absolute"/>
+	<moveEntry
+		id="org.eclipse.wb.swing.components javax.swing.JSeparator"
+		category="org.eclipse.wb.swing.components"
+		nextEntry="org.eclipse.wb.swing.components javax.swing.JSpinner"/>
+</commands>

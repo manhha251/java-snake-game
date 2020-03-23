@@ -1,0 +1,55 @@
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.GridLayout;
+import net.miginfocom.swing.MigLayout;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
+
+public class main extends JFrame {
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					main frame = new main();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public main() {
+		JPanel p = new ScorePanel();
+		JPanel game = new JPanel();
+		game.setPreferredSize(new Dimension(400, 400));
+		
+		setLayout(new BorderLayout());
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
+		
+		add(p, BorderLayout.EAST);
+		add(game, BorderLayout.CENTER);
+		
+		JSeparator separator = new JSeparator(JSeparator.VERTICAL);
+		separator.setBounds(0, 167, 300, 14);
+		add(separator);
+		
+		pack(); // size of the frame
+        setLocationRelativeTo(null); // if the argument is null, the window is centered onscreen
+
+	}
+
+}

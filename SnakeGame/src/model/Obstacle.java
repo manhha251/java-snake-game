@@ -1,0 +1,14 @@
+package model;
+
+import java.awt.Color;
+
+public class Obstacle extends GameObject{
+
+	private final Color OBSTACLE_COLOR = Color.pink;
+	
+	public Obstacle(int x, int y) {
+		super(x, y);
+		this.setColor(OBSTACLE_COLOR);
+	}
+
+}

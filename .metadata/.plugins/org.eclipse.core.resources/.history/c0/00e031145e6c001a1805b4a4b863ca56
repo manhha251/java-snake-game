@@ -1,0 +1,15 @@
+package config;
+
+public class Config {
+	
+	private final static int DEFAULT_BLOCK_SIZE = 20;
+	
+	public static final int BOARD_ROWS = 20, BOARD_COLUMNS = 20;
+	
+	public static int BLOCK_SIZE = DEFAULT_BLOCK_SIZE;
+	
+	public void setBlockSize(int s) {
+		Config.BLOCK_SIZE = s;
+	}
+	
+}

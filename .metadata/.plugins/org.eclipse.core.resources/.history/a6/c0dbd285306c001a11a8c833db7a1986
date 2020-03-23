@@ -1,0 +1,9 @@
+package predefined;
+
+public enum Size {
+	SMALL,
+	
+	NORMAL,
+	
+	LARGE
+}

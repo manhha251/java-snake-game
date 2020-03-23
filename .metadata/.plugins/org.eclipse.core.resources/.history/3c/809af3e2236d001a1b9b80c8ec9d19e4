@@ -1,0 +1,398 @@
+package view;
+
+import java.awt.Color;
+import java.awt.Dimension;
+
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
+
+import config.Mode;
+
+import java.awt.Font;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+
+public class ScorePanelView extends JPanel{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	public final static int SCORE_PANEL_HEIGHT = 50;
+	
+	private final static Font NORMAL_FONT = new Font("Monospaced", Font.BOLD, 14);
+	
+	private final static Font BOLD_FONT = new Font("Monospaced", Font.BOLD, 20);
+	
+	private final static Color score_label_color = Color.yellow;
+	
+	private final Color score_panel_color = Color.black;
+	 
+	
+	private JLabel lb_player_name, lb_score, lb_high_score, lb_apples, lb_mode;
+	
+	private int score, high_score, apples;
+	private String player_name;
+	private Mode mode;
+	
+	public ScorePanelView() {
+		
+		initLayout();
+		
+		initUI();
+		
+		initVariable();
+	}
+	
+	public ScorePanelView(String player_name, int high_score, int score, int apples, Mode mode) {
+		setPlayerName(player_name);
+		this.score = score;
+	}
+	
+	private void initVariable() {
+		score = 0;
+		apples = 0;
+		updateScore();
+		updateApplesEaten();
+	}
+
+	private void initLayout() {
+		
+		setPreferredSize(new Dimension(300, 400));
+		
+		setBackground(score_panel_color);
+		
+		GridBagLayout grid_bag_layout = new GridBagLayout();
+		grid_bag_layout.columnWidths = new int[]{160, 200};
+		grid_bag_layout.rowWeights = new double[]{0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		setLayout(grid_bag_layout);
+	}
+	
+	private void initUI() {
+
+		/*--------------------------- 2 cells in a row wide label --------------------------------*/
+		/*
+		JLabel lb_statistics = new JLabel("STATISTICS");
+		lb_statistics.setFont(BOLD_FONT);
+		lb_statistics.setHorizontalAlignment(SwingConstants.CENTER);
+		gbc.insets = new Insets(0, 0, 5, 0);
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		add(lb_statistics, gbc);
+		*/
+		addLabel("STATISTICS", 0, 1, 2, BOLD_FONT);
+		
+		/*
+		JLabel lb_controls = new JLabel("CONTROLS");
+		lb_controls.setFont(BOLD_FONT);
+		lb_controls.setHorizontalAlignment(SwingConstants.CENTER);
+		gbc.insets = new Insets(0, 0, 5, 0);
+		gbc.gridx = 0;
+		gbc.gridy = 8;
+		add(lb_controls, gbc);
+		*/
+		addLabel("CONTROLS", 0, 8, 2, BOLD_FONT);
+		
+		/*--------------------------- 1 cell in a row wide label --------------------------------*/
+		
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridwidth = 1;
+		
+		/*
+		JLabel lb_player_name = new JLabel("Player Name: ");
+		lb_player_name.setFont(NORMAL_FONT);
+		lb_player_name.setHorizontalAlignment(SwingConstants.RIGHT);
+		gbc.anchor = GridBagConstraints.EAST;
+		gbc.insets = new Insets(0, 0, 5, 0);
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		add(lb_player_name, gbc);
+		*/
+		addLabel("Player Name: ", 0, 2, 1, NORMAL_FONT);
+		
+		
+		lb_player_name = new JLabel("Test");
+		lb_player_name.setFont(NORMAL_FONT);
+		lb_player_name.setHorizontalAlignment(SwingConstants.RIGHT);
+		gbc.anchor = GridBagConstraints.WEST;
+		gbc.insets = new Insets(0, 0, 5, 0);
+		gbc.gridx = 1;
+		gbc.gridy = 2;
+		add(lb_player_name, gbc);
+		//addLabel("Test", 1, 2, 1, NORMAL_FONT);
+		
+		/*
+		JLabel lb_high_score = new JLabel("High Score: ");
+		lb_high_score.setFont(NORMAL_FONT);
+		lb_high_score.setHorizontalAlignment(SwingConstants.RIGHT);
+		gbc.anchor = GridBagConstraints.EAST;
+		gbc.insets = new Insets(0, 0, 5, 0);
+		gbc.gridx = 0;
+		gbc.gridy = 3;
+		add(lb_high_score, gbc);
+		*/
+		addLabel("High Score: ", 0, 3, 1, NORMAL_FONT);
+		
+		lb_high_score = new JLabel("100");
+		lb_high_score.setFont(NORMAL_FONT);
+		lb_high_score.setHorizontalAlignment(SwingConstants.RIGHT);
+		gbc.anchor = GridBagConstraints.WEST;
+		gbc.insets = new Insets(0, 0, 5, 0);
+		gbc.gridx = 1;
+		gbc.gridy = 3;
+		add(lb_high_score, gbc);	
+		//addLabel("100", 1, 3, 1, NORMAL_FONT);
+		
+		/*	
+		JLabel lb_score = new JLabel("Score: ");
+		lb_score.setFont(NORMAL_FONT);
+		lb_score.setHorizontalAlignment(SwingConstants.RIGHT);
+		gbc.anchor = GridBagConstraints.EAST;
+		gbc.insets = new Insets(0, 0, 5, 0);
+		gbc.gridx = 0;
+		gbc.gridy = 4;
+		add(lb_score, gbc);
+		*/
+		addLabel("Score: ", 0, 4, 1, NORMAL_FONT);
+		
+		lb_score = new JLabel("10");
+		lb_score.setFont(NORMAL_FONT);
+		lb_score.setHorizontalAlignment(SwingConstants.RIGHT);
+		gbc.anchor = GridBagConstraints.WEST;
+		gbc.insets = new Insets(0, 0, 5, 0);
+		gbc.gridx = 1;
+		gbc.gridy = 4;
+		add(lb_score, gbc);
+		//addLabel("10", 1, 4, 1, NORMAL_FONT);
+		
+		/*
+		JLabel lb_apples = new JLabel("Apples Eaten: ");
+		lb_apples.setFont(NORMAL_FONT);
+		lb_apples.setHorizontalAlignment(SwingConstants.RIGHT);
+		gbc.anchor = GridBagConstraints.EAST;
+		gbc.insets = new Insets(0, 0, 5, 0);
+		gbc.gridx = 0;
+		gbc.gridy = 5;
+		add(lb_apples, gbc);
+		*/
+		addLabel("Apples Eaten: ", 0, 5, 1, NORMAL_FONT);
+		
+		lb_apples = new JLabel("2");
+		lb_apples.setFont(NORMAL_FONT);
+		lb_apples.setHorizontalAlignment(SwingConstants.RIGHT);
+		gbc.anchor = GridBagConstraints.WEST;
+		gbc.insets = new Insets(0, 0, 5, 0);
+		gbc.gridx = 1;
+		gbc.gridy = 5;
+		add(lb_apples, gbc);
+		//addLabel("2", 1, 5, 1, NORMAL_FONT);
+		
+		/*
+		JLabel lb_mode = new JLabel("Mode: ");
+		lb_mode.setFont(NORMAL_FONT);
+		lb_mode.setHorizontalAlignment(SwingConstants.RIGHT);
+		gbc.anchor = GridBagConstraints.EAST;
+		gbc.insets = new Insets(0, 0, 5, 0);
+		gbc.gridx = 0;
+		gbc.gridy = 6;
+		add(lb_mode, gbc);
+		*/
+		addLabel("Mode: ", 0, 6, 1, NORMAL_FONT);
+		
+		lb_mode = new JLabel("EASY");
+		lb_mode.setFont(NORMAL_FONT);
+		lb_mode.setHorizontalAlignment(SwingConstants.RIGHT);
+		gbc.anchor = GridBagConstraints.WEST;
+		gbc.insets = new Insets(0, 0, 5, 0);
+		gbc.gridx = 1;
+		gbc.gridy = 6;
+		add(lb_mode, gbc);
+		//addLabel("EASY", 1, 6, 1, NORMAL_FONT);
+		
+		/*
+		JLabel lb_up = new JLabel("UP: ");
+		lb_up.setFont(NORMAL_FONT);
+		lb_up.setHorizontalAlignment(SwingConstants.RIGHT);
+		gbc.anchor = GridBagConstraints.EAST;
+		gbc.insets = new Insets(0, 0, 5, 0);
+		gbc.gridx = 0;
+		gbc.gridy = 9;
+		add(lb_up, gbc);
+		*/
+		addLabel("UP: ", 0, 9, 1, NORMAL_FONT);
+		
+		/*
+		JLabel lb_controls_up = new JLabel("Up Arrow Key / W");
+		lb_controls_up.setFont(NORMAL_FONT);
+		lb_controls_up.setHorizontalAlignment(SwingConstants.TRAILING);
+		gbc.anchor = GridBagConstraints.WEST;
+		gbc.insets = new Insets(0, 0, 5, 0);
+		gbc.gridx = 1;
+		gbc.gridy = 9;
+		add(lb_controls_up, gbc);
+		*/
+		addLabel("Up Arrow Key / W", 1, 9, 1, NORMAL_FONT);
+		
+		/*
+		JLabel lb_down = new JLabel("DOWN: ");
+		lb_down.setFont(NORMAL_FONT);
+		lb_down.setHorizontalAlignment(SwingConstants.RIGHT);
+		gbc.anchor = GridBagConstraints.EAST;
+		gbc.insets = new Insets(0, 0, 5, 0);
+		gbc.gridx = 0;
+		gbc.gridy = 10;
+		add(lb_down, gbc);
+		*/
+		addLabel("DOWN: ", 0, 10, 1, NORMAL_FONT);
+		
+		/*
+		JLabel lb_controls_down = new JLabel("Down Arrow Key / S");
+		lb_controls_down.setFont(NORMAL_FONT);
+		gbc.anchor = GridBagConstraints.WEST;
+		gbc.insets = new Insets(0, 0, 5, 0);
+		gbc.gridx = 1;
+		gbc.gridy = 10;
+		add(lb_controls_down, gbc);
+		*/
+		addLabel("Down Arrow Key / S", 1, 10, 1, NORMAL_FONT);
+		
+		/*
+		JLabel lb_left = new JLabel("LEFT: ");
+		lb_left.setFont(NORMAL_FONT);
+		lb_left.setHorizontalAlignment(SwingConstants.RIGHT);		
+		gbc.anchor = GridBagConstraints.EAST;
+		gbc.insets = new Insets(0, 0, 5, 0);
+		gbc.gridx = 0;
+		gbc.gridy = 11;
+		add(lb_left, gbc);
+		*/
+		addLabel("LEFT: ", 0, 11, 1, NORMAL_FONT);
+		
+		/*
+		JLabel lb_controls_left = new JLabel("Left Arrow Key / A");	
+		lb_controls_left.setFont(NORMAL_FONT);
+		gbc.anchor = GridBagConstraints.WEST;
+		gbc.insets = new Insets(0, 0, 5, 0);
+		gbc.gridx = 1;
+		gbc.gridy = 11;
+		add(lb_controls_left, gbc);
+		*/
+		addLabel("Left Arrow Key / A", 1, 11, 1, NORMAL_FONT);
+		
+		/*
+		JLabel lb_right = new JLabel("RIGHT: ");
+		lb_right.setFont(NORMAL_FONT);
+		lb_right.setHorizontalAlignment(SwingConstants.RIGHT);
+		gbc.anchor = GridBagConstraints.EAST;
+		gbc.insets = new Insets(0, 0, 5, 0);
+		gbc.gridx = 0;
+		gbc.gridy = 12;
+		add(lb_right, gbc);
+		*/
+		addLabel("RIGHT: ", 0, 12, 1, NORMAL_FONT);
+		
+		/*
+		JLabel lb_controls_right = new JLabel("Right Arrow Key / D");
+		lb_controls_right.setFont(NORMAL_FONT);
+		gbc.anchor = GridBagConstraints.WEST;
+		gbc.insets = new Insets(0, 0, 5, 0);
+		gbc.gridx = 1;
+		gbc.gridy = 12;
+		add(lb_controls_right, gbc);
+		*/
+		addLabel("Right Arrow Key / D", 1, 12, 1, NORMAL_FONT);
+	}
+	
+	private void addLabel(String text, int x, int y, int grid_width, Font font) {
+		
+		GridBagConstraints gbc = new GridBagConstraints();
+		JLabel label = new JLabel(text);
+		label.setForeground(score_label_color);
+		label.setFont(font);
+		
+		if (grid_width == 2) {
+			label.setHorizontalAlignment(SwingConstants.CENTER);
+		} else if (x == 0) {
+			label.setHorizontalAlignment(SwingConstants.RIGHT);
+			gbc.anchor = GridBagConstraints.EAST;
+		}
+		else {
+			label.setHorizontalAlignment(SwingConstants.LEFT);
+			gbc.anchor = GridBagConstraints.WEST;
+		}
+		
+		gbc.gridx = x;
+		gbc.gridy = y;
+		gbc.gridwidth = grid_width;
+		gbc.insets = new Insets(0, 0, 5, 0);
+		
+		add(label, gbc);
+	}
+	
+	public int getScore() {
+		
+		return this.score;
+	}
+	
+	public int getHighScore() {
+		
+		return this.high_score;
+	}
+	
+	public String getPlayerName() {
+		
+		return this.player_name;
+	}
+	
+	public int getApplesEaten() {
+		
+		return this.apples;
+	}
+	
+	public Mode getMode() {
+		
+		return this.mode;
+	}
+	
+	public void addScore(int score) {
+		
+		this.score += score;
+		updateScore();
+		
+		if (this.score > high_score) {
+			high_score = this.score;
+			updateHighScore();
+		}
+	}
+	
+	public void setPlayerName(String name) {
+		this.player_name = name;
+		lb_player_name.setText(name);
+	}
+	
+	public void updateScore() {
+		lb_score.setText(Integer.toString(score));
+	}
+	
+	public void updateHighScore() {
+		lb_high_score.setText(Integer.toString(high_score));
+	}
+	
+	public void updateApplesEaten() {
+		lb_apples.setText(Integer.toString(apples));
+	}
+
+	public void updateMode() {
+		lb_mode.setText(mode.toString());
+	}
+	
+	private void setScore(int score) {
+		this.score = score;
+		updateScore();
+	}
+}

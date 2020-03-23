@@ -1,0 +1,12 @@
+package model;
+
+public class SnakeTile extends GameObject {
+	
+	
+
+	public SnakeTile(int x, int y) {
+		super(x, y);
+		// TODO Auto-generated constructor stub
+	}
+
+}

@@ -1,0 +1,66 @@
+package snake;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.util.Timer;
+
+import javax.swing.JPanel;
+
+public class Config extends JPanel{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6987717423315755027L;
+	
+	/*--------------------------Static configuration------------------------------*/
+	
+		/*--------------------------Font-------------------------------*/
+	
+	final static Font DEFAULT_FONT = new Font("Monospaced", Font.BOLD, 20);
+    
+        /*--------------------------Size-------------------------------*/
+    
+	final static int BOARD_COLS = 20;
+	final static int BOARD_ROWS = 20;
+	final static int SIDE_PANEL_COLS = 15;
+	final static int SIDE_PANEL_ROWS = 20;
+	final static int DEFAULT_BLOCK_SIZE = 20;
+    
+        /*----------------------------Color-------------------------------*/
+    
+	final static Color block_color = Color.black;
+	final static Color block_border_color = Color.white;
+	final static Color text_color = Color.white;
+	
+	/*----------------------------------------------------------------------------*/
+	
+	private int block_size;
+	
+	private Font main_font;
+	
+	public Config() {
+		block_size = DEFAULT_BLOCK_SIZE;
+		
+	}
+	
+	public void setBlockSize(Size size) {
+		switch (size) {
+			case SMALL:
+				block_size = DEFAULT_BLOCK_SIZE / 2;
+				break;
+			case NORMAL:
+				block_size = DEFAULT_BLOCK_SIZE;
+				break;
+			case LARGE:
+				block_size = DEFAULT_BLOCK_SIZE * 3 / 2;
+				break;
+			default:
+				break;
+		}
+	}
+	
+	public int getBlockSize() {
+		return this.block_size;
+	}
+}

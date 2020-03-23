@@ -1,0 +1,133 @@
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+import java.awt.GridLayout;
+import javax.swing.JLayeredPane;
+import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import javax.swing.BoxLayout;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JLabel;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JSeparator;
+import java.awt.Font;
+
+public class ScorePanel extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public ScorePanel() {
+		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		
+		JPanel side_panel = new JPanel();
+		add(side_panel);
+		
+		JLabel lb_player_name = new JLabel("Player Name:");
+		
+		JLabel lb_score = new JLabel("Score:");
+		
+		JLabel lb_high_score = new JLabel("High Score:");
+		
+		JLabel lb_apples = new JLabel("Apples Eaten:");
+		
+		JLabel high_score = new JLabel("");
+		
+		JLabel player_name = new JLabel("");
+		
+		JLabel score = new JLabel("");
+		
+		JLabel apples = new JLabel("");
+		
+		JSeparator separator = new JSeparator();
+		
+		JLabel lb_controls = new JLabel("CONTROLS");
+		lb_controls.setFont(new Font("Tahoma", Font.BOLD, 16));
+		
+		JLabel lb_up = new JLabel("Up: Up Arrow Key/W");
+		
+		JLabel lb_down = new JLabel("Down: Down Arrow Key/S");
+		
+		JLabel lb_left = new JLabel("Left: Left Arrow Key/A");
+		
+		JLabel lb_right = new JLabel("Right: Right Arrow Key/D");
+		GroupLayout gl_side_panel = new GroupLayout(side_panel);
+		gl_side_panel.setHorizontalGroup(
+			gl_side_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_side_panel.createSequentialGroup()
+					.addGroup(gl_side_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_side_panel.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(gl_side_panel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_side_panel.createSequentialGroup()
+									.addComponent(lb_score, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(score))
+								.addGroup(gl_side_panel.createSequentialGroup()
+									.addComponent(lb_apples)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(apples))
+								.addGroup(gl_side_panel.createSequentialGroup()
+									.addComponent(lb_high_score)
+									.addGap(18)
+									.addComponent(high_score))
+								.addGroup(gl_side_panel.createSequentialGroup()
+									.addComponent(lb_player_name, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(player_name))))
+						.addComponent(separator, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_side_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lb_controls))
+						.addGroup(gl_side_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lb_up))
+						.addGroup(gl_side_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lb_down))
+						.addGroup(gl_side_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lb_left))
+						.addGroup(gl_side_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lb_right)))
+					.addContainerGap(296, Short.MAX_VALUE))
+		);
+		gl_side_panel.setVerticalGroup(
+			gl_side_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_side_panel.createSequentialGroup()
+					.addGap(37)
+					.addGroup(gl_side_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lb_player_name)
+						.addComponent(player_name))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_side_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lb_high_score)
+						.addComponent(high_score))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_side_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lb_score)
+						.addComponent(score))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_side_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lb_apples)
+						.addComponent(apples))
+					.addGap(32)
+					.addComponent(separator, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lb_controls)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lb_up)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lb_down)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lb_left)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lb_right)
+					.addContainerGap(39, Short.MAX_VALUE))
+		);
+		side_panel.setLayout(gl_side_panel);
+		
+	}
+}

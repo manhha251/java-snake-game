@@ -1,0 +1,10 @@
+import javax.swing.JPanel;
+
+public class JPanelTest extends JPanel{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2646932605261177861L;
+
+}

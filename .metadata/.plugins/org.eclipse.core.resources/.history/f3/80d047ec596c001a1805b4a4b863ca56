@@ -1,0 +1,15 @@
+package model;
+
+import java.awt.Color;
+
+public class SnakeTile extends GameObject {
+	
+	
+
+	public SnakeTile(int x, int y, Color c) {
+		super(x, y);
+		// TODO Auto-generated constructor stub
+		this.setColor(c);
+	}
+
+}

@@ -1,0 +1,17 @@
+package predefined;
+
+import java.awt.Color;
+
+public enum Tile {
+	SNAKE_HEAD(Color.yellow),
+	SNAKE_BODY(Color.green),
+	APPLE(Color.red),
+	BLANK(Color.black),
+	WALL(Color.white);
+	
+	Tile(Color color) {
+		this.color = color;
+	}
+	
+	final Color color;
+}

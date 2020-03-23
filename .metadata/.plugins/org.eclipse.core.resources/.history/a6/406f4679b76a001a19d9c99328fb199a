@@ -1,0 +1,33 @@
+package snake;
+
+import javax.swing.JFrame;
+
+import snake.Config;
+
+public class Game extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3888612749549946935L;
+	
+	private Player player;
+	
+	private Snake snake;
+
+	private Apple apple;
+	
+	private int apple_score;
+	
+	public Game(String player_name, Difficulty mode) {
+		player = new Player(player_name, mode);
+		snake = new Snake();
+	}
+	
+	public Game(Player player, Snake snake, Apple apple, int apple_score) {
+		this.player = player;
+		this.snake = snake;
+		this.apple = apple;
+		this.apple_score = apple_score;
+	}
+}

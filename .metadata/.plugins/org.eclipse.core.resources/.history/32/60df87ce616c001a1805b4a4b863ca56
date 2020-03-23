@@ -1,0 +1,8 @@
+package model;
+
+import config.Config;
+
+public class Board {
+	
+	
+}

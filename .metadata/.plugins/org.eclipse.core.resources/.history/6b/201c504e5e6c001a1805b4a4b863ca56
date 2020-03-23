@@ -1,0 +1,19 @@
+package model;
+
+import java.util.ArrayList;
+
+import config.Config; 
+
+public class Snake {
+	
+	private final static int INIT_LENGTH = 3;
+	
+	private SnakeTile head;
+	
+	private ArrayList<SnakeTile> body;
+	
+	private int length;
+	
+	private int init_x = Config.BOARD_COLUMNS/2;
+
+}

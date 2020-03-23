@@ -1,0 +1,9 @@
+package model;
+
+import config.Config;
+
+public class Board {
+	
+	private final static int BOARD_COLUMNS = Config.BOARD_COLUMNS;
+	private final static int BOARD_ROWS = Config.BOARD_ROWS;
+}

@@ -1,0 +1,90 @@
+package snake;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.util.Timer;
+
+import javax.swing.JPanel;
+
+public class Config extends JPanel{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6987717423315755027L;
+	
+	/*--------------------------Static configuration------------------------------*/
+	
+		/*--------------------------Font-------------------------------*/
+	
+	final static Font DEFAULT_FONT = new Font("Monospaced", Font.BOLD, 20);
+    
+        /*--------------------------Size-------------------------------*/
+    
+	final static int BOARD_COLS = 20;
+	final static int BOARD_ROWS = 20;
+	final static int SIDE_PANEL_COLS = 15;
+	final static int SIDE_PANEL_ROWS = 20;
+	final static int DEFAULT_BLOCK_SIZE = 20;
+    
+        /*----------------------------Color-------------------------------*/
+    
+	final static Color BLOCK_COLOR = Color.black;
+	final static Color BLOCK_BORDER_COLOR = Color.white;
+	final static Color TEXT_COLOR = Color.white;
+	
+	/*----------------------------------------------------------------------------*/
+	
+	private int block_size;
+	
+	private Font main_font;
+	
+	public Config() {
+		block_size = DEFAULT_BLOCK_SIZE;
+		main_font = DEFAULT_FONT;
+	}
+	
+	/*--------------------- Block method --------------------- */
+	
+	public void setBlockSize(Size size) {
+		switch (size) {
+			case SMALL:
+				block_size = DEFAULT_BLOCK_SIZE / 2;
+				break;
+			case NORMAL:
+				block_size = DEFAULT_BLOCK_SIZE;
+				break;
+			case LARGE:
+				block_size = DEFAULT_BLOCK_SIZE * 3 / 2;
+				break;
+			default:
+				break;
+		}
+	}
+	
+	public int getBlockSize() {
+		return this.block_size;
+	}
+	
+	/*--------------------- Font method --------------------- */
+	
+	public void setFontSize(Size size) {
+		switch (size) {
+			case SMALL:
+				main_font = DEFAULT_FONT.deriveFont(Font.BOLD, 12);
+				break;
+			case NORMAL:
+				main_font = DEFAULT_FONT;
+				break;
+			case LARGE:
+				main_font = DEFAULT_FONT.deriveFont(Font.BOLD, 30);
+				break;
+			default:
+				break;
+		}
+	}
+	
+	public Font getFont() {
+		return this.main_font;
+	}
+}

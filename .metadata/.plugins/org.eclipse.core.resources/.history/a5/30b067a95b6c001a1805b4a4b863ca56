@@ -1,0 +1,8 @@
+package config;
+
+public abstract class Config {
+	
+	public static int BOARD_ROWS = 20, BOARD_COLUMNS = 20;
+	
+	public static int 
+}

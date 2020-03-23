@@ -1,0 +1,9 @@
+package snake;
+
+public enum Size {
+	SMALL,
+	
+	NORMAL,
+	
+	LARGE
+}

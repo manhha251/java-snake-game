@@ -1,0 +1,8 @@
+version=1.0
+name=SnakeGame
+date=2020-03-18
+font=Monospaced
+font_size=20
+board_columns=20
+board_rows=20
+block_size=20

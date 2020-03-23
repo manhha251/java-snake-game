@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.wb.internal.core.model.property.order.ReorderDialog">
+		<item key="x" value="379"/>
+		<item key="y" value="201"/>
+		<item key="width" value="520"/>
+		<item key="height" value="366"/>
+	</section>
+	<section name="org.eclipse.wb.internal.core.editor.actions.assistant.LayoutAssistantWindow">
+		<item key="x" value="522"/>
+		<item key="y" value="330"/>
+	</section>
+	<section name="org.eclipse.wb.internal.core.editor.palette.dialogs.CategoryAddDialog">
+		<item key="x" value="377"/>
+		<item key="y" value="189"/>
+		<item key="width" value="525"/>
+		<item key="height" value="389"/>
+	</section>
+	<section name="org.eclipse.wb.internal.core.model.util.ExposeComponentSupport$ExposeDialog">
+		<item key="x" value="377"/>
+		<item key="y" value="243"/>
+		<item key="width" value="525"/>
+		<item key="height" value="281"/>
+	</section>
+</section>

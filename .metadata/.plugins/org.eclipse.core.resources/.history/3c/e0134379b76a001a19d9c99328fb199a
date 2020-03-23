@@ -1,0 +1,16 @@
+package snake;
+
+import javax.swing.JPanel;
+
+public class Board extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6444327468458593219L;
+	
+	private Snake snake;
+	
+	private Apple apple;
+	
+}

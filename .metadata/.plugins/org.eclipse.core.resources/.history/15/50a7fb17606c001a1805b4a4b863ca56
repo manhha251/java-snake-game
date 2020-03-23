@@ -1,0 +1,64 @@
+package model;
+
+import java.awt.Color;
+import java.util.ArrayList;
+
+import config.Config; 
+
+public class Snake {
+	
+	private final int INIT_LENGTH = 5;
+	
+	private final Color HEAD_COLOR = Color.blue, BODY_COLOR = Color.green;
+	
+	private SnakeTile snake_head;
+	
+	private ArrayList<SnakeTile> snake;
+	
+	private int length;
+	
+	private int init_x = Config.BOARD_COLUMNS/2, init_y = Config.BOARD_ROWS/2;
+	
+	public Snake() {
+
+		snake_head = new SnakeTile(init_x, init_y, HEAD_COLOR);
+		snake = new ArrayList<>();
+		length = 0;
+		setPosition();
+	}
+	
+	private void setPosition() {
+		
+		if (length == 0) {
+			
+			snake.add(snake_head);
+			++length;
+			
+			for (int i = 1; i < INIT_LENGTH; i++) {
+				this.addSnakeBody(init_x, init_y + i);
+			}
+		} else {
+			
+			snake.clear();
+			snake_head.setX(init_x);
+			snake_head.setY(init_y);
+			length = 0;
+			setPosition();
+		}
+	}
+	
+	public int getSnakeLength() {
+		return this.length;
+	}
+	
+	public SnakeTile getSnakeBodyAt(int index) {
+		return this.snake.get(index);
+	}
+
+	private void addSnakeBody(int x, int y) {
+		// TODO Auto-generated method stub
+		snake.add(new SnakeTile(x, y, BODY_COLOR));
+		++length;
+	}
+
+}

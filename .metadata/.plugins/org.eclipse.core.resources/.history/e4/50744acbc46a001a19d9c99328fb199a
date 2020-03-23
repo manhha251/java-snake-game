@@ -1,0 +1,8 @@
+package predefined;
+
+public enum Direction {
+	LEFT,
+	RIGHT,
+	UP,
+	DOWN 
+}

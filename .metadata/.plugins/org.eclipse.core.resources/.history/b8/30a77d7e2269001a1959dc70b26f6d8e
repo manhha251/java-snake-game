@@ -1,0 +1,34 @@
+package snake;
+
+public class Player {
+	
+	private String player_name;
+	
+	private int score;
+	
+	private int snake_length;
+	
+	private int apples_eaten;
+	
+	private Difficulty mode;
+	
+	public Player(String name, Difficulty mode) {
+		this.player_name = name;
+		score = 0;
+		snake_length = 3;
+		apples_eaten = 0;
+		this.mode = mode;
+	}
+	
+	public void setPlayerName(String name) {
+		this.player_name = name;
+	}
+	
+	public void setPlayerScore(int score) {
+		this.score = score;
+	}
+	
+	public void setAppleEatens(int apple) {
+		this.apples_eaten = apple;
+	}
+}

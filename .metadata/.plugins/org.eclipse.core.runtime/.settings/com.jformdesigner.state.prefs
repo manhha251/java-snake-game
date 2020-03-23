@@ -1,0 +1,6 @@
+designer/newcontainer.layoutmanager=net.miginfocom.swing.MigLayout
+designer/newform.superclass=javax.swing.JPanel
+eclipse.preferences.version=1
+license.filechooser.lastdirpath=C\:\\Users\\manhh\\Downloads
+license.filechooser.size=582, 399
+lookandfeel=com.sun.java.swing.plaf.windows.WindowsLookAndFeel

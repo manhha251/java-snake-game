@@ -1,0 +1,29 @@
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+import java.awt.GridLayout;
+import javax.swing.JLayeredPane;
+import java.awt.FlowLayout;
+
+public class ScorePanel extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public ScorePanel() {
+		setLayout(new GridLayout(1, 1, 1, 0));
+		
+		JSplitPane splitPane = new JSplitPane();
+		add(splitPane);
+		
+		JLayeredPane layeredPane = new JLayeredPane();
+		splitPane.setRightComponent(layeredPane);
+		
+		JPanel panel = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
+		flowLayout.setVgap(100);
+		flowLayout.setHgap(100);
+		splitPane.setLeftComponent(panel);
+		
+	}
+
+}

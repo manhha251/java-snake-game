@@ -1,0 +1,27 @@
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+import java.awt.GridLayout;
+import javax.swing.JLayeredPane;
+import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import javax.swing.BoxLayout;
+
+public class ScorePanel extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public ScorePanel() {
+		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		
+		JSplitPane splitPane = new JSplitPane();
+		add(splitPane);
+		
+		JSplitPane splitPane_1 = new JSplitPane();
+		splitPane_1.setOrientation(JSplitPane.VERTICAL_SPLIT);
+		splitPane.setRightComponent(splitPane_1);
+		
+	}
+
+}

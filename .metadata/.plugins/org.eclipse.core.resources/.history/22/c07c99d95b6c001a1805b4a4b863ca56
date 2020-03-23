@@ -1,0 +1,10 @@
+package config;
+
+public abstract class Config {
+	
+	private final int DEFAULT_BLOCK_SIZE = 20;
+	
+	public static int BOARD_ROWS = 20, BOARD_COLUMNS = 20;
+	
+	public static int BLOCK_SIZE;
+}
