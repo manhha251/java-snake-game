@@ -1,0 +1,20 @@
+package model;
+
+import java.util.ArrayList;
+
+import config.Config;
+
+public class Board {
+	
+	private ArrayList<Apple> apples;
+	
+	private Snake snake;
+	
+	private ArrayList<Obstacle> obstacles;
+
+	private int score, high_score, apples_eaten;
+	
+	private GameState state;
+	
+	private ScorePanelView score_panel_view;
+}

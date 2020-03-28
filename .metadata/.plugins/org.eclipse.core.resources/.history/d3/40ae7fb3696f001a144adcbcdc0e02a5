@@ -1,0 +1,99 @@
+package controller;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.List;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
+import config.Config;
+import model.Board;
+import model.GameObject;
+import model.Update;
+import observers.GameObjectObserver;
+import util.Direction;
+import view.GameBoardView;
+
+public class Controller implements GameObjectObserver, Runnable{
+	
+	// private GameBoardView view;
+	
+	private JFrame view;
+	
+	private Board board;
+	
+	public Controller() {
+		
+		board = new Board(Config.BOARD_COLUMNS * Config.BLOCK_SIZE, Config.BOARD_ROWS * Config.BLOCK_SIZE);
+		board.addObserver(this);
+		
+		view = new JFrame();
+	}
+	
+	public void initScreen() {
+		
+		view.setPreferredSize(new Dimension(600, 600));
+		view.setFocusable(true);
+		view.setVisible(true);
+		
+		Thread controller_thread = new Thread(this);
+		controller_thread.start();
+		
+		//board.gameStart();
+	}
+
+	@Override
+	public void run() {
+		while (board.isAlive()) {
+			try {
+				Thread.sleep(50);
+			} catch(InterruptedException e) {
+				
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+	@Override
+	public void update(GameObject object) {
+		// TODO Auto-generated method stub
+		List<Update> updates_list = object.getUpdates();
+		
+		//view.setUpdateList(updates_list);
+	}
+	
+	public void keyPressed(KeyEvent e) {
+		
+		int key_code = e.getKeyCode();
+		
+		switch (key_code) {
+			case KeyEvent.VK_UP:
+			case KeyEvent.VK_W:
+				board.setDirection(Direction.UP);
+				break;
+			case KeyEvent.VK_DOWN:
+			case KeyEvent.VK_S:
+				board.setDirection(Direction.DOWN);
+				break;
+			case KeyEvent.VK_LEFT:
+			case KeyEvent.VK_A:
+				board.setDirection(Direction.LEFT);
+				break;
+			case KeyEvent.VK_RIGHT:
+			case KeyEvent.VK_D:
+				board.setDirection(Direction.RIGHT);
+				break;
+			default:
+				break;
+		}
+	}
+	
+	
+}

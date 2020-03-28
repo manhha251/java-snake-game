@@ -1,0 +1,19 @@
+package model;
+
+import java.awt.Color;
+import java.util.List;
+
+import observers.GameObjectObservers;
+
+public abstract class GameObject {
+	
+	private List<GameObjectObservers> observers;
+	
+	private char display_char;
+	
+	public GameObject(char display_char) {
+		
+		this.display_char = display_char;
+		
+	}
+}

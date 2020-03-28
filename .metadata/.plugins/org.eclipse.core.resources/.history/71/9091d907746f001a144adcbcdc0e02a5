@@ -1,0 +1,20 @@
+package gameui;
+
+import javax.swing.JPanel;
+
+import model.Apple;
+import model.Snake;
+
+public class GamePanel extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2753827354436846121L;
+	
+	private int width, height;
+
+	private Snake snake;
+	
+	private Apple apple;
+}

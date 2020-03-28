@@ -1,0 +1,41 @@
+package view;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+
+import javax.swing.JPanel;
+
+import model.Board;
+import model.Point;
+
+public class GameBoardView extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1558652551614550222L;
+	
+	public GameBoardView(Board board) {
+		
+		initBoardView(board);
+	}
+	
+	private void initBoardView(Board board) {
+		
+		setPreferredSize(new Dimension(board.getWidth(), board.getHeight()));
+		setFocusable(true);
+	}
+	
+	public void paintPoint(Point p, Color c) {
+
+		paintComponent(g);
+	}
+	
+	@Override
+    public void paintComponent(Graphics g) {
+
+        super.paintComponent(g);
+    }
+
+}

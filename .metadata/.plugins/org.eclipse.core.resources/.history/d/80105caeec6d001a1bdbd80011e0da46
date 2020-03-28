@@ -1,0 +1,15 @@
+package model;
+
+import java.awt.Color;
+
+public class Apple extends GameObject{
+
+	private final Color APPLE_COLOR = Color.red;
+	
+	public Apple(int x, int y) {
+		super(x, y);
+		// TODO Auto-generated constructor stub
+		this.setColor(APPLE_COLOR);
+	}	
+
+}

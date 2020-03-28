@@ -1,38 +1,50 @@
 package model;
 
 import java.awt.Color;
+import java.util.LinkedList;
+import java.util.List;
+
+import observers.GameObjectObserver;
 
 public abstract class GameObject {
 	
-	protected int x, y; // object coordinates
-	protected Color color; // object color
+	private List<GameObjectObserver> observers;
 	
-	public GameObject(int x, int y) {
-		this.x = x;
-		this.y = y;
+	private Color color;
+	
+	public GameObject(Color color) {
+		
+		this.color = color;
+		this.observers = new LinkedList<GameObjectObserver>();
 	}
 	
-	public int getX() {
-		return this.x;
+	public abstract	List<Update> getUpdates();
+	
+	public void notifyObservers() {
+		
+		for (GameObjectObserver observer: observers) {
+			
+			observer.update(this);
+		}
 	}
 	
-	public int getY() {
-		return this.y;
+	public void addObserver(GameObjectObserver observer) {
+		
+		observers.add(observer);
+	}
+	
+	public void removerObserver(GameObjectObserver observer) {
+		
+		observers.remove(observer);
 	}
 	
 	public Color getColor() {
+		
 		return this.color;
 	}
 	
-	public void setX(int x) {
-		this.x = x;
-	}
-	
-	public void setY(int y) {
-		this.y = y;
-	}
-	
 	public void setColor(Color c) {
+		
 		this.color = c;
 	}
 }

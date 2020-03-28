@@ -1,0 +1,64 @@
+package gameui;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
+import javax.swing.JPanel;
+
+import model.Apple;
+import model.Board;
+import model.Snake;
+
+public class GamePanel extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2753827354436846121L;
+	
+	private int width, height;
+
+	private Snake snake;
+	
+	private Apple apple;
+	
+	private Graphics2D g2d;
+	
+	public GamePanel(Board board, Snake snake, Apple apple) {
+		
+		new GamePanel(board.getWidth(), board.getHeight(), snake, apple);
+		
+	}
+
+	public GamePanel(int width, int height, Snake snake, Apple apple) {
+		// TODO Auto-generated constructor stub
+		this.width = width;
+		this.height = height;
+		this.snake = snake;
+		this.apple = apple;
+		
+		setPreferredSize(new Dimension(this.width, this.height));
+	}
+	
+	@Override
+	public Color getBackground() {
+		
+		return Color.black;
+	}
+	
+	@Override
+	public boolean isOpaque() {
+		
+		return true;
+	}
+	
+	@Override 
+	public void paintComponent(Graphics g) {
+		
+		super.paintComponent(g);
+		g2d = (Graphics2D) g;
+	}
+	
+}

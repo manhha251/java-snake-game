@@ -1,0 +1,37 @@
+package model;
+
+import config.Config;
+
+public class Point {
+
+	private int x, y;
+	
+	public Point(int x, int y) {
+		
+		this.x = x;
+		this.y = y;
+	}
+	
+	public int getX() {
+		
+		return this.x;
+	}
+	
+	public int getY() {
+		
+		return this.y;
+	}
+	
+	public static Point getRandomPoint() {
+		
+		int random_x = (int)(Math.random() * Config.BOARD_COLUMNS);
+		int random_y = (int)(Math.random() * Config.BOARD_ROWS);
+		
+		return new Point(random_y, random_x);
+	}
+	
+	public boolean coincide(Point point) {
+			
+			return point.getX() == this.x && point.getY() == this.y;
+	}
+}

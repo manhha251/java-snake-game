@@ -1,0 +1,23 @@
+package model;
+
+import java.awt.Color;
+import java.util.LinkedList;
+import java.util.List;
+
+import observers.GameObjectObserver;
+
+public abstract class GameObject {
+	
+	private List<GameObjectObserver> observers;
+	
+	private char display_char;
+	
+	public GameObject(char display_char) {
+		
+		this.display_char = display_char;
+		this.observers = new LinkedList<GameObjectObserver>();
+	}
+	
+	public abstract	List<Update> getUpdates();
+	
+}

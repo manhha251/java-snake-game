@@ -2,70 +2,126 @@ package model;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
-import config.Config; 
+import config.Config;
+import util.Direction; 
 
-public class Snake {
+public class Snake extends GameObject implements Runnable {
 	
-	private final int INIT_LENGTH = 5;
+	public static int INIT_LENGTH = 5;
 	
-	private final Color HEAD_COLOR = Color.blue, BODY_COLOR = Color.green;
+	public static Color HEAD_COLOR = Color.blue, BODY_COLOR = Color.green;
 	
-	private SnakeTile snake_head;
-	
-	private ArrayList<SnakeTile> snake;
-	
-	private int length;
+	private List<Point> snake;
 	
 	private int init_x = Config.BOARD_COLUMNS/2, init_y = Config.BOARD_ROWS/2;
 	
-	public Snake() {
-
-		snake_head = new SnakeTile(init_x, init_y, HEAD_COLOR);
-		snake = new ArrayList<>();
-		length = 0;
-		setPosition();
-	}
+	private List<Update> updates;
 	
-	private void setPosition() {
+	private Direction direction;
+	
+	private Board board;
+	
+	private boolean alive = true;
+	
+	public Snake(Board board, int length) {
+
+		super(Color.green);
 		
-		if (length == 0) {
+		snake = new LinkedList<Point>();
+		
+		updates = new LinkedList<Update>();
+		
+		direction = Direction.RIGHT;
+		
+		this.board = board;
+		
+		// Point head = new Point(init_x, init_y);
+		
+		for (int i = 0; i < length; i++) {
 			
-			snake.add(snake_head);
-			++length;
+			Point body_part = new Point(init_y + i, init_x);
 			
-			for (int i = 1; i < INIT_LENGTH; i++) {
-				this.addSnakeBody(init_x, init_y + i);
-			}
-		} else {
+			snake.add(body_part);
 			
-			snake.clear();
-			snake_head.setX(init_x);
-			snake_head.setY(init_y);
-			length = 0;
-			setPosition();
+			updates.add(new Update(this.getColor(), body_part));
 		}
 	}
-	
-	public int getSnakeLength() {
+
+	public void move() {
 		
-		return this.length;
+		Point head = snake.get(snake.size() - 1);
+		Point new_head = new Point(head.getY() + direction.y, head.getX() + direction.x);
+		
+		if (snake.contains(new_head) || board.outOfBoard(new_head)) {
+			
+			alive = false;
+		}
+		
+		updates.add(new Update(this.getColor(), new_head));
+		updates.add(new Update(Color.black, snake.get(0)));
+		
+		snake.add(new_head);
+		
+		if (!board.appleEaten(snake)) {
+			
+			snake.remove(0);
+		}
+		
+		notifyObservers();
 	}
 	
-	public SnakeTile getSnakeBodyAt(int index) {
+
+	public void setDirection(Direction d) {
 		
-		return this.snake.get(index);
-	}
-	
-	public SnakeTile getSnakeHead() {
+		if (direction.opposite() == d) 
+			return;
 		
-		return this.snake_head;
+		direction = d;
 	}
 
-	private void addSnakeBody(int x, int y) {
-		// TODO Auto-generated method stub
-		snake.add(new SnakeTile(x, y, BODY_COLOR));
-		++length;
+	public boolean isAlive() {
+		
+		return alive;
+	}
+
+
+	@Override
+	public List<Update> getUpdates() {
+		
+		List<Update> updates_list = new LinkedList<Update>();
+		
+		updates_list.addAll(updates);
+		
+		updates.clear();
+		
+		return updates_list;
+	}
+
+
+	@Override
+	public void run() {
+		
+		while (alive) {
+			
+			move();
+			
+			try {
+				
+				Thread.sleep(50);
+			} catch(InterruptedException e) {
+				
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	public List<Point> getSnakeBody() {
+		
+		return this.snake;
 	}
 
 }

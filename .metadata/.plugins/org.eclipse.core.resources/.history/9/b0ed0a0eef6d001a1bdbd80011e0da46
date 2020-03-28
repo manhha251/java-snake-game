@@ -1,0 +1,15 @@
+package model;
+
+public class Update {
+
+	private char display_char;
+	
+	private Point point;
+	
+	public Update(char display_char, Point point) {
+		
+		super();
+		this.display_char = display_char;
+		this.point = point;
+	}
+}

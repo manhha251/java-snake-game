@@ -1,0 +1,36 @@
+package model;
+
+import java.util.LinkedList;
+import java.util.List;
+
+import config.Config;
+import observers.GameObjectObserver;
+import view.ScorePanelView;
+
+public class Board extends GameObject implements GameObjectObserver{
+	
+	private int width, height;
+	
+	private Snake snake;
+	
+	private Apple apple;
+
+	public Board(char display_char) {
+		super(display_char);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void update(GameObject object) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Update> getUpdates() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+}

@@ -1,0 +1,122 @@
+package model;
+
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+import config.Config;
+import util.Direction; 
+
+public class Snake extends GameObject implements Runnable {
+	
+	public static int INIT_LENGTH = 5;
+	
+	private final Color HEAD_COLOR = Color.blue, BODY_COLOR = Color.green;
+	
+	private List<Point> snake;
+	
+	private int init_x = Config.BOARD_COLUMNS/2, init_y = Config.BOARD_ROWS/2;
+	
+	private List<Update> updates;
+	
+	private Direction direction;
+	
+	private Board board;
+	
+	private boolean alive = true;
+	
+	public Snake(Board board, int length) {
+
+		super(Color.green);
+		
+		snake = new LinkedList<Point>();
+		
+		updates = new LinkedList<Update>();
+		
+		direction = Direction.RIGHT;
+		
+		this.board = board;
+		
+		// Point head = new Point(init_x, init_y);
+		
+		for (int i = 0; i < length; i++) {
+			
+			Point body_part = new Point(init_y + i, init_x);
+			
+			snake.add(body_part);
+			
+			updates.add(new Update(this.getDisplayChar(), body_part));
+		}
+	}
+
+	public void move() {
+		
+		Point head = snake.get(snake.size() - 1);
+		Point new_head = new Point(head.getY() + direction.y, head.getX() + direction.x);
+		
+		if (snake.contains(new_head) || board.outOfBoard(new_head)) {
+			
+			alive = false;
+		}
+		
+		updates.add(new Update(this.getDisplayChar(), new_head));
+		updates.add(new Update(' ', snake.get(0)));
+		
+		snake.add(new_head);
+		
+		if (!board.appleEaten(snake)) {
+			
+			snake.remove(0);
+		}
+		
+		notifyObservers();
+	}
+	
+
+	public void setDirection(Direction d) {
+		
+		if (direction.opposite() == d) 
+			return;
+		
+		direction = d;
+	}
+
+	public boolean isAlive() {
+		
+		return alive;
+	}
+
+
+	@Override
+	public List<Update> getUpdates() {
+		
+		List<Update> updates_list = new LinkedList<Update>();
+		
+		updates_list.addAll(updates);
+		
+		updates.clear();
+		
+		return updates_list;
+	}
+
+
+	@Override
+	public void run() {
+		
+		while (alive) {
+			
+			move();
+			
+			try {
+				
+				Thread.sleep(50);
+			} catch(InterruptedException e) {
+				
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+}

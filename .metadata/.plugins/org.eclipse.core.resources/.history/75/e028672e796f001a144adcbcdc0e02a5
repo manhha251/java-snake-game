@@ -1,0 +1,11 @@
+package view;
+
+import gameui.GamePanel;
+import gameui.NewGamePanel;
+
+public final class MainView {
+	
+	private final GamePanel game_panel = null;
+	private final NewGamePanel newgame_panel = null;
+	private final ViewListener view_listener = new ViewListener();
+}

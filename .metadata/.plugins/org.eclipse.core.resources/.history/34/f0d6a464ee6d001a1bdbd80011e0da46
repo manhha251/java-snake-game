@@ -1,0 +1,10 @@
+package model;
+
+import java.awt.Color;
+
+import observers.GameObjectObservers;
+
+public abstract class GameObject {
+	
+	private List<GameObjectObservers> observers;
+}

@@ -1,0 +1,83 @@
+package model;
+
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+import config.Config;
+import util.Direction; 
+
+public class Snake extends GameObject implements Runnable {
+	
+	public static int INIT_LENGTH = 5;
+	
+	private final Color HEAD_COLOR = Color.blue, BODY_COLOR = Color.green;
+	
+	private List<Point> snake;
+	
+	private int length;
+	
+	private int init_x = Config.BOARD_COLUMNS/2, init_y = Config.BOARD_ROWS/2;
+	
+	private List<Update> updates;
+	
+	private Direction direction;
+	
+	private Board board;
+	
+	private boolean alive = true;
+	
+	public Snake(Board board, int length) {
+
+		super('\u2588');
+		
+		snake = new LinkedList<Point>();
+		
+		updates = new LinkedList<Update>();
+		
+		direction = Direction.RIGHT;
+		
+		this.board = board;
+		
+		// Point head = new Point(init_x, init_y);
+		
+		for (int i = 0; i < length; i++) {
+			
+			Point body_part = new Point(init_y + i, init_x);
+			
+			snake.add(body_part);
+			
+			updates.add(new Update(this.getDisplayChar(), body_part));
+		}
+	}
+
+	public void move() {
+		
+		Point tail = snake.get(snake.size() - 1);
+		Point new_tail = new Point(tail.getY() + direction.y, tail.getX() + direction.x);  
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Update> getUpdates() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean isAlive() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void setDirection(Direction d) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

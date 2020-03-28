@@ -1,0 +1,8 @@
+package observers;
+
+import model.GameObject;
+
+public interface GameObjectObservers {
+	
+	public void update(GameObject object);
+}

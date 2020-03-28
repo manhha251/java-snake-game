@@ -1,0 +1,23 @@
+package view;
+
+import java.awt.Image;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import gameui.GamePanel;
+import gameui.NewGamePanel;
+
+public final class MainView {
+	
+	private final GamePanel game_panel = null;
+	private final NewGamePanel newgame_panel = null;
+	private final ViewListener view_listener = new ViewListener();
+	
+	private JFrame frame;
+	private JPanel content;
+	private final int scale;
+	private final List<Image> icons = new ArrayList<>();
+}

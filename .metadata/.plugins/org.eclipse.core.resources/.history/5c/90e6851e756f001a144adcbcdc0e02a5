@@ -1,0 +1,38 @@
+package gameui;
+
+import java.awt.Graphics2D;
+
+import javax.swing.JPanel;
+
+import model.Apple;
+import model.Board;
+import model.Snake;
+
+public class GamePanel extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2753827354436846121L;
+	
+	private int width, height;
+
+	private Snake snake;
+	
+	private Apple apple;
+	
+	private Graphics2D g2d;
+	
+	public GamePanel(Board board, Snake snake, Apple apple) {
+		
+		new GamePanel(board.getWidth(), board.getHeight(), snake, apple);
+		
+	}
+
+	public GamePanel(int width, int eight, Snake snake, Apple apple) {
+		// TODO Auto-generated constructor stub
+		
+	}
+	
+	
+}

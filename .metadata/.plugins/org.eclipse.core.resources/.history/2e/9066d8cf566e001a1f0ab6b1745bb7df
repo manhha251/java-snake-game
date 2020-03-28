@@ -1,0 +1,59 @@
+package controller;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionListener;
+import java.util.List;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
+import config.Config;
+import model.Board;
+import model.GameObject;
+import model.Update;
+import observers.GameObjectObserver;
+import util.Direction;
+import view.GameBoardView;
+
+public class Controller implements GameObjectObserver, Runnable{
+	
+	private GameBoardView view;
+	
+	private Board board;
+	
+	public Controller() {
+		
+		board = new Board(Config.BOARD_COLUMNS * Config.BLOCK_SIZE, Config.BOARD_ROWS * Config.BLOCK_SIZE);
+		board.addObserver(this);
+		
+		view = new GameBoardView(board);
+	}
+	
+	public void initScreen() {
+		
+		Thread controller_thread = new Thread(this);
+		controller_thread.start();
+		
+		board.gameStart();
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(GameObject object) {
+		// TODO Auto-generated method stub
+		List<Update> updates_list = object.getUpdates();
+		
+		view.setUpdateList(updates_list);
+	}
+	
+	
+	
+	
+}

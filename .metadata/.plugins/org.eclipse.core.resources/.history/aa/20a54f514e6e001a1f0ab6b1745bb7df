@@ -1,0 +1,12 @@
+package view;
+
+import javax.swing.JPanel;
+
+public class GameBoardView extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1558652551614550222L;
+
+}

@@ -1,0 +1,50 @@
+package model;
+
+import java.awt.Color;
+import java.util.LinkedList;
+import java.util.List;
+
+import observers.GameObjectObserver;
+
+public abstract class GameObject {
+	
+	private List<GameObjectObserver> observers;
+	
+	private Color color;
+	
+	public GameObject(Color color) {
+		
+		this.color = color;
+		this.observers = new LinkedList<GameObjectObserver>();
+	}
+	
+	public abstract	List<Update> getUpdates();
+	
+	public void notifyObservers() {
+		
+		for (GameObjectObserver observer: observers) {
+			
+			observer.update(this);
+		}
+	}
+	
+	public void addObserver(GameObjectObserver observer) {
+		
+		observers.add(observer);
+	}
+	
+	public void removerObserver(GameObjectObserver observer) {
+		
+		observers.remove(observer);
+	}
+	
+	public char getDisplayChar() {
+		
+		return this.display_char;
+	}
+	
+	public void setDisplayChar(char c) {
+		
+		this.display_char = c;
+	}
+}
