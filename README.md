@@ -13,11 +13,11 @@ Member:
 ## Alpha v1 1.0.0.1
 No GUI implement yet
 Only simple game board with snake object
-* Done: 
+#### Done: 
  - Create Frame for main window
  - Create Panel for game board
  - Add Snake object that changes direction on key pressed
-* To-do list:
+#### To-do list:
  - More game object: Apples, Obstacles
  - Collision detected
  - Game information: score, highscore, timer
