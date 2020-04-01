@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f874265d-543a-41d0-b604-de16a22b6348" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../GameEngine/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GameEngine/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GameEngine/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GameEngine/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GameEngine/GameEngine.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GameEngine/src/Game.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GameEngine/src/Snake.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Java UI/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Java UI/.idea/Java UI.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Java UI/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Java UI/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Java UI/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SnakeGame/.idea/SnakeGame.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SnakeGame/src/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SnakeGame/.classpath" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SnakeGame/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SnakeGame/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SnakeGame/src/config/Config.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SnakeGame/src/controller/Controller.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SnakeGame/src/gameui/GamePanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SnakeGame/src/gameui/NewGamePanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SnakeGame/src/gameui/ScorePanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SnakeGame/src/main/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SnakeGame/src/model/Apple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SnakeGame/src/model/Board.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SnakeGame/src/model/GameObject.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SnakeGame/src/model/GameState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SnakeGame/src/model/Point.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SnakeGame/src/model/Snake.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SnakeGame/src/model/Update.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SnakeGame/src/observers/GameObjectObserver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SnakeGame/src/util/Direction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SnakeGame/src/util/Mode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SnakeGame/src/view/GameBoardView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SnakeGame/src/view/MainView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SnakeGame/src/view/ViewListener.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1ZwWa1PzZ4P53koJzwbEiUoBl0T" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f874265d-543a-41d0-b604-de16a22b6348" name="Default Changelist" comment="" />
+      <created>1585750696957</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1585750696957</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="425" y="101" key="FileChooserDialogImpl" timestamp="1585750718874">
+      <screen x="0" y="0" width="1291" height="768" />
+    </state>
+    <state x="425" y="101" key="FileChooserDialogImpl/0.0.1291.768@0.0.1291.768" timestamp="1585750718874" />
+    <state x="310" y="83" width="789" height="602" key="NewModule_or_Project.wizard" timestamp="1585750735225">
+      <screen x="0" y="0" width="1291" height="768" />
+    </state>
+    <state x="310" y="83" width="789" height="602" key="NewModule_or_Project.wizard/0.0.1291.768@0.0.1291.768" timestamp="1585750735225" />
+  </component>
+</project>
