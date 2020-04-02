@@ -10,7 +10,7 @@ Member:
  - Lưu Phạm Mạnh Hà - 1752001
  - Nguyễn Thị Quỳnh Hoa - 1752017
 
-## Alpha v1 1.0.0.1
+## Alpha v1 - April 2, 2020 12:30 AM
 No GUI implement yet
 Only simple game board with snake object
 #### Done: 
@@ -22,3 +22,18 @@ Only simple game board with snake object
  - Collision detected
  - Game information: score, highscore, timer
  - Logic layout for game
+
+## Alpha v2 April 2, 2020, 4:40 PM
+
+Basic Game Engine complete
+No GUI
+Game end right after collision
+#### Done:
+ - Added collision dectect, Apples Object, Score Panel (score, high score, timer)
+ - Snake can grow after eat apple and GAME OVER on collision
+#### To-do list:
+ - Add game Pause/Continue button/key
+ - Add game obstacles if possible
+ - Optimize and refactor code
+ - Add package, interfaces
+ - Implement GUI

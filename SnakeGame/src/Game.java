@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 
 /*
  * Main display for the game window
@@ -11,11 +12,17 @@ public class Game {
 
     private GamePanel gamePanel;
 
+    private ScorePanel scorePanel;
+
     public Game() {
 
         JFrame frame = new JFrame("Animation");
-        gamePanel = new GamePanel(400, 400, 20);
-        frame.add(gamePanel);
+
+        scorePanel = new ScorePanel(200, 400);
+        gamePanel = new GamePanel(scorePanel,400, 400, 20);
+
+        frame.add(gamePanel, BorderLayout.CENTER);
+        frame.add(scorePanel, BorderLayout.EAST);
         frame.pack();
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);

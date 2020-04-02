@@ -1,5 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /*
  * Panel for main game board
@@ -11,28 +14,97 @@ import java.awt.*;
 
 public class GamePanel extends JPanel {
 
-    private int width, height, scale;
+    private int width;
+    private int height;
+    private int scale;
 
-    private Snake snake;
+    //private Snake snake;
+
+    //private Apple apple;
+
+    private Model model;
 
     private MyKeyListener keyListener;
 
-    public GamePanel(int width, int height, int scale) {
+    public GamePanel(ScorePanel scorePanel, int width, int height, int scale) {
 
         this.width = width;
         this.height = height;
         this.scale = scale;
         setPreferredSize(new Dimension(width, height));
-        snake = new Snake(this, 20);
-        keyListener = new MyKeyListener(snake);
+
+        model = new Model(this);
+
+        int highScore = loadData();
+        model.setHighScore(highScore);
+        scorePanel.updateHighScore(highScore);
+        model.start(scorePanel);
+
+        keyListener = new MyKeyListener(model.getSnake());
 
         addKeyListener(keyListener);
         setFocusable(true);
         setBackground(Color.black);
     }
 
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+
+    @Override
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
     public void move() {
-        snake.move();
+
+        model.moveSnake();
+    }
+
+    public void gameOver() {
+        saveData(model.getHighScore());
+        JOptionPane.showMessageDialog(this, "Game Over", "Game Over", JOptionPane.YES_NO_OPTION);
+        System.exit(ABORT);
+    }
+
+    private void saveData(int highScore) {
+
+        try (FileWriter output = new FileWriter("./SnakeData.txt")) {
+
+            BufferedWriter writer = new BufferedWriter(output);
+            writer.write(highScore);
+            writer.close();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private int loadData() {
+        int highScore = 0;
+
+        try (FileReader input = new FileReader("./SnakeData.txt")) {
+
+            BufferedReader reader = new BufferedReader(input);
+            highScore = reader.read();
+            reader.close();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        return highScore;
     }
 
     /*
@@ -46,9 +118,12 @@ public class GamePanel extends JPanel {
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
         paintBackGround(g2d);
-        snake.paint(g2d);
+        model.paint(g2d);
     }
 
+    /*
+     * paint white border between cells in background
+     */
     private void paintBackGround(Graphics2D g2d) {
 
         g2d.setColor(Color.white);
