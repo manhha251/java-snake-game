@@ -16,27 +16,32 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class login extends JFrame {
+public class Login extends JPanel {
 
-	private JPanel contentPane;
+	public JPanel contentPane;
 	private JTextField txt_username;
 	private JTextField txt_password;
-
+	Component component = new Component();
+	
 	/**
 	 * Create the frame.
 	 */
-	public login() {
-		setTitle("Home Screen");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 400, 400);
+	public Login() {
+		//setTitle("Home Screen");
+		//setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		//setBounds(100, 100, 400, 400);
+		//setContentPane(contentPane);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		/*
 		JLabel lb_title_game = new JLabel("SNAKE GAME");
 		lb_title_game.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 34));
 		lb_title_game.setBounds(68, 11, 223, 54);
+		contentPane.add(lb_title_game);
+		*/
+		JLabel lb_title_game = component.createLabelgameTitile();
 		contentPane.add(lb_title_game);
 		
 		JPanel pn_login = new JPanel();
@@ -45,46 +50,73 @@ public class login extends JFrame {
 		contentPane.add(pn_login);
 		pn_login.setLayout(null);
 		
+		
+		/*
 		JButton btn_login = new JButton("Login");
 		btn_login.setBackground(new Color(255, 255, 255));
 		btn_login.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		btn_login.setBounds(10, 133, 91, 39);
 		pn_login.add(btn_login);
+		*/
+		JButton btn_login = component.createButton("Login", 10, 133, 91, 39, 18);
+		pn_login.add(btn_login);
 		
+		/*
 		JButton btn_register = new JButton("Register");
 		btn_register.setBackground(new Color(255, 255, 255));
 		btn_register.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		btn_register.setBounds(111, 133, 102, 39);
+		*/
+		JButton btn_register = component.createButton("Register", 111, 133, 102, 39, 18);
 		pn_login.add(btn_register);
 		
+		/*
 		JLabel lb_username = new JLabel("Username:");
 		lb_username.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		lb_username.setBounds(10, 35, 75, 17);
 		pn_login.add(lb_username);
+		*/
+		JLabel lb_username = component.createInformationlabel("Username: ",10, 35, 75, 17, 13);
+		pn_login.add(lb_username);
 		
+		/*
 		JLabel lb_password = new JLabel("Password:");
 		lb_password.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		lb_password.setBounds(10, 84, 75, 17);
 		pn_login.add(lb_password);
+		*/
+		JLabel lb_password = component.createInformationlabel("Password: ",10, 84, 75, 17, 13);
+		pn_login.add(lb_password);
 		
+		/*
 		txt_username = new JTextField();
 		txt_username.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		txt_username.setBounds(82, 30, 131, 28);
 		pn_login.add(txt_username);
 		txt_username.setColumns(10);
+		*/
+		txt_username = component.createTextbox(82, 30, 131, 28);
+		pn_login.add(txt_username);
 		
+		/*
 		txt_password = new JTextField();
 		txt_password.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		txt_password.setColumns(10);
 		txt_password.setBounds(82, 79, 131, 28);
 		pn_login.add(txt_password);
+		*/
+		txt_password = component.createTextbox(82, 79, 131, 28);
+		pn_login.add(txt_password);
 		
+		/*
 		JButton btn_exit = new JButton("EXIT");
 		btn_exit.setBackground(Color.RED);
 		btn_exit.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		btn_exit.setBounds(118, 295, 117, 39);
 		contentPane.add(btn_exit);
-		
+		*/
+		JButton btn_exit = component.createButton("EXIT", 122, 285, 117, 39, 18);
+		contentPane.add(btn_exit);
 		/*
 		 	Event of components:
 		 */
@@ -105,7 +137,7 @@ public class login extends JFrame {
 		btn_register.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				setVisible(false);
-				register form_register = new register();
+				Register form_register = new Register();
 				form_register.setVisible(true);
 				
 			}

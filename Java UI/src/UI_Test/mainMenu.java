@@ -7,58 +7,83 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class main_menu extends JFrame {
+public class mainMenu extends JPanel {
 
-	private JPanel contentPane;
+	public JPanel contentPane;
+	Component component = new Component();
 
 	/**
-	 * Create the frame.
+	 * Create the Panel.
 	 */
-	public main_menu() {
-		setTitle("Main Menu");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 400, 400);
+	public  mainMenu() {
+		//setTitle("Main Menu");
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setBounds(100, 100, 400, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
+		//setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		/*
 		JLabel lb_title_game = new JLabel("SNAKE GAME");
 		lb_title_game.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 34));
 		lb_title_game.setBounds(75, 24, 223, 54);
 		contentPane.add(lb_title_game);
+		*/
+		JLabel lb_title_game = component.createLabelgameTitile();
+		contentPane.add(lb_title_game);
 		
+		
+		/*
 		JButton btn_new_game = new JButton("New Game");
 		btn_new_game.setFont(new Font("Times New Roman", Font.ITALIC, 20));
 		btn_new_game.setBounds(107, 89, 164, 33);
 		contentPane.add(btn_new_game);
+		*/
+		JButton btn_new_game = component.createButton("New Game", 107, 89, 164, 33, 20);
+		contentPane.add(btn_new_game);
 		
+		/*
 		JButton btn_load_game = new JButton("Load Game");
 		btn_load_game.setFont(new Font("Times New Roman", Font.ITALIC, 20));
 		btn_load_game.setBounds(107, 141, 164, 33);
 		contentPane.add(btn_load_game);
-		
+		*/
+		JButton btn_load_game =  component.createButton("Load Game", 107, 141, 164, 33, 20);
+		contentPane.add(btn_load_game);
+		/*
 		JButton btn_settings = new JButton("Settings");
 		btn_settings.setFont(new Font("Times New Roman", Font.ITALIC, 20));
 		btn_settings.setBounds(107, 246, 164, 33);
 		contentPane.add(btn_settings);
+		*/
+		JButton btn_settings = component.createButton("Settings",107, 246, 164, 33, 20);
+		contentPane.add(btn_settings);
 		
+		/*
 		JButton btn_hight_score = new JButton("Hight Score");
 		btn_hight_score.setFont(new Font("Times New Roman", Font.ITALIC, 20));
-		btn_hight_score.setBounds(107, 194, 164, 33);
+		btn_hight_score.setBounds();
+		contentPane.add(btn_hight_score);
+		*/
+		JButton btn_hight_score =  component.createButton("Hight Score",107, 194, 164, 33,20);
 		contentPane.add(btn_hight_score);
 		
+		/*
 		JButton btn_logout = new JButton("Logout");
-
 		btn_logout.setFont(new Font("Times New Roman", Font.ITALIC, 20));
 		btn_logout.setBounds(107, 298, 164, 33);
 		contentPane.add(btn_logout);
-		
+		*/
+		JButton btn_logout =component.createButton("Logout",107, 298, 164, 33,20);
+		contentPane.add(btn_logout);
 		//Event of components:
 		/*
 		 	event of new game button 
@@ -66,9 +91,6 @@ public class main_menu extends JFrame {
 		 */
 		btn_new_game.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				setVisible(false);
-				game_board form_game_boar  =new game_board();
-				form_game_boar.setVisible(true);
 			}
 		});
 		
@@ -78,9 +100,6 @@ public class main_menu extends JFrame {
 		 */
 		btn_load_game.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				setVisible(false);
-				load_game form_load_game  =new load_game();
-				form_load_game.setVisible(true);
 			}
 		});
 		
@@ -90,9 +109,7 @@ public class main_menu extends JFrame {
 		 */		
 		btn_hight_score.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				setVisible(false);
-				high_score form_high_score  =new high_score();
-				form_high_score.setVisible(true);
+				
 			}
 		});
 
@@ -102,9 +119,7 @@ public class main_menu extends JFrame {
 		 */		
 		btn_settings.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt ) {
-				setVisible(false);
-				settings form_settings  =new settings();
-				form_settings.setVisible(true);				
+
 			}
 		});
 		
