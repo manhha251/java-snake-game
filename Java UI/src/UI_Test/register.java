@@ -22,6 +22,7 @@ public class Register extends JPanel {
 	private JTextField txt_username;
 	private JTextField txt_password;
 	private JTextField txt_player_name;
+	public JButton btn_login;
 	
 	Component component = new Component();
 	/**
@@ -58,7 +59,7 @@ public class Register extends JPanel {
 		btn_login.setBounds(10, 174, 91, 39);
 		pn_register.add(btn_login);
 		*/
-		JButton btn_login = component.createButton("Login",10, 174, 91, 39, 18);
+		btn_login = component.createButton("Login",10, 174, 91, 39, 18);
 		pn_register.add(btn_login);
 		
 		/*
@@ -155,7 +156,6 @@ public class Register extends JPanel {
 		 */
 		btn_login.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-
 			}
 		});
 		

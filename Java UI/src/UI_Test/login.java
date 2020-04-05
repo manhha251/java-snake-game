@@ -23,13 +23,17 @@ public class Login extends JPanel {
 	private JTextField txt_password;
 	Component component = new Component();
 	
+	//the button of the panel
+	public JButton btn_login;
+	public JButton btn_register;
+	
 	/**
 	 * Create the frame.
 	 */
 	public Login() {
 		//setTitle("Home Screen");
 		//setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		//setBounds(100, 100, 400, 400);
+		setBounds(100, 100, 400, 400);
 		//setContentPane(contentPane);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -58,7 +62,7 @@ public class Login extends JPanel {
 		btn_login.setBounds(10, 133, 91, 39);
 		pn_login.add(btn_login);
 		*/
-		JButton btn_login = component.createButton("Login", 10, 133, 91, 39, 18);
+		btn_login = component.createButton("Login", 10, 133, 91, 39, 18);
 		pn_login.add(btn_login);
 		
 		/*
@@ -67,7 +71,7 @@ public class Login extends JPanel {
 		btn_register.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		btn_register.setBounds(111, 133, 102, 39);
 		*/
-		JButton btn_register = component.createButton("Register", 111, 133, 102, 39, 18);
+		btn_register = component.createButton("Register", 111, 133, 102, 39, 18);
 		pn_login.add(btn_register);
 		
 		/*
@@ -135,11 +139,7 @@ public class Login extends JPanel {
 			use to open register form
 		*/
 		btn_register.addActionListener(new ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				setVisible(false);
-				Register form_register = new Register();
-				form_register.setVisible(true);
-				
+			public void actionPerformed(java.awt.event.ActionEvent evt) {				
 			}
 		});
 		
@@ -149,7 +149,6 @@ public class Login extends JPanel {
 		 */
 		btn_login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				return;
 			}
 		});
 	}

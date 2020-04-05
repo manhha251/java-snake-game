@@ -18,7 +18,14 @@ public class mainMenu extends JPanel {
 
 	public JPanel contentPane;
 	Component component = new Component();
-
+	
+	//JButton of the panel
+	public JButton btn_new_game;
+	public JButton btn_load_game;
+	public JButton btn_high_score;
+	public JButton btn_settings;
+	public JButton btn_logout;
+	
 	/**
 	 * Create the Panel.
 	 */
@@ -47,7 +54,7 @@ public class mainMenu extends JPanel {
 		btn_new_game.setBounds(107, 89, 164, 33);
 		contentPane.add(btn_new_game);
 		*/
-		JButton btn_new_game = component.createButton("New Game", 107, 89, 164, 33, 20);
+		btn_new_game = component.createButton("New Game", 107, 89, 164, 33, 20);
 		contentPane.add(btn_new_game);
 		
 		/*
@@ -56,7 +63,7 @@ public class mainMenu extends JPanel {
 		btn_load_game.setBounds(107, 141, 164, 33);
 		contentPane.add(btn_load_game);
 		*/
-		JButton btn_load_game =  component.createButton("Load Game", 107, 141, 164, 33, 20);
+		btn_load_game =  component.createButton("Load Game", 107, 141, 164, 33, 20);
 		contentPane.add(btn_load_game);
 		/*
 		JButton btn_settings = new JButton("Settings");
@@ -64,7 +71,7 @@ public class mainMenu extends JPanel {
 		btn_settings.setBounds(107, 246, 164, 33);
 		contentPane.add(btn_settings);
 		*/
-		JButton btn_settings = component.createButton("Settings",107, 246, 164, 33, 20);
+		btn_settings = component.createButton("Settings",107, 246, 164, 33, 20);
 		contentPane.add(btn_settings);
 		
 		/*
@@ -73,8 +80,8 @@ public class mainMenu extends JPanel {
 		btn_hight_score.setBounds();
 		contentPane.add(btn_hight_score);
 		*/
-		JButton btn_hight_score =  component.createButton("Hight Score",107, 194, 164, 33,20);
-		contentPane.add(btn_hight_score);
+		btn_high_score =  component.createButton("Hight Score",107, 194, 164, 33,20);
+		contentPane.add(btn_high_score);
 		
 		/*
 		JButton btn_logout = new JButton("Logout");
@@ -82,47 +89,9 @@ public class mainMenu extends JPanel {
 		btn_logout.setBounds(107, 298, 164, 33);
 		contentPane.add(btn_logout);
 		*/
-		JButton btn_logout =component.createButton("Logout",107, 298, 164, 33,20);
+		btn_logout =component.createButton("Logout",107, 298, 164, 33,20);
 		contentPane.add(btn_logout);
 		//Event of components:
-		/*
-		 	event of new game button 
-		 	use to open boar game
-		 */
-		btn_new_game.addActionListener(new ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-			}
-		});
-		
-		/*
-	 		event of load game button 
-	 		use to open load game page 
-		 */
-		btn_load_game.addActionListener(new ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-			}
-		});
-		
-		/*
- 			event of high score button 
- 			use to open high score page 
-		 */		
-		btn_hight_score.addActionListener(new ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				
-			}
-		});
-
-		/*
-			event of setting button 
-			use to open setting page 
-		 */		
-		btn_settings.addActionListener(new ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt ) {
-
-			}
-		});
-		
 		/*
 			event of logout button 
 			use to logout current user 

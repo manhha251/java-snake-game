@@ -22,6 +22,8 @@ public class Settings extends JPanel {
 
 	public JPanel contentPane;
 	private JTextField txtPlayerName;
+	
+	public JButton btn_return;
 	Component component = new Component();
 	
 	/**
@@ -125,7 +127,8 @@ public class Settings extends JPanel {
 		button.setBounds(126, 313, 128, 23);
 		contentPane.add(button);
 		*/
-		JButton btn_return = component.createButton("Return", 126, 276, 128, 23, 14);
+		btn_return = component.createButton("Return", 126, 276, 128, 23, 14);
+		btn_return.setBackground(Color.RED);
 		contentPane.add(btn_return);
 		
 		/*

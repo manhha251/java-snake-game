@@ -18,8 +18,10 @@ import java.awt.event.ActionEvent;
 public class loadGame extends JPanel {
 
 	public JPanel contentPane;
+	
 	Component component = new Component();
-
+	public JButton btn_return;
+	
 	/**
 	 * Create the frame.
 	 */
@@ -63,7 +65,7 @@ public class loadGame extends JPanel {
 		btn_return.setBounds(121, 314, 128, 23);
 		contentPane.add(btn_return);
 		*/
-		JButton btn_return = component.createButton("Return", 121, 314, 128, 23, 15);
+		btn_return = component.createButton("Return", 121, 314, 128, 23, 15);
 		btn_return.setBackground(Color.RED);
 		contentPane.add(btn_return);
 		
@@ -74,7 +76,7 @@ public class loadGame extends JPanel {
 		 */
 		btn_return.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-
+				
 			}
 		});
 	}

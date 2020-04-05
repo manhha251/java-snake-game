@@ -3,6 +3,7 @@ package UI_Test;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -11,26 +12,44 @@ import java.awt.GridLayout;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class gameBoard extends JPanel {
+public class gameBoard extends JFrame {
 
 	public JPanel contentPane;
+	public JButton btn_return ;
+	
 	Component component = new Component();
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					gameBoard frame = new gameBoard();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
 	
 	/**
 	 * Create the frame.
 	 */
 	public gameBoard() {
-		//setTitle("Game Board");
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//setBounds(100, 100, 550, 400);
+		setTitle("Game Board");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 550, 400);
 		contentPane = new JPanel();
+
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
-		//setContentPane(contentPane);
+		setContentPane(contentPane);
 		
 		JPanel pn_game_boar = new JPanel();
 		pn_game_boar.setBounds(5, 5, 308, 351);
@@ -203,5 +222,9 @@ public class gameBoard extends JPanel {
 		*/
 		JLabel lb_move_left = component.createInformationlabel("Move Left: Left ArrowKey/ A", 10, 51, 176, 22, 14);
 		pn_help.add(lb_move_left);
+		
+		btn_return = component.createButton("Return", 60, 150, 87, 22, 15);
+		btn_return.setBackground(Color.RED);
+		pn_help.add(btn_return);
 	}
 }

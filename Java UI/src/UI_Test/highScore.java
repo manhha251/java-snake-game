@@ -19,7 +19,7 @@ public class highScore extends JPanel {
 
 	public JPanel contentPane;
 	public JTable tb_high_score;
-
+	public JButton btn_return;
 
 	/**
 	 * Create the panel.
@@ -145,7 +145,7 @@ public class highScore extends JPanel {
 		button.setBounds(138, 327, 128, 23);
 		contentPane.add(button);
 		*/
-		JButton btn_return = component.createButton("return", 138, 327, 128, 30, 15);
+		btn_return = component.createButton("return", 138, 327, 128, 30, 15);
 		btn_return.setBackground(Color.red);
 		contentPane.add(btn_return);
 		
