@@ -1,4 +1,4 @@
-package UI_Test;
+package uiSnakeGame;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -16,11 +16,24 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class loadGame extends JPanel {
-
-	public JPanel contentPane;
-	
 	Component component = new Component();
+	
+	public JPanel contentPane;
+	JLabel lb_title_game;
+	JList l_saved;
+	JButton btn_choose;
 	public JButton btn_return;
+	
+	/*
+	 * create methods
+	 * Resize(int width, int height) to change size of the panel
+	 */
+	public void Resize(int width, int height) {
+		component.resizeLabel(lb_title_game, 34, 84, 11, 223, 54,width, height);
+		component.resizeList(l_saved, 73, 67, 223, 191, width, height);
+		component.resizeButton(btn_choose, 15, 121, 277, 128, 23,width, height);
+		component.resizeButton(btn_return, 15, 121, 314, 128, 23,width, height);
+	}
 	
 	/**
 	 * Create the frame.
@@ -41,10 +54,10 @@ public class loadGame extends JPanel {
 		lb_game_title.setBounds(73, 11, 223, 54);
 		contentPane.add(lb_game_title);
 		*/
-		JLabel lb_title_game = component.createLabelgameTitile();
+		lb_title_game = component.createLabelgameTitile();
 		contentPane.add(lb_title_game);
 		
-		JList l_saved = new JList();
+		l_saved = new JList();
 		l_saved.setBounds(73, 67, 223, 191);
 		contentPane.add(l_saved);
 		
@@ -55,7 +68,7 @@ public class loadGame extends JPanel {
 		btn_choose.setBounds(121, 277, 128, 23);
 		contentPane.add(btn_choose);
 		*/
-		JButton btn_choose = component.createButton("Choose", 121, 277, 128, 23, 15);
+		btn_choose = component.createButton("Choose", 121, 277, 128, 23, 15);
 		contentPane.add(btn_choose);
 		
 		/*
@@ -81,3 +94,4 @@ public class loadGame extends JPanel {
 		});
 	}
 }
+

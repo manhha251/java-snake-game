@@ -1,4 +1,4 @@
-package UI_Test;
+package uiSnakeGame;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -18,46 +18,96 @@ import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class gameBoard extends JFrame {
+public class gameBoard extends JPanel {
 
 	public JPanel contentPane;
+	
 	public JButton btn_return ;
+	JPanel pn_game_boar;
 	
+	JPanel pn_information;
+	JLabel lb_information;
+	JLabel lb_difficult;
+	JLabel lb_player_name;
+	JLabel lb_score;
+	JLabel lb_apples_eaten;
+	JLabel lb_snake_length ;
+	JLabel user_name;
+	JLabel difficulty;
+	JLabel score;
+	JLabel apples_eaten;
+	JLabel snake_length;
+	
+	JPanel pn_help;
+	JLabel lb_help;
+	JLabel lb_move_up;
+	JLabel lb_pause;
+	JLabel lb_move_down;
+	JLabel lb_move_right;
+	JLabel lb_move_left;
 	Component component = new Component();
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					gameBoard frame = new gameBoard();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 	
+	/*
+	 * create methods
+	 * Resize(int width, int height) to change size of the panel
+	 */
+	public void Resize(int width, int height) {
+		component.resizePanel(pn_game_boar, 5, 5, 308, 351, width, height, 160);
+		
+		component.resizePanel(pn_information, 311, 5, 218, 167, width, height, 160);
+		component.resizeLabel(lb_information, 20, 33, 11, 160, 29, width, height, 160);
+		
+		component.resizeLabel(lb_player_name, 14, 10, 51, 87, 22, width, height, 160);
+		component.resizeLabel(user_name, 14, 112, 51, 96, 22, width, height, 160);
+		
+		component.resizeLabel(lb_difficult, 14, 10, 71, 66, 22, width, height, 160);
+		component.resizeLabel(difficulty, 14, 112, 71, 96, 22, width, height, 160);
+		
+		component.resizeLabel(lb_score, 14, 10, 91, 66, 22, width, height, 160);
+		component.resizeLabel(score, 14, 112, 91, 96, 22, width, height, 160);
+		
+		component.resizeLabel(lb_apples_eaten, 14, 10, 111, 87, 22, width, height, 160);
+		component.resizeLabel(apples_eaten, 14, 112, 111, 96, 22, width, height, 160);
+		
+		component.resizeLabel(lb_snake_length, 14, 10, 131, 87, 22, width, height, 160);
+		component.resizeLabel(snake_length, 14, 112, 131, 96, 22, width, height, 160);
+		
+		component.resizePanel(pn_help, 311, 171, 218, 185, width, height, 160);
+		component.resizeLabel(lb_help, 20, 84, 11, 47, 29, width, height, 160);
+		
+		component.resizeLabel(lb_move_up, 14, 10, 111, 198, 22, width, height, 160);
+		
+		component.resizeLabel(lb_move_down, 14, 10, 91, 198, 22, width, height, 160);
+		
+		component.resizeLabel(lb_move_left, 14, 10, 51, 176, 22, width, height, 160);
+		
+		component.resizeLabel(lb_move_right, 14, 10, 71, 198, 22, width, height, 160);
+		
+		component.resizeLabel(lb_pause, 14, 10, 131, 87, 22, width, height, 160);
+		
+		component.resizeButton(btn_return, 15,60, 150, 87, 22, width, height, 160);
+	}
 	
 	/**
 	 * Create the frame.
 	 */
 	public gameBoard() {
-		setTitle("Game Board");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setTitle("Game Board");
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 550, 400);
 		contentPane = new JPanel();
 
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
-		setContentPane(contentPane);
+		//setContentPane(contentPane);
 		
-		JPanel pn_game_boar = new JPanel();
+		pn_game_boar = new JPanel();
 		pn_game_boar.setBounds(5, 5, 308, 351);
 		pn_game_boar.setBorder(new LineBorder(new Color(0, 0, 0)));
 		contentPane.add(pn_game_boar);
 		pn_game_boar.setLayout(null);
 		
-		JPanel pn_information = new JPanel();
+		pn_information = new JPanel();
 		pn_information.setBounds(311, 5, 218, 167);
 		pn_information.setBorder(new LineBorder(new Color(0, 0, 0)));
 		contentPane.add(pn_information);
@@ -69,7 +119,7 @@ public class gameBoard extends JFrame {
 		lb_information.setBounds(33, 11, 160, 29);
 		pn_information.add(lb_information);
 		*/
-		JLabel lb_information = component.createInformationlabel("Game Information",33, 11, 160, 29, 20);
+		lb_information = component.createInformationlabel("Game Information",33, 11, 160, 29, 20);
 		pn_information.add(lb_information);
 		
 		/*
@@ -78,7 +128,7 @@ public class gameBoard extends JFrame {
 		lb_difficult.setBounds(10, 71, 66, 22);
 		pn_information.add(lb_difficult);
 		*/
-		JLabel lb_difficult = component.createInformationlabel("Difficulty:",10, 71, 66, 22, 14);
+		lb_difficult = component.createInformationlabel("Difficulty:",10, 71, 66, 22, 14);
 		pn_information.add(lb_difficult);
 		
 		/*
@@ -87,7 +137,7 @@ public class gameBoard extends JFrame {
 		lb_player_name.setBounds(10, 51, 87, 22);
 		pn_information.add(lb_player_name);
 		*/
-		JLabel lb_player_name = component.createInformationlabel("Player Name:",10, 51, 87, 22, 14);
+		lb_player_name = component.createInformationlabel("Player Name:",10, 51, 87, 22, 14);
 		pn_information.add(lb_player_name);
 		
 		/*
@@ -96,7 +146,7 @@ public class gameBoard extends JFrame {
 		lb_score.setBounds(10, 91, 66, 22);
 		pn_information.add(lb_score);
 		*/		
-		JLabel lb_score = component.createInformationlabel("Score: ",10, 91, 66, 22, 14);
+		lb_score = component.createInformationlabel("Score: ",10, 91, 66, 22, 14);
 		pn_information.add(lb_score);
 		
 		/*
@@ -105,7 +155,7 @@ public class gameBoard extends JFrame {
 		lb_apples_eaten.setBounds(10, 111, 87, 22);
 		pn_information.add(lb_apples_eaten);
 		*/
-		JLabel lb_apples_eaten = component.createInformationlabel("Apples Eaten:",10, 111, 87, 22, 14);
+		lb_apples_eaten = component.createInformationlabel("Apples Eaten:",10, 111, 87, 22, 14);
 		pn_information.add(lb_apples_eaten);
 		
 		/*
@@ -114,7 +164,7 @@ public class gameBoard extends JFrame {
 		lb_snake_length.setBounds(10, 131, 87, 22);
 		pn_information.add(lb_snake_length);
 		*/
-		JLabel lb_snake_length = component.createInformationlabel("Snake Length:",10, 131, 87, 22, 14);
+		lb_snake_length = component.createInformationlabel("Snake Length:",10, 131, 87, 22, 14);
 		pn_information.add(lb_snake_length);
 		
 		/*
@@ -123,7 +173,7 @@ public class gameBoard extends JFrame {
 		user_name.setBounds(112, 51, 96, 22);
 		pn_information.add(user_name);
 		*/
-		JLabel user_name = component.createInformationlabel("Name",112, 51, 96, 22, 14);
+		user_name = component.createInformationlabel("Name",112, 51, 96, 22, 14);
 		pn_information.add(user_name);
 		
 		/*
@@ -132,7 +182,7 @@ public class gameBoard extends JFrame {
 		difficulty.setBounds(112, 71, 96, 22);
 		pn_information.add(difficulty);
 		*/
-		JLabel difficulty = component.createInformationlabel("Difficulty",112, 71, 96, 22, 14);
+		difficulty = component.createInformationlabel("Easy",112, 71, 96, 22, 14);
 		pn_information.add(difficulty);
 		
 		/*
@@ -141,7 +191,7 @@ public class gameBoard extends JFrame {
 		score.setBounds(112, 91, 96, 22);
 		pn_information.add(score);
 		*/		
-		JLabel score = component.createInformationlabel("Score",112, 91, 96, 22, 14);
+		score = component.createInformationlabel("0",112, 91, 96, 22, 14);
 		pn_information.add(score);
 		
 		/*
@@ -150,7 +200,7 @@ public class gameBoard extends JFrame {
 		apples_eaten.setBounds(112, 111, 96, 22);
 		pn_information.add(apples_eaten);
 		*/
-		JLabel apples_eaten = component.createInformationlabel("Apples eaten",112, 111, 96, 22, 14);
+		apples_eaten = component.createInformationlabel("0",112, 111, 96, 22, 14);
 		pn_information.add(apples_eaten);
 		
 		/*
@@ -159,10 +209,10 @@ public class gameBoard extends JFrame {
 		snake_length.setBounds(112, 131, 96, 22);
 		pn_information.add(snake_length);
 		*/
-		JLabel snake_length = component.createInformationlabel("Snake length", 112, 131, 96, 22, 14);
+		snake_length = component.createInformationlabel("1", 112, 131, 96, 22, 14);
 		pn_information.add(snake_length);
 		
-		JPanel pn_help = new JPanel();
+		pn_help = new JPanel();
 		pn_help.setBorder(new LineBorder(new Color(0, 0, 0)));
 		pn_help.setBounds(311, 171, 218, 185);
 		contentPane.add(pn_help);
@@ -175,7 +225,7 @@ public class gameBoard extends JFrame {
 		lb_help.setBounds(84, 11, 47, 29);
 		pn_help.add(lb_help);
 		*/
-		JLabel lb_help = component.createInformationlabel("Help", 84, 11, 47, 29, 20);
+		lb_help = component.createInformationlabel("Help", 84, 11, 47, 29, 20);
 		pn_help.add(lb_help);
 		
 		/*
@@ -184,7 +234,7 @@ public class gameBoard extends JFrame {
 		lb_move_up.setBounds(10, 111, 198, 22);
 		pn_help.add(lb_move_up);
 		*/
-		JLabel lb_move_up = component.createInformationlabel("Move Up: Up ArrowKey/ W", 10, 111, 198, 22, 14);
+		lb_move_up = component.createInformationlabel("Move Up: Up ArrowKey/ W", 10, 111, 198, 22, 14);
 		pn_help.add(lb_move_up);
 		
 		/*
@@ -193,7 +243,7 @@ public class gameBoard extends JFrame {
 		lb_pause.setBounds(10, 131, 87, 22);
 		pn_help.add(lb_pause);
 		*/
-		JLabel lb_pause = component.createInformationlabel("Pause : P", 10, 131, 87, 22, 14);
+		lb_pause = component.createInformationlabel("Pause : P", 10, 131, 87, 22, 14);
 		pn_help.add(lb_pause);
 		
 		/*
@@ -202,7 +252,7 @@ public class gameBoard extends JFrame {
 		lb_move_down.setBounds(10, 91, 198, 22);
 		pn_help.add(lb_move_down);
 		*/
-		JLabel lb_move_down = component.createInformationlabel("Move Down: Down ArrowKey/ S", 10, 91, 198, 22, 14);
+		lb_move_down = component.createInformationlabel("Move Down: Down ArrowKey/ S", 10, 91, 198, 22, 14);
 		pn_help.add(lb_move_down);
 		
 		/*
@@ -211,7 +261,7 @@ public class gameBoard extends JFrame {
 		lb_move_right.setBounds(10, 71, 198, 22);
 		pn_help.add(lb_move_right);
 		*/
-		JLabel lb_move_right = component.createInformationlabel("Move Right: Right ArrowKey/ D", 10, 71, 198, 22, 14);
+		lb_move_right = component.createInformationlabel("Move Right: Right ArrowKey/ D", 10, 71, 198, 22, 14);
 		pn_help.add(lb_move_right);
 		
 		/*
@@ -220,7 +270,7 @@ public class gameBoard extends JFrame {
 		lb_move_left.setBounds(10, 51, 176, 22);
 		pn_help.add(lb_move_left);
 		*/
-		JLabel lb_move_left = component.createInformationlabel("Move Left: Left ArrowKey/ A", 10, 51, 176, 22, 14);
+		lb_move_left = component.createInformationlabel("Move Left: Left ArrowKey/ A", 10, 51, 176, 22, 14);
 		pn_help.add(lb_move_left);
 		
 		btn_return = component.createButton("Return", 60, 150, 87, 22, 15);

@@ -1,4 +1,4 @@
-package UI_Test;
+package uiSnakeGame;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -19,13 +19,26 @@ public class mainMenu extends JPanel {
 	public JPanel contentPane;
 	Component component = new Component();
 	
-	//JButton of the panel
+	//component of the panel
 	public JButton btn_new_game;
 	public JButton btn_load_game;
 	public JButton btn_high_score;
 	public JButton btn_settings;
 	public JButton btn_logout;
+	JLabel lb_title_game;
 	
+	/*
+	 * create methods
+	 * Resize(int width, int height) to change size of the panel
+	 */
+	public void Resize(int width ,int height) {
+		component.resizeLabel(lb_title_game, 34, 84, 11, 223, 54,width, height);
+		component.resizeButton(btn_new_game, 20, 107, 89, 164, 33, width, height);
+		component.resizeButton(btn_load_game, 20, 107, 141, 164, 33, width, height);
+		component.resizeButton(btn_high_score, 20, 107, 194, 164, 33, width, height);
+		component.resizeButton(btn_settings, 20, 107, 246, 164, 33, width, height);
+		component.resizeButton(btn_logout, 20, 107, 298, 164, 33, width, height);
+	}
 	/**
 	 * Create the Panel.
 	 */
@@ -44,7 +57,7 @@ public class mainMenu extends JPanel {
 		lb_title_game.setBounds(75, 24, 223, 54);
 		contentPane.add(lb_title_game);
 		*/
-		JLabel lb_title_game = component.createLabelgameTitile();
+		lb_title_game = component.createLabelgameTitile();
 		contentPane.add(lb_title_game);
 		
 		

@@ -1,21 +1,28 @@
-package UI_Test;
+package uiSnakeGame;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 
 import java.awt.CardLayout;
+import java.awt.Component;
 
 public class mainUI extends JFrame {
 	
+	int x,y,height, width;
 	private JLayeredPane layeredPane;
 	private JPanel contentPane;
 	
@@ -62,10 +69,12 @@ public class mainUI extends JFrame {
 	 * Create the frame.
 	 */
 	public mainUI() {
-
+		height = 410;
+		width = 400 ;
 		setTitle("Home Screen");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 400, 410);
+		setBounds(500, 0, width, height);
+		setAlwaysOnTop(true);
 		contentPane = new JPanel();
 		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -115,7 +124,6 @@ public class mainUI extends JFrame {
 				changePanel(panel_main_menu);
 			}
 		});
-		
 		/*
 		 * Event of the register panel
 		 * btn_login event open login panel
@@ -139,7 +147,7 @@ public class mainUI extends JFrame {
 		main_menu.btn_new_game.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt ) {
 				setTitle("Game Boar");
-				setBounds(100, 100, 560, 410);
+				setBounds(200, 0, width+160, height);
 				changePanel(panel_game_board);
 			}
 		});
@@ -185,8 +193,8 @@ public class mainUI extends JFrame {
 		game_board.btn_return.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt ) {
 				setTitle("Main Menu");
-				setBounds(100, 100, 400, 410);
 				changePanel(panel_main_menu);
+				setBounds(200, 0, width, height);
 			}
 		});
 		
@@ -204,6 +212,7 @@ public class mainUI extends JFrame {
 		/*
 		 * Event of the settimgs panel
 		 * btn_return event return main menu panel
+		 * btn_apply event save settings
 		 */
 		settings.btn_return.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt ) {
@@ -212,9 +221,37 @@ public class mainUI extends JFrame {
 			}
 		});
 		
+		settings.btn_apply.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String window_size = (String)settings.model_window_size.getSelectedItem();
+				switch (window_size) {
+				case "Small":
+					height = width = 400;
+					break;
+				case "Normal":
+					height = width = 600;
+					break;
+				case "Large":
+					height = 780;
+					width = 800;
+					break;
+				default:
+					break;
+				}
+				setBounds(200, 0, width, height);
+				
+				settings.Resize(width ,height);
+				main_menu.Resize(width ,height);
+				login.Resize(width,height);
+				register.Resize(width, height);
+				high_score.Resize(width, height);
+				load_game.Resize(width, height);
+				game_board.Resize(width, height);
+			}
+		});
 		/*
 		 * Event of the high_score panel
-		 * btn_return event return main menu panel
+		 * btn_return event `return main menu panel
 		 */
 		high_score.btn_return.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt ) {

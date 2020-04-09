@@ -1,4 +1,4 @@
-package UI_Test;
+package uiSnakeGame;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -17,15 +17,36 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Login extends JPanel {
-
-	public JPanel contentPane;
-	private JTextField txt_username;
-	private JTextField txt_password;
 	Component component = new Component();
 	
-	//the button of the panel
+	public JPanel contentPane;
+	//the component of the panel
+	JLabel lb_title_game;
+	JLabel lb_password;
+	JPanel pn_login;
+	JLabel lb_username;
 	public JButton btn_login;
 	public JButton btn_register;
+	private JTextField txt_username;
+	private JTextField txt_password;
+	
+	JButton btn_exit;
+	
+	/*
+	 * create methods
+	 * Resize(int width, int height) to change size of the panel
+	 */
+	public void Resize(int width, int height) {
+		component.resizeLabel(lb_title_game, 34, 84, 11, 223, 54,width, height);
+		component.resizePanel(pn_login, 68, 76, 223, 192, width, height);
+		component.resizeLabel(lb_username, 13, 10, 35, 75, 17, width, height);
+		component.resizeLabel(lb_password, 13, 10, 84, 75, 17, width, height);
+		component.resizeTextbox(txt_username, 14, 82, 30, 131, 28, width, height);
+		component.resizeTextbox(txt_password, 14, 82, 79, 131, 28, width, height);
+		component.resizeButton(btn_login,18, 10, 133, 91, 39, width, height);
+		component.resizeButton(btn_register,18, 111, 133, 102, 39, width, height);
+		component.resizeButton(btn_exit,18,  122, 285, 117, 39, width, height);
+	}
 	
 	/**
 	 * Create the frame.
@@ -45,10 +66,10 @@ public class Login extends JPanel {
 		lb_title_game.setBounds(68, 11, 223, 54);
 		contentPane.add(lb_title_game);
 		*/
-		JLabel lb_title_game = component.createLabelgameTitile();
+		lb_title_game = component.createLabelgameTitile();
 		contentPane.add(lb_title_game);
 		
-		JPanel pn_login = new JPanel();
+		pn_login = new JPanel();
 		pn_login.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Login", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		pn_login.setBounds(68, 76, 223, 192);
 		contentPane.add(pn_login);
@@ -80,7 +101,7 @@ public class Login extends JPanel {
 		lb_username.setBounds(10, 35, 75, 17);
 		pn_login.add(lb_username);
 		*/
-		JLabel lb_username = component.createInformationlabel("Username: ",10, 35, 75, 17, 13);
+		lb_username = component.createInformationlabel("Username: ",10, 35, 75, 17, 13);
 		pn_login.add(lb_username);
 		
 		/*
@@ -89,7 +110,7 @@ public class Login extends JPanel {
 		lb_password.setBounds(10, 84, 75, 17);
 		pn_login.add(lb_password);
 		*/
-		JLabel lb_password = component.createInformationlabel("Password: ",10, 84, 75, 17, 13);
+		lb_password = component.createInformationlabel("Password: ",10, 84, 75, 17, 13);
 		pn_login.add(lb_password);
 		
 		/*
@@ -119,7 +140,7 @@ public class Login extends JPanel {
 		btn_exit.setBounds(118, 295, 117, 39);
 		contentPane.add(btn_exit);
 		*/
-		JButton btn_exit = component.createButton("EXIT", 122, 285, 117, 39, 18);
+		btn_exit = component.createButton("EXIT", 122, 285, 117, 39, 18);
 		contentPane.add(btn_exit);
 		/*
 		 	Event of components:
