@@ -8,12 +8,18 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
 
+import javax.sound.midi.Soundbank;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 
@@ -21,10 +27,13 @@ import java.awt.CardLayout;
 import java.awt.Component;
 
 public class mainUI extends JFrame {
+	Clip sound;
+	int height, width;
+	double vol = 1;
 	
-	int x,y,height, width;
 	private JLayeredPane layeredPane;
 	private JPanel contentPane;
+	
 	
 	Login login = new Login();
 	Register register = new Register();
@@ -36,9 +45,38 @@ public class mainUI extends JFrame {
 	
 	/**
 	 * the methods
-	 *changePanel(JPanel panel) to change new panel
-	 * 
+	 * changePanel(JPanel panel) to change new panel
+	 * Clip setMusic(String musicLocation) to set a sound
+	 * void setVolume(Clip sound, double vol) to set volume of sound
 	 */
+	
+		Clip setMusic(String musicLocation)
+		{	
+			try {
+				File musicFile = new File(musicLocation);
+				if (musicFile.exists())
+				{
+					AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicFile);
+					Clip clip  = AudioSystem.getClip();
+					clip.open(audioInput);
+					clip.start();
+					return clip;
+				}
+				else {
+					System.out.print("can not find");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		void setVolume(Clip sound, double vol)
+		{
+			FloatControl gain = (FloatControl)sound.getControl(FloatControl.Type.MASTER_GAIN);
+			float dB = (float)(Math.log(vol) / Math.log(10) * 20);
+			gain.setValue(dB);
+		}
 	
 	public void changePanel(JPanel panel)
 	{
@@ -64,13 +102,14 @@ public class mainUI extends JFrame {
 		});
 	}
 	
-	
+
 	/**
 	 * Create the frame.
 	 */
-	public mainUI() {
+	public mainUI() {		
 		height = 410;
 		width = 400 ;
+		
 		setTitle("Home Screen");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(500, 0, width, height);
@@ -105,6 +144,9 @@ public class mainUI extends JFrame {
 		
 		JPanel panel_settings = settings.contentPane;
 		layeredPane.add(panel_settings, "name_8525526148900");
+		
+		sound = setMusic("Sound\\\\open_sound.wav");
+		setVolume(sound, 1);
 		
 		/*
 		 * event of the login panel
@@ -149,6 +191,9 @@ public class mainUI extends JFrame {
 				setTitle("Game Boar");
 				setBounds(200, 0, width+160, height);
 				changePanel(panel_game_board);
+				sound.stop();
+				sound = setMusic("Sound\\\\game_sound.wav");
+				setVolume(sound, vol);
 			}
 		});
 		
@@ -195,6 +240,11 @@ public class mainUI extends JFrame {
 				setTitle("Main Menu");
 				changePanel(panel_main_menu);
 				setBounds(200, 0, width, height);
+				
+				sound.stop();
+				sound = setMusic("Sound\\\\open_sound.wav");
+				setVolume(sound, vol);
+				
 			}
 		});
 		
@@ -221,6 +271,12 @@ public class mainUI extends JFrame {
 			}
 		});
 		
+		settings.volume.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				vol = 1.0*settings.volume.getValue()/100;
+			}
+		});
+		
 		settings.btn_apply.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String window_size = (String)settings.model_window_size.getSelectedItem();
@@ -239,6 +295,8 @@ public class mainUI extends JFrame {
 					break;
 				}
 				setBounds(200, 0, width, height);
+				
+				setVolume(sound, vol);
 				
 				settings.Resize(width ,height);
 				main_menu.Resize(width ,height);
