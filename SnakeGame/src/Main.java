@@ -1,3 +1,6 @@
+import Controller.Controller;
+import View.View;
+
 /*
  * Main class for executing program
  * Version: Alpha 1.0.0.1
@@ -7,7 +10,8 @@
 public class Main{
 
     public static void main(String[] args){
-        Game game = new Game();
-        game.start();
+        Controller controller = new Controller();
+        controller.initScreen();
+        controller.start();
     }
 }

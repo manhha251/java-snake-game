@@ -1,3 +1,7 @@
+package Controller;
+
+import Model.Snake;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -9,10 +13,10 @@ import java.awt.event.KeyListener;
 
 public class MyKeyListener implements KeyListener {
 
-    private Snake snake;
+    private Controller controller;
 
-    public MyKeyListener (Snake snake) {
-        this.snake = snake;
+    public MyKeyListener (Controller controller) {
+        this.controller = controller;
     }
 
     @Override
@@ -23,7 +27,7 @@ public class MyKeyListener implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
 
-        snake.keyPressed(e);
+        controller.keyPressed(e);
     }
 
     @Override

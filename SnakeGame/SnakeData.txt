@@ -1,1 +1,3 @@
-
+#Sun Apr 12 22:36:28 ICT 2020
+highScore=10
+playerName=manhha251

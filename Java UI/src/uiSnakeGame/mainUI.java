@@ -115,6 +115,8 @@ public class mainUI extends JFrame {
 		setBounds(500, 0, width, height);
 		setAlwaysOnTop(true);
 		contentPane = new JPanel();
+
+		setLocationRelativeTo(null);
 		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
