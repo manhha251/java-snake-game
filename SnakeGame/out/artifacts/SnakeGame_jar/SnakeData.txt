@@ -1,3 +1,0 @@
-#Thu Apr 16 18:08:20 ICT 2020
-highScore=5
-playerName=m
