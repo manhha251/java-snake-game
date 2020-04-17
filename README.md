@@ -50,3 +50,7 @@ Separate by package
  - Add game Pause/Continue button/key
  - Add game obstacles if possible
  - Implement GUI
+
+## Alpha v4 April 18, 2020, 12:30 AM
+
+Add simple GUI for testing

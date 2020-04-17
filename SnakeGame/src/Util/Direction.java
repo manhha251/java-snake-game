@@ -1,5 +1,10 @@
 package Util;
 
+/*
+ * Enum for Snake direction
+ *
+ * @Author Luu Pham Manh Ha - 1752001
+ */
 public enum Direction {
     UP(0, -1),
     DOWN(0, 1),

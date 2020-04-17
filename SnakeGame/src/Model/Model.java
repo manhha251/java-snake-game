@@ -1,6 +1,5 @@
 package Model;
 
-import Controller.Controller;
 import Config.Config;
 import Util.Direction;
 import View.View;
@@ -10,7 +9,7 @@ import java.awt.event.KeyEvent;
 import java.util.Random;
 
 /*
- * Model.Model contains all other game objects and game logic
+ * Model contains all game objects and game actions
  *
  * Author: Luu Pham Manh Ha - 1752001
  */
@@ -19,13 +18,13 @@ public class Model {
     private final int ROWS = Config.BOARD_ROWS;
     private final int COLUMNS = Config.BOARD_COLUMNS;
 
-    private Snake snake;
+    private final Snake snake;
 
-    private Apple apple;
+    private final Apple apple;
 
-    private Player player;
+    private final Player player;
 
-    private View view;
+    private final View view;
 
     public Model(View view) {
 
@@ -35,7 +34,7 @@ public class Model {
         player = new Player();
     }
 
-    public void start() {
+    public void init() {
 
         generateSnake();
         generateApple();
@@ -67,6 +66,9 @@ public class Model {
         snake.generate();
     }
 
+    /*
+     * Randomly generate a position on board for apple object
+     */
     private void generateApple() {
 
         Random random = new Random();
@@ -82,7 +84,7 @@ public class Model {
 
     /*
      * Method for moving snakes
-     * Model.Model.Snake moves by moving its tail one grid ahead its head - new virtual head
+     * Snake moves by moving its tail one grid ahead its head - new virtual head
      * If this new virtual head collided with snake body or the board's edge: GAME OVER
      * Add new head to snake
      * If new head collided with an apple, increase snake size by not remove its current tail
@@ -123,10 +125,7 @@ public class Model {
             return true;
 
         /* horizontal border collision */
-        if (y < 0 || y >= ROWS)
-            return true;
-
-        return false;
+        return y < 0 || y >= ROWS;
     }
 
     public void paint(Graphics2D g2d) {
@@ -164,5 +163,10 @@ public class Model {
             default:
                 break;
         }
+    }
+
+    public int getScore() {
+
+        return player.getScore();
     }
 }

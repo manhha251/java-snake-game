@@ -5,13 +5,24 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/*
+ * Score panel
+ * Use to display player info: name, score, high score, time
+ *
+ * @author Luu Pham Manh Ha - 1752001
+ *         Nguyen Hoang Anh - 1652002
+ *         Nguyen Thi Quynh Hoa - 1752017
+ */
+
 public class ScorePanel extends JPanel {
 
-    private JLabel playerName;
-    private JLabel playerNamePlaceHolder;
-    private JLabel score;
-    private JLabel highScore;
-    private JLabel timer;
+    private final JLabel playerName;
+    private final JLabel playerNamePlaceHolder;
+    private final JLabel score;
+    private final JLabel highScore;
+    private final JLabel timer;
+
+    private Timer Ttimer;
 
     public ScorePanel(int width, int height) {
 
@@ -43,8 +54,11 @@ public class ScorePanel extends JPanel {
 
     }
 
+    /*
+     * Initialize a clock timer for the game
+     */
     public void initTimer() {
-        Timer timer = new Timer(1000, new ActionListener() {
+        Ttimer = new Timer(1000, new ActionListener() {
             int count;
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -55,13 +69,17 @@ public class ScorePanel extends JPanel {
             }
         });
 
-        timer.setInitialDelay(0);
-        timer.start();
+        Ttimer.setInitialDelay(0);
+        Ttimer.start();
+    }
+
+    public void stopTimer() {
+        Ttimer.stop();
     }
 
     public void updatePlayerName(String string) { playerNamePlaceHolder.setText(string); }
 
-    private void updateTimer(String string) {
+    public void updateTimer(String string) {
         timer.setText("Timer: " + string);
     }
 

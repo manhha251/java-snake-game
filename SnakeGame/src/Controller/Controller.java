@@ -1,37 +1,84 @@
 package Controller;
 
+import Config.Config;
 import Model.Model;
+import Util.AppState;
 import View.View;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
+import java.awt.image.ImageObserver;
 import java.io.*;
 import java.util.Properties;
 
+/*
+ * Controller component in MVC model
+ * Handle event
+ * Manipulate Model, notify View and receive request from View
+ *
+ * @author Luu Pham Manh Ha - 1752001
+ *
+ */
+
 public class Controller {
 
-    private Model model;
-    private View view;
+    private final Model model;
+    private final View view;
 
-    //private MyKeyListener keyListener;
+    private Timer timer;
 
     public Controller() {
 
-        //keyListener = new MyKeyListener(this);
         view = new View(this);
         model = new Model(view);
+        Config.loadConfig();
+    }
 
+    public void initModel() {
+        model.init();
     }
 
     public void initScreen() {
 
         loadData();
-        String name = JOptionPane.showInputDialog("Enter player name (>0): ");
+        view.updatePlayerName(model.getPlayerName());
+        view.initScreen();
+    }
+
+    public void changeState(AppState state) {
+
+        switch (state) {
+            case MainMenu:
+                saveData();
+                view.display("MAINMENU");
+                break;
+            case InGame:
+                prepareGame();
+                view.display("GAMEBOARD");
+                start();
+                break;
+            case Pause:
+                pause();
+                break;
+            case GameOver:
+                view.stopTimer();
+                view.updateClock("00:00");
+                stop();
+                JOptionPane.showMessageDialog(view, "Game Over\nScore: " + model.getScore());
+                view.display("MAINMENU");
+                break;
+            case Exit:
+                quit();
+                break;
+            default:
+                break;
+        }
+    }
+    public void prepareGame() {
+
+        String name = JOptionPane.showInputDialog("Enter player name\n (Press cancel to use default name or old name): ");
         if (name != null && name.length() > 0)
             model.setPlayerName(name);
-
-        view.initScreen();
-        model.setHighScore(model.getHighScore());
     }
 
     public void start() {
@@ -39,13 +86,48 @@ public class Controller {
         initModel();
         view.initTimer();
 
-        Timer timer = new Timer(250, e -> {
+        timer = new Timer(250, e -> {
             run();
             view.repaint();
         });
 
         timer.setInitialDelay(0);
         timer.start();
+    }
+
+    public void run() {
+        model.moveSnake();
+    }
+
+    private void pause() {
+        timer.stop();
+    }
+
+    private void resume() {
+
+        timer.start();
+    }
+
+    public void stop() {
+
+        timer.stop();
+    }
+
+    public void quit() {
+        int choice = JOptionPane.showConfirmDialog(view, "Do you want to quit game ?",
+                "Quit game", JOptionPane.YES_NO_OPTION);
+        // 0: YES, 1: NO
+        if (choice == 0) {
+            Config.saveConfig();
+            saveData();
+            System.exit(ImageObserver.ABORT);
+        }
+
+    }
+
+    public void keyPressed(KeyEvent e) {
+
+        model.keyPressed(e);
     }
 
     public void saveData() {
@@ -80,19 +162,5 @@ public class Controller {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
-    }
-
-    public void keyPressed(KeyEvent e) {
-
-        model.keyPressed(e);
-    }
-
-    public void run() {
-        model.moveSnake();
-    }
-
-    public void initModel() {
-        model.start();
     }
 }

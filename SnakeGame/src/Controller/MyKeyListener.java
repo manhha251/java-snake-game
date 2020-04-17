@@ -1,7 +1,5 @@
 package Controller;
 
-import Model.Snake;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -13,7 +11,7 @@ import java.awt.event.KeyListener;
 
 public class MyKeyListener implements KeyListener {
 
-    private Controller controller;
+    private final Controller controller;
 
     public MyKeyListener (Controller controller) {
         this.controller = controller;

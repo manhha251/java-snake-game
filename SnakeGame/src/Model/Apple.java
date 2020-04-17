@@ -4,9 +4,16 @@ import Config.Config;
 
 import java.awt.*;
 
+/*
+ * Apple object
+ * Can be generated at random position on board
+ *
+ * @Author Luu Pham Manh Ha - 1752001
+ */
+
 public class Apple implements RenderObject{
 
-    private int scale = Config.SCALE;
+    private final int scale = Config.SCALE;
 
     private Point apple;
 

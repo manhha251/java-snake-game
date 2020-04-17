@@ -8,15 +8,16 @@ import java.util.LinkedList;
 
 /*
  * Model for the snake object
+ * Generated at center of the board upon game start
  *
  * @author Luu Pham Manh Ha - 1752001
  */
 
 public class Snake implements RenderObject {
 
-    private int rows = Config.BOARD_ROWS;
-    private int columns = Config.BOARD_COLUMNS;
-    private int scale = Config.SCALE;
+    private final int rows = Config.BOARD_ROWS;
+    private final int columns = Config.BOARD_COLUMNS;
+    private final int scale = Config.SCALE;
 
     private static LinkedList<Point> snake;
 
@@ -73,10 +74,7 @@ public class Snake implements RenderObject {
 
     public boolean collision(Point point) {
 
-        if (snake.contains(point))
-            return true;
-
-        return false;
+        return snake.contains(point);
     }
 
     public void update(Point newHead, boolean appleEaten) {

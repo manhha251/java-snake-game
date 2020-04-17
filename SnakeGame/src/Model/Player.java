@@ -13,13 +13,6 @@ public class Player {
         score = highScore = 0;
     }
 
-    public Player(String name, int score, int highScore) {
-
-        this.name = name;
-        this.score = score;
-        this.highScore = highScore;
-    }
-
     public String getName() {
         return name;
     }

@@ -15,13 +15,15 @@ import java.util.List;
  * Draw the layout of the board as well as the snake, apple, obstacles,...
  *
  * @author Luu Pham Manh Ha - 1752001
+ *         Nguyen Hoang Anh - 1652002
+ *         Nguyen Thi Quynh Hoa - 1752017
  */
 
 public class GamePanel extends JPanel {
 
     private int width;
     private int height;
-    private int scale;
+    private final int scale;
 
     private List<RenderObject> objectList = new LinkedList<>();
 
@@ -67,8 +69,7 @@ public class GamePanel extends JPanel {
 
     public void removeRenderObject(RenderObject o) {
 
-        if (objectList.contains(o))
-            objectList.remove(o);
+        objectList.remove(o);
     }
 
     public void removeAllObject() {
@@ -76,14 +77,8 @@ public class GamePanel extends JPanel {
         objectList.clear();
     }
 
-    public void gameOver() {
-        //saveData(model.getHighScore());
-        JOptionPane.showMessageDialog(this, "View.Game Over", "View.Game Over", JOptionPane.YES_NO_OPTION);
-        System.exit(ABORT);
-    }
-
     /*
-     * Paint all GI main components: layout, snake, apple, obstacles,...
+     * Paint all game's main components: layout, snake, apple, obstacles,...
      */
     @Override
     public void paintComponent(Graphics g) {

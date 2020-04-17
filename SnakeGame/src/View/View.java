@@ -7,25 +7,34 @@ import Model.Apple;
 import Model.Player;
 import Model.RenderObject;
 import Model.Snake;
+import Util.AppState;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.LinkedList;
 
 /*
  * Main display for the game window
- * Display all other Panel such as Menu, View.Game panel, Scoreboard,...
+ * Display all other Panel such as Menu, Game panel, Score panel,...
+ * Receive user input and send to Controller for handling
  *
  * @author Luu Pham Manh Ha - 1752001
+ *         Nguyen Hoang Anh - 1652002
+ *         Nguyen Thi Quynh Hoa - 1752017
  */
 
 public class View extends JFrame{
 
-    private GamePanel gamePanel;
+    private final GamePanel gamePanel;
+    private final ScorePanel scorePanel;
+    private final MainMenuPanel mainMenuPanel;
 
-    private ScorePanel scorePanel;
+    private final Controller controller;
 
-    private Controller controller;
+    private CardLayout card;
+    private JPanel cardPanel;
 
     public View(Controller controller) {
 
@@ -33,44 +42,51 @@ public class View extends JFrame{
 
         MyKeyListener keyListener = new MyKeyListener(controller);
 
+        card = new CardLayout();
+        cardPanel = new JPanel(card);
+
         setTitle("Snake");
 
         scorePanel = new ScorePanel(Config.BOARD_COLUMNS * Config.SCALE / 2,
                 Config.BOARD_COLUMNS * Config.SCALE);
         gamePanel = new GamePanel(Config.BOARD_COLUMNS * Config.SCALE,
                 Config.BOARD_ROWS * Config.SCALE, Config.SCALE);
+        mainMenuPanel = new MainMenuPanel(controller,Config.BOARD_COLUMNS * Config.SCALE / 2,
+                Config.BOARD_COLUMNS * Config.SCALE);
 
+        cardPanel.add(mainMenuPanel, "MAINMENU");
+        cardPanel.add(gamePanel, "GAMEBOARD");
+
+        add(cardPanel, BorderLayout.CENTER);
         add(scorePanel, BorderLayout.EAST);
-        add(gamePanel, BorderLayout.CENTER);
         addKeyListener(keyListener);
+
         pack();
         setResizable(false);
         setFocusable(true);
-        //setVisible(true);
+        setVisible(false);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                controller.saveData();
+                Config.saveConfig();
+                System.exit(0);
+            }
+        });
 
     }
-
 
     public void initScreen() {
 
-       //add(gamePanel, BorderLayout.CENTER);
+        display("MAINMENU");
         setVisible(true);
     }
 
-    public void start() {
+    public void display(String panel) {
 
-        controller.initModel();
-        scorePanel.initTimer();
-
-        Timer timer = new Timer(250, e -> {
-            controller.run();
-            gamePanel.repaint();
-        });
-
-        timer.setInitialDelay(0);
-        timer.start();
+        card.show(cardPanel, panel);
     }
 
     @Override
@@ -93,20 +109,28 @@ public class View extends JFrame{
         scorePanel.updateScore(player.getScore());
     }
 
-    public void gameOver() {
-
-        controller.saveData();
-        JOptionPane.showMessageDialog(this, "Game Over", "Game Over", JOptionPane.YES_NO_OPTION);
-        System.exit(ABORT);
-    }
-
     public void updatePlayerName(String name) {
 
         scorePanel.updatePlayerName(name);
     }
 
+    public void updateClock(String time) {
+
+        scorePanel.updateTimer(time);
+    }
+
     public void initTimer() {
 
         scorePanel.initTimer();
+    }
+
+    public void stopTimer() {
+
+        scorePanel.stopTimer();
+    }
+
+    public void gameOver() {
+
+        controller.changeState(AppState.GameOver);
     }
 }
