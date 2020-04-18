@@ -25,6 +25,6 @@ hs_err_pid*
 # Folder
 out/
 META-INF/
+save/
 
-SnakeConfig.txt
-SnakeData.txt
+*.txt

@@ -20,7 +20,7 @@ public class Config {
      */
     public static void saveConfig() {
 
-        try (OutputStream output = new FileOutputStream("./SnakeConfig.txt")) {
+        try (OutputStream output = new FileOutputStream("./save/SnakeConfig.txt")) {
 
             Properties properties = new Properties();
 
@@ -41,7 +41,7 @@ public class Config {
      */
     public static void loadConfig() {
 
-        try (InputStream input = new FileInputStream("./SnakeConfig.txt")) {
+        try (InputStream input = new FileInputStream("./save/SnakeConfig.txt")) {
 
             Properties properties = new Properties();
 

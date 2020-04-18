@@ -132,7 +132,7 @@ public class Controller {
 
     public void saveData() {
 
-        try (OutputStream output = new FileOutputStream("./SnakeData.txt")) {
+        try (OutputStream output = new FileOutputStream("./save/SnakeData.txt")) {
 
             Properties properties = new Properties();
 
@@ -150,7 +150,7 @@ public class Controller {
 
     public void loadData() {
 
-        try (InputStream  input = new FileInputStream("./SnakeData.txt")) {
+        try (InputStream  input = new FileInputStream("./save/SnakeData.txt")) {
 
             Properties properties = new Properties();
 
