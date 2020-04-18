@@ -36,7 +36,7 @@ public class Snake implements RenderObject {
     public void generate() {
 
         if (snakeBody == null)
-            snakeBody = new LinkedList<Point>();
+            snakeBody = new LinkedList<>();
         else
             snakeBody.clear();
 
