@@ -19,7 +19,7 @@ public class Snake implements RenderObject {
     private final int columns = Config.BOARD_COLUMNS;
     private final int scale = Config.SCALE;
 
-    private static LinkedList<Point> snake;
+    private static LinkedList<Point> snakeBody;
 
     private Direction direction;
 
@@ -35,10 +35,10 @@ public class Snake implements RenderObject {
 
     public void generate() {
 
-        if (snake == null)
-            snake = new LinkedList<Point>();
+        if (snakeBody == null)
+            snakeBody = new LinkedList<Point>();
         else
-            snake.clear();
+            snakeBody.clear();
 
         int initX = rows / 2;
         int initY = columns / 2;
@@ -47,13 +47,13 @@ public class Snake implements RenderObject {
 
         for (int i = 0; i < initLength; i++) {
 
-            snake.add(new Point(initX - i * direction.x, initY - i * direction.y));
+            snakeBody.add(new Point(initX - i * direction.x, initY - i * direction.y));
         }
     }
 
     public Point newHead() {
 
-        Point head = snake.getFirst();
+        Point head = snakeBody.getFirst();
 
         return new Point((int)head.getX() + direction.x, (int)head.getY() + direction.y);
     }
@@ -64,7 +64,7 @@ public class Snake implements RenderObject {
     public void paint(Graphics2D g) {
 
         g.setColor(Color.green);
-        for (Point snakeBody : snake) {
+        for (Point snakeBody : snakeBody) {
 
             int x = (int)snakeBody.getX();
             int y = (int)snakeBody.getY();
@@ -74,19 +74,19 @@ public class Snake implements RenderObject {
 
     public boolean collision(Point point) {
 
-        return snake.contains(point);
+        return snakeBody.contains(point);
     }
 
     public void update(Point newHead, boolean appleEaten) {
 
-        snake.getLast().setLocation(newHead);
+        snakeBody.getLast().setLocation(newHead);
 
         if (appleEaten) {
 
-            snake.addFirst(newHead);
+            snakeBody.addFirst(newHead);
         } else {
 
-            snake.addFirst(snake.removeLast());
+            snakeBody.addFirst(snakeBody.removeLast());
         }
     }
 }

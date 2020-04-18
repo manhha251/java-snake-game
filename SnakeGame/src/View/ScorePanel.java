@@ -22,6 +22,8 @@ public class ScorePanel extends JPanel {
     private final JLabel highScore;
     private final JLabel timer;
 
+    private final Font defaultFont = new Font("Monospaced", Font.BOLD, 20);
+
     private Timer Ttimer;
 
     public ScorePanel(int width, int height) {
@@ -34,17 +36,22 @@ public class ScorePanel extends JPanel {
         playerNamePlaceHolder = new JLabel();
         score = new JLabel("Score: 0");
         highScore = new JLabel();
-        timer = new JLabel("Timer: 00:00");
+        timer = new JLabel("");
 
-        playerName.setFont(new Font("Monospaced", Font.BOLD, 20));
+        playerName.setFont(defaultFont);
         playerName.setAlignmentX(Component.CENTER_ALIGNMENT);
-        playerNamePlaceHolder.setFont(new Font("Monospaced", Font.PLAIN, 16));
+
+        playerNamePlaceHolder.setFont(defaultFont);
         playerNamePlaceHolder.setAlignmentX(Component.CENTER_ALIGNMENT);
-        highScore.setFont(new Font("Monospaced", Font.BOLD, 20));
+
+        highScore.setFont(defaultFont);
         highScore.setAlignmentX(Component.CENTER_ALIGNMENT);
-        score.setFont(new Font("Monospaced", Font.BOLD, 20));
+
+        score.setFont(defaultFont);
         score.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         timer.setAlignmentX(Component.CENTER_ALIGNMENT);
+        timer.setVisible(false);
 
         add(playerName);
         add(playerNamePlaceHolder);
@@ -58,6 +65,8 @@ public class ScorePanel extends JPanel {
      * Initialize a clock timer for the game
      */
     public void initTimer() {
+
+        timer.setVisible(true);
         Ttimer = new Timer(1000, new ActionListener() {
             int count;
             @Override
@@ -74,7 +83,9 @@ public class ScorePanel extends JPanel {
     }
 
     public void stopTimer() {
+
         Ttimer.stop();
+        timer.setVisible(false);
     }
 
     public void updatePlayerName(String string) { playerNamePlaceHolder.setText(string); }
