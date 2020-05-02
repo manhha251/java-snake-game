@@ -76,7 +76,6 @@ public class Register extends JFrame {
         btExit.setBounds(75, 200, 110, 25);
         panel.add(btExit);
 
-
         //set backgroud of panel
         panel.setBackground(Color.pink);
     }
