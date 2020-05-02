@@ -39,7 +39,7 @@ public class Register extends JFrame {
         panel.add(lbNameGame);
 
         lbRegister = new JLabel("Register");
-        lbRegister.setBounds(10,40,80,25);
+        lbRegister.setBounds(20,40,80,25);
         panel.add(lbRegister);
 
         lbUsername = new JLabel("Username: ");
