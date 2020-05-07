@@ -1,4 +1,6 @@
-package View;
+package main.java.View;
+
+import main.java.Model.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,7 +9,7 @@ import java.awt.event.ActionListener;
 
 /*
  * Score panel
- * Use to display player info: name, score, high score, time
+ * Use to display player info: player name, score, timer
  *
  * @author Luu Pham Manh Ha - 1752001
  *         Nguyen Hoang Anh - 1652002
@@ -58,7 +60,6 @@ public class ScorePanel extends JPanel {
         add(score);
         add(highScore);
         add(timer);
-
     }
 
     /*
@@ -88,8 +89,6 @@ public class ScorePanel extends JPanel {
         timer.setVisible(false);
     }
 
-    public void updatePlayerName(String string) { playerNamePlaceHolder.setText(string); }
-
     public void updateTimer(String string) {
         timer.setText("Timer: " + string);
     }
@@ -98,8 +97,18 @@ public class ScorePanel extends JPanel {
         this.score.setText("Score: " + score);
     }
 
-    public void updateHighScore(int highScore) {
+    public void updatePlayerInfo(Player player) {
 
-        this.highScore.setText("High Score: " + highScore);
+        playerNamePlaceHolder.setText(player.getName());
+    }
+
+    public void displayClock() {
+        if (!timer.isVisible())
+            timer.setVisible(true);
+    }
+
+    public void hideClock() {
+        if (timer.isVisible())
+            timer.setVisible(false);
     }
 }

@@ -54,3 +54,14 @@ Separate by package
 ## Alpha v4 April 18, 2020, 12:30 AM
 
 Add simple GUI for testing
+
+## Alpha v5 May 8, 2020, 1:00 AM
+
+Add Account (Login, Registration), LeaderBoard and difficulty selection
+Add more GUI
+### To-do list:
+ - Add game Pause/Continue button/key
+ - Add game obstacles if possible
+ - Improve GUI
+ - Add sounds/music (if possible)
+ - Add Options menu

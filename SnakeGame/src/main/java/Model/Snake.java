@@ -1,7 +1,7 @@
-package Model;
+package main.java.Model;
 
-import Config.Config;
-import Util.Direction;
+import main.java.Config.Config;
+import main.java.Util.Direction;
 
 import java.awt.*;
 import java.util.LinkedList;

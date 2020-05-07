@@ -1,4 +1,4 @@
-package Util;
+package main.java.Util;
 
 /*
  * Enum presenting different stats of the application
@@ -8,9 +8,12 @@ package Util;
 
 public enum AppState {
 
+    Login,
+    Register,
     MainMenu,
-    InGame,
+    GameStart,
     Pause,
     GameOver,
-    Exit
+    Options,
+    Ranking
 }

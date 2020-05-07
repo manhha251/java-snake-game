@@ -1,8 +1,9 @@
-package Model;
+package main.java.Model;
 
-import Config.Config;
-import Util.Direction;
-import View.View;
+import main.java.Config.Config;
+import main.java.Util.Direction;
+import main.java.Util.GameMode;
+import main.java.View.View;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -22,9 +23,12 @@ public class Model {
 
     private final Apple apple;
 
-    private final Player player;
+    private Player player;
 
     private final View view;
+
+    private boolean keyPressed;
+    private GameMode mode;
 
     public Model(View view) {
 
@@ -32,33 +36,19 @@ public class Model {
         snake = new Snake();
         apple = new Apple();
         player = new Player();
+
     }
 
     public void init() {
 
+        keyPressed = false;
         generateSnake();
         generateApple();
-        view.updatePlayerName(player.getName());
     }
 
-    public int getHighScore() {
+    public void updateHighScore() {
 
-        return player.getHighScore();
-    }
-
-    public void setHighScore(int highScore) {
-
-        player.setHighScore(highScore);
-    }
-
-    public void setPlayerName(String name) {
-
-        player.setName(name);
-    }
-
-    public String getPlayerName() {
-
-        return player.getName();
+        player.updateHighScore();
     }
 
     public void generateSnake() {
@@ -111,62 +101,96 @@ public class Model {
         view.update(snake, apple, player);
     }
 
+    public void setPlayer(Player player) {
+
+        this.player = player;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public int getScore() {
+
+        return player.getScore();
+    }
+
     public boolean collision(Point head) {
 
         /* self collision */
-        if (snake.collision(head))
+        if (snake.collision(head)) {
+            System.out.println("Self collision at " + head.x + " " + head.y);
             return true;
+        }
 
         int x = (int) head.getX();
         int y = (int) head.getY();
 
         /* vertical border collision */
-        if (x < 0 || x >= COLUMNS)
+        if (x < 0 || x >= COLUMNS) {
+            System.out.println("Columns collision at " + head.x + " " + head.y);
             return true;
+        }
 
         /* horizontal border collision */
-        return y < 0 || y >= ROWS;
+        if (y < 0 || y >= ROWS ) {
+            System.out.println("Rows collision at " + head.x + " " + head.y);
+            return true;
+        }
+
+        return false;
     }
 
-    public void paint(Graphics2D g2d) {
-        snake.paint(g2d);
-        apple.paint(g2d);
-    }
-
+    /*
+     * Handling key event for game
+     */
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
 
         Direction currentDirection = snake.getDirection();
-
         switch (keyCode) {
 
             case KeyEvent.VK_W:
             case KeyEvent.VK_UP:
-                if (currentDirection != Direction.DOWN)
-                snake.setDirection(Direction.UP);
+                if (!keyPressed && currentDirection != Direction.DOWN) {
+                    snake.setDirection(Direction.UP);
+                    keyPressed = true;
+                }
                 break;
             case KeyEvent.VK_S:
             case KeyEvent.VK_DOWN:
-                if (currentDirection != Direction.UP)
-                snake.setDirection(Direction.DOWN);
+                if (!keyPressed && currentDirection != Direction.UP) {
+                    snake.setDirection(Direction.DOWN);
+                    keyPressed = true;
+                }
                 break;
             case KeyEvent.VK_A:
             case KeyEvent.VK_LEFT:
-                if (currentDirection != Direction.RIGHT)
-                snake.setDirection(Direction.LEFT);
+                if (!keyPressed && currentDirection != Direction.RIGHT) {
+                    snake.setDirection(Direction.LEFT);
+                    keyPressed = true;
+                }
                 break;
             case KeyEvent.VK_D:
             case KeyEvent.VK_RIGHT:
-                if (currentDirection != Direction.LEFT)
-                snake.setDirection(Direction.RIGHT);
+                if (!keyPressed && currentDirection != Direction.LEFT) {
+                    snake.setDirection(Direction.RIGHT);
+                    keyPressed = true;
+                }
                 break;
             default:
                 break;
         }
     }
 
-    public int getScore() {
+    public void keyReleased(KeyEvent e) {
 
-        return player.getScore();
+        keyPressed = false;
+    }
+
+    public void setMode(GameMode mode) {
+
+        this.mode = mode;
+        player.setMode(mode);
     }
 }

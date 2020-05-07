@@ -1,9 +1,13 @@
-import Controller.Controller;
+package main.java;
+
+import main.java.Controller.Controller;
+
+import javax.swing.*;
 
 /*
  * Main class for executing program
  * User use Controller for application usage
- * Version: Alpha 1.5
+ * Version: 2.0
  *
  * @author Luu Pham Manh Ha - 1752001
  *         Nguyen Hoang Anh - 1652002
@@ -12,7 +16,9 @@ import Controller.Controller;
 public class Main{
 
     public static void main(String[] args){
-        Controller controller = new Controller();
-        controller.initScreen();
+        SwingUtilities.invokeLater(() -> {
+            Controller controller = new Controller();
+            controller.initScreen();
+        });
     }
 }

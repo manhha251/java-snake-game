@@ -1,6 +1,6 @@
-package Model;
+package main.java.Model;
 
-import Config.Config;
+import main.java.Config.Config;
 
 import java.awt.*;
 

@@ -1,19 +1,22 @@
-package View;
+package main.java.View;
 
-import Config.Config;
-import Controller.Controller;
-import Controller.MyKeyListener;
-import Model.Apple;
-import Model.Player;
-import Model.RenderObject;
-import Model.Snake;
-import Util.AppState;
+import main.java.Config.Config;
+import main.java.Controller.Controller;
+import main.java.Controller.MyKeyListener;
+import main.java.Database.Database;
+import main.java.Model.Apple;
+import main.java.Model.Player;
+import main.java.Model.RenderObject;
+import main.java.Model.Snake;
+import main.java.Util.AppState;
+import org.bson.Document;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.LinkedList;
+import java.util.List;
 
 /*
  * Main display for the game window
@@ -30,6 +33,9 @@ public class View extends JFrame{
     private final GamePanel gamePanel;
     private final ScorePanel scorePanel;
     private final MainMenuPanel mainMenuPanel;
+    private final LoginPanel loginPanel;
+    private final RegisterPanel registerPanel;
+    private final RankingPanel rankingPanel;
 
     private final Controller controller;
 
@@ -47,15 +53,21 @@ public class View extends JFrame{
 
         setTitle("Snake");
 
-        scorePanel = new ScorePanel(Config.BOARD_COLUMNS * Config.SCALE / 2,
-                Config.BOARD_COLUMNS * Config.SCALE);
-        gamePanel = new GamePanel(Config.BOARD_COLUMNS * Config.SCALE,
-                Config.BOARD_ROWS * Config.SCALE, Config.SCALE);
-        mainMenuPanel = new MainMenuPanel(controller,Config.BOARD_COLUMNS * Config.SCALE / 2,
-                Config.BOARD_COLUMNS * Config.SCALE);
+        int width = Config.BOARD_COLUMNS * Config.SCALE;
+        int height = Config.BOARD_COLUMNS * Config.SCALE;
 
+        scorePanel = new ScorePanel(width / 2, height);
+        gamePanel = new GamePanel(width, height, Config.SCALE);
+        mainMenuPanel = new MainMenuPanel(this,width, height);
+        loginPanel = new LoginPanel(this, width, height);
+        registerPanel = new RegisterPanel(this, width, height);
+        rankingPanel = new RankingPanel(this, width, height);
+
+        cardPanel.add(loginPanel, "LOGIN");
+        cardPanel.add(registerPanel, "REGISTER");
         cardPanel.add(mainMenuPanel, "MAINMENU");
         cardPanel.add(gamePanel, "GAMEBOARD");
+        cardPanel.add(rankingPanel, "RANKING");
 
         add(cardPanel, BorderLayout.CENTER);
         add(scorePanel, BorderLayout.EAST);
@@ -80,13 +92,18 @@ public class View extends JFrame{
 
     public void initScreen() {
 
-        display("MAINMENU");
+        hideScorePanel();
+        display("LOGIN");
         setVisible(true);
     }
 
     public void display(String panel) {
 
         card.show(cardPanel, panel);
+    }
+
+    public void changeState(AppState state) {
+        controller.changeState(state);
     }
 
     @Override
@@ -105,18 +122,7 @@ public class View extends JFrame{
         list.add(apple);
 
         gamePanel.setObjectList(list);
-        scorePanel.updateHighScore(player.getHighScore());
         scorePanel.updateScore(player.getScore());
-    }
-
-    public void updatePlayerName(String name) {
-
-        scorePanel.updatePlayerName(name);
-    }
-
-    public void updateClock(String time) {
-
-        scorePanel.updateTimer(time);
     }
 
     public void initTimer() {
@@ -132,5 +138,53 @@ public class View extends JFrame{
     public void gameOver() {
 
         controller.changeState(AppState.GameOver);
+    }
+
+    public void register(String username, String password, String playerName) {
+
+        if (Database.addUser(username, password)) {
+
+            controller.addNewPlayer(username, playerName);
+        } else {
+
+            JOptionPane.showMessageDialog(this, "Username already exist");
+            System.out.println("Register fail");
+        }
+    }
+
+    public void hideScorePanel() {
+        if (scorePanel.isVisible())
+            scorePanel.setVisible(false);
+    }
+
+    public void showScorePanel() {
+        if (!scorePanel.isVisible())
+            scorePanel.setVisible(true);
+    }
+
+
+    public void displayClock() {
+        scorePanel.displayClock();
+    }
+
+    public void hideClock() {
+        scorePanel.hideClock();
+    }
+
+    public void updatePlayerInfo(Player player) {
+
+        scorePanel.updatePlayerInfo(player);
+        scorePanel.updateScore(0);
+        controller.setPlayer(player);
+    }
+
+    public void updateRankingBoard() {
+
+        rankingPanel.updateRankingBoard();
+    }
+
+    public List<Document> getRankingBoard() {
+
+        return controller.getRankingBoard();
     }
 }

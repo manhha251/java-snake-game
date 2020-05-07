@@ -1,13 +1,11 @@
-package View;
+package main.java.View;
 
-import Model.RenderObject;
+import main.java.Model.RenderObject;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
-
-
 
 /*
  * Panel for main game board
@@ -44,37 +42,14 @@ public class GamePanel extends JPanel {
         return width;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
     @Override
     public int getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public void addRenderObject(RenderObject o) {
-
-        objectList.add(o);
-    }
-
     public void setObjectList(LinkedList<RenderObject> list) {
 
         objectList = list;
-    }
-
-    public void removeRenderObject(RenderObject o) {
-
-        objectList.remove(o);
-    }
-
-    public void removeAllObject() {
-
-        objectList.clear();
     }
 
     /*

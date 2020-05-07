@@ -1,4 +1,4 @@
-package Controller;
+package main.java.Controller;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -31,5 +31,6 @@ public class MyKeyListener implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
 
+        controller.keyReleased(e);
     }
 }
