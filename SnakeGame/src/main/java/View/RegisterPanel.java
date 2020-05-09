@@ -110,7 +110,7 @@ public class RegisterPanel extends JPanel implements KeyListener {
         // 0: YES, 1: NO
         if (choice == 0) {
             Database.close();
-            System.exit(ABORT);
+            System.exit(0);
         }
     }
 

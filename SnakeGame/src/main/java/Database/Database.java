@@ -1,5 +1,6 @@
 package main.java.Database;
 
+import com.mongodb.MongoConfigurationException;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -10,6 +11,7 @@ import main.java.Model.Player;
 import org.bson.Document;
 import org.mindrot.jbcrypt.BCrypt;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +30,7 @@ public class Database {
 
     private static MongoDatabase db;
 
-    private static String currentUsername;
+    private static String currentUsername = "";
 
     public static String getCurrentUsername() {
 
@@ -37,7 +39,16 @@ public class Database {
 
     public static void connect(String connection, String database) {
 
-        client = MongoClients.create(connection);
+        do {
+            try {
+                client = MongoClients.create(connection);
+                break;
+            } catch (MongoConfigurationException e) {
+                System.out.println(e.getCause());
+                JOptionPane.showMessageDialog(null,
+                        "Connection failed. Please check your internet connect and try again");
+            }
+        } while (true);
         db = client.getDatabase(database);
     }
 
@@ -51,7 +62,8 @@ public class Database {
         Document user = new Document("username", username).append("password", hash);
 
         MongoCollection users = db.getCollection("Users");
-        Document existUser = (Document) users.find(new Document("username", username)).first();
+        Document existUser = (Document) users.find(new Document("username", username))
+                                            .first();
         if (existUser == null) {
             db.getCollection("Users").insertOne(user);
             return true;
@@ -78,7 +90,7 @@ public class Database {
         return false;
     }
 
-    public static List<Document> getRankingBoard() {
+    public static List<Document> getPlayerList() {
 
         MongoCollection rankingBoard = db.getCollection("Player");
 
@@ -113,17 +125,21 @@ public class Database {
         String username = player.getUsername();
         if (username == "" || username == null)
             return;
-        Document playerUpdate = new Document("username", username)
-                                    .append("playerName", player.getName())
-                                    .append("highScoreEasy", player.getHighScoreEasy())
-                                    .append("highScoreNormal", player.getHighScoreNormal())
-                                    .append("highScoreHard", player.getHighScoreHard());
+        Document playerUpdate
+                = new Document("username", username)
+                    .append("playerName", player.getName())
+                    .append("highScoreEasy", player.getHighScoreEasy())
+                    .append("highScoreNormal", player.getHighScoreNormal())
+                    .append("highScoreHard", player.getHighScoreHard());
 
-        ReplaceOptions replaceOptions = new ReplaceOptions().upsert(true).bypassDocumentValidation(true);
+        ReplaceOptions replaceOptions = new ReplaceOptions().upsert(true)
+                .bypassDocumentValidation(true);
 
         try {
             db.getCollection("Player")
-                    .replaceOne(eq("username", username), playerUpdate, replaceOptions);
+                    .replaceOne(eq("username", username),
+                            playerUpdate,
+                            replaceOptions);
         } catch (MongoException ex) {
             System.out.println("Update failed");
         }

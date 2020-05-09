@@ -14,6 +14,7 @@ public class Config {
     public final static int BOARD_ROWS = 20;
     public final static int BOARD_COLUMNS = 20;
     public static int SCALE = 20;
+    public static int SOUND = 100;
 
     /*
      * Store necessary configuration in a txt file via Properties
@@ -25,8 +26,9 @@ public class Config {
             Properties properties = new Properties();
 
             properties.setProperty("scale", Integer.toString(SCALE));
+            properties.setProperty("sound", Integer.toString(SOUND));
 
-            properties.store(output, null);
+            properties.store(output, "Application configuration");
 
             System.out.println(properties);
 
@@ -34,7 +36,6 @@ public class Config {
             ex.printStackTrace();
         }
     }
-
 
     /*
      * Store necessary configuration from config txt file
@@ -48,7 +49,7 @@ public class Config {
             properties.load(input);
 
             SCALE = Integer.parseInt(properties.getProperty("scale"));
-
+            SOUND = Integer.parseInt(properties.getProperty("sound"));
 
         } catch (IOException ex) {
             ex.printStackTrace();

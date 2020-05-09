@@ -18,6 +18,8 @@ import java.awt.event.ActionListener;
 
 public class ScorePanel extends JPanel {
 
+    private View view;
+
     private final JLabel playerName;
     private final JLabel playerNamePlaceHolder;
     private final JLabel score;
@@ -28,11 +30,12 @@ public class ScorePanel extends JPanel {
 
     private Timer Ttimer;
 
-    public ScorePanel(int width, int height) {
+    public ScorePanel(View view, int width, int height) {
+
+        this.view = view;
 
         setPreferredSize(new Dimension(width, height));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
 
         playerName = new JLabel("Player Name: ");
         playerNamePlaceHolder = new JLabel();
@@ -60,14 +63,7 @@ public class ScorePanel extends JPanel {
         add(score);
         add(highScore);
         add(timer);
-    }
 
-    /*
-     * Initialize a clock timer for the game
-     */
-    public void initTimer() {
-
-        timer.setVisible(true);
         Ttimer = new Timer(1000, new ActionListener() {
             int count;
             @Override
@@ -80,6 +76,14 @@ public class ScorePanel extends JPanel {
         });
 
         Ttimer.setInitialDelay(0);
+    }
+
+    /*
+     * Initialize a clock timer for the game
+     */
+    public void initTimer() {
+
+        timer.setVisible(true);
         Ttimer.start();
     }
 

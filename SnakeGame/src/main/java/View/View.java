@@ -56,7 +56,7 @@ public class View extends JFrame{
         int width = Config.BOARD_COLUMNS * Config.SCALE;
         int height = Config.BOARD_COLUMNS * Config.SCALE;
 
-        scorePanel = new ScorePanel(width / 2, height);
+        scorePanel = new ScorePanel(this,width / 2, height);
         gamePanel = new GamePanel(width, height, Config.SCALE);
         mainMenuPanel = new MainMenuPanel(this,width, height);
         loginPanel = new LoginPanel(this, width, height);
@@ -83,6 +83,7 @@ public class View extends JFrame{
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
                 controller.saveData();
+                Database.close();
                 Config.saveConfig();
                 System.exit(0);
             }
@@ -93,6 +94,7 @@ public class View extends JFrame{
     public void initScreen() {
 
         hideScorePanel();
+        updateRankingBoard();
         display("LOGIN");
         setVisible(true);
     }
@@ -158,7 +160,7 @@ public class View extends JFrame{
     }
 
     public void showScorePanel() {
-        if (!scorePanel.isVisible())
+       if (!scorePanel.isVisible())
             scorePanel.setVisible(true);
     }
 

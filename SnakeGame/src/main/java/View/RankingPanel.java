@@ -2,7 +2,6 @@ package main.java.View;
 
 import main.java.Config.Config;
 import main.java.Database.Database;
-import main.java.Model.Player;
 import main.java.Util.AppState;
 import main.java.Util.GameMode;
 import org.bson.Document;
@@ -47,13 +46,21 @@ public class RankingPanel extends JPanel {
         title.setForeground(Color.green);
         title.setHorizontalAlignment(JLabel.CENTER);
 
+        /*
         easy = new JLabel();
         easy.setFont(new Font("Monospaced", Font.PLAIN, 20));
         normal = new JLabel();
         normal.setFont(new Font("Monospaced", Font.PLAIN, 20));
         hard = new JLabel();
         hard.setFont(new Font("Monospaced", Font.PLAIN, 20));
+         */
 
+        JLabel tips = new JLabel("Leaderboard will be refresh every 1 minutes",
+                                SwingConstants.CENTER);
+        tips.setFont(font);
+        tips.setForeground(Color.white);
+
+        /*
         easyTable = new JList();
         easyTable.setFont(new Font("Monospaced", Font.PLAIN, 20));
 
@@ -62,8 +69,17 @@ public class RankingPanel extends JPanel {
 
         hardTable = new JList();
         hardTable.setFont(new Font("Monospaced", Font.PLAIN, 20));
+        */
 
-        createRankingPanel(width, height);
+        createRankingPanel(width);
+        JButton btnRefresh = new JButton("Refresh");
+        btnRefresh.addActionListener(e -> updateRankingBoard());
+
+        JPanel leadBoardPanel = new JPanel(new BorderLayout());
+        leadBoardPanel.setBackground(Color.black);
+        leadBoardPanel.add(tips, BorderLayout.PAGE_START);
+        leadBoardPanel.add(rankingPanel, BorderLayout.CENTER);
+        leadBoardPanel.add(btnRefresh, BorderLayout.PAGE_END);
 
         JButton btnBack = new JButton("Return");
         btnBack.addActionListener(e -> view.changeState(AppState.MainMenu));
@@ -74,12 +90,11 @@ public class RankingPanel extends JPanel {
         btnPanel.add(btnBack);
 
         add(title, BorderLayout.PAGE_START);
-        add(rankingPanel, BorderLayout.CENTER);
+        add(leadBoardPanel, BorderLayout.CENTER);
         add(btnPanel, BorderLayout.PAGE_END);
-        //setAlignmentX(Component.CENTER_ALIGNMENT);
     }
 
-    private void createRankingPanel(int width, int height) {
+    private void createRankingPanel(int width) {
 
         rankingPanel = new JTabbedPane();
 
@@ -92,19 +107,17 @@ public class RankingPanel extends JPanel {
         hardPanel = new JPanel();
         hardPanel.setLayout(new GridBagLayout());
 
-
-        JLabel easyLabel = new JLabel("Easy");
+        JLabel easyLabel = new JLabel("Easy", SwingConstants.CENTER);
         easyLabel.setPreferredSize(new Dimension(width / 4, Config.SCALE));
-        easyLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        easyLabel.setFont(font.deriveFont(Font.BOLD));
 
-        JLabel normalLabel = new JLabel("Normal");
+        JLabel normalLabel = new JLabel("Normal", SwingConstants.CENTER);
         normalLabel.setPreferredSize(new Dimension(width / 4, Config.SCALE));
-        normalLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        normalLabel.setFont(font.deriveFont(Font.BOLD));
 
-        JLabel hardLabel = new JLabel("Hard");
+        JLabel hardLabel = new JLabel("Hard", SwingConstants.CENTER);
         hardLabel.setPreferredSize(new Dimension(width / 4, Config.SCALE));
-        hardLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
+        hardLabel.setFont(font.deriveFont(Font.BOLD));
 
         rankingPanel.addTab("Easy", easyPanel);
         rankingPanel.addTab("Normal", normalPanel);
@@ -158,7 +171,7 @@ public class RankingPanel extends JPanel {
 
         panel.removeAll();
         panel.validate();
-        panel.repaint();
+        //panel.repaint();
 
         JLabel rank = new JLabel("RANK", SwingConstants.CENTER);
         rank.setFont(font.deriveFont(Font.BOLD, 20));
@@ -168,7 +181,6 @@ public class RankingPanel extends JPanel {
 
         JLabel highScore = new JLabel("SCORE", SwingConstants.CENTER);
         highScore.setFont(font.deriveFont(Font.BOLD, 20));
-
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridy = 0;
@@ -183,6 +195,8 @@ public class RankingPanel extends JPanel {
 
         gbc.gridx = 2;
         panel.add(highScore, gbc);
+
+        repaint();
     }
 
     private void addPlayerToTable(int index,
@@ -202,8 +216,16 @@ public class RankingPanel extends JPanel {
         lbPlayerName.setFont(font);
         lbHighScore.setFont(font);
 
-//        if (currentUsername.compareTo(username) == 0)
-        lbRank.setBackground(Color.YELLOW);
+        if (currentUsername.compareTo(username) == 0) {
+            lbRank.setOpaque(true);
+            lbRank.setBackground(Color.YELLOW);
+
+            lbPlayerName.setOpaque(true);
+            lbPlayerName.setBackground(Color.YELLOW);
+
+            lbHighScore.setOpaque(true);
+            lbHighScore.setBackground(Color.YELLOW);
+        }
 
         // column index
         gbc.gridy = index + 1;

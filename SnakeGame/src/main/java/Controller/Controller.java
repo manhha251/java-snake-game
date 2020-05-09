@@ -27,7 +27,7 @@ public class Controller {
     private final Model model;
     private final View view;
 
-    private Timer timer;
+    private Timer timer, updateRank;
 
     private GameMode mode;
 
@@ -53,6 +53,12 @@ public class Controller {
         //loadData();
         //view.updatePlayerName(model.getPlayerName());
         view.initScreen();
+
+        updateRank = new Timer(1000 * 60, e -> {
+           view.updateRankingBoard();
+        });
+
+        updateRank.setInitialDelay(0);
     }
 
     public void setPlayer(Player player) {
@@ -66,14 +72,15 @@ public class Controller {
             case Login:
                 view.hideScorePanel();
                 view.display("LOGIN");
+                updateRank.stop();
                 break;
             case Register:
-                //view.hideScorePanel();
                 view.display("REGISTER");
                 break;
             case MainMenu:
+                if (!updateRank.isRunning())
+                    updateRank.start();
                 view.showScorePanel();
-                view.updateRankingBoard();
                 view.display("MAINMENU");
                 break;
             case Options:
@@ -181,7 +188,6 @@ public class Controller {
         model.keyPressed(e);
     }
 
-
     public void keyReleased(KeyEvent e) {
 
         model.keyReleased(e);
@@ -199,6 +205,6 @@ public class Controller {
     }
 
     public List<Document> getRankingBoard() {
-        return Database.getRankingBoard();
+        return Database.getPlayerList();
     }
 }
