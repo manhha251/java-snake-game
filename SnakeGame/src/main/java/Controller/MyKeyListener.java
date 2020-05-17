@@ -12,6 +12,7 @@ import java.awt.event.KeyListener;
 public class MyKeyListener implements KeyListener {
 
     private final Controller controller;
+    private boolean isPressed;
 
     public MyKeyListener (Controller controller) {
         this.controller = controller;
@@ -25,12 +26,16 @@ public class MyKeyListener implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
 
+        if (isPressed)
+            return;
+        isPressed = true;
         controller.keyPressed(e);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
 
+        isPressed = false;
         controller.keyReleased(e);
     }
 }

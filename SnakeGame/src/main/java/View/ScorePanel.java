@@ -28,7 +28,9 @@ public class ScorePanel extends JPanel {
 
     private final Font defaultFont = new Font("Monospaced", Font.BOLD, 20);
 
-    private Timer Ttimer;
+    private Timer clockTimer;
+
+    private boolean running;
 
     public ScorePanel(View view, int width, int height) {
 
@@ -64,18 +66,21 @@ public class ScorePanel extends JPanel {
         add(highScore);
         add(timer);
 
-        Ttimer = new Timer(1000, new ActionListener() {
-            int count;
+        clockTimer = new Timer(1000, new ActionListener() {
+            int count = 0;
             @Override
             public void actionPerformed(ActionEvent e) {
-                count++;
-                int minutes = count / 60;
-                int seconds = count % 60;
-                updateTimer(String.format("%02d", minutes) + ":" + String.format("%02d", seconds));
+                if (running) {
+                    count++;
+                    int minutes = count / 60;
+                    int seconds = count % 60;
+                    updateTimer(String.format("%02d", minutes) + ":" + String.format("%02d", seconds));
+                }
             }
         });
 
-        Ttimer.setInitialDelay(0);
+        //clockTimer.setRepeats(false);
+        clockTimer.setInitialDelay(0);
     }
 
     /*
@@ -83,13 +88,24 @@ public class ScorePanel extends JPanel {
      */
     public void initTimer() {
 
+        running = true;
         timer.setVisible(true);
-        Ttimer.start();
+        clockTimer.start();
+    }
+
+    public void pauseTimer() {
+        running = false;
+    }
+
+    public void resumeTimer() {
+        running = true;
+        //clockTimer.start();
     }
 
     public void stopTimer() {
 
-        Ttimer.stop();
+        running = false;
+        clockTimer.stop();
         timer.setVisible(false);
     }
 
@@ -115,4 +131,5 @@ public class ScorePanel extends JPanel {
         if (timer.isVisible())
             timer.setVisible(false);
     }
+
 }

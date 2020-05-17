@@ -118,7 +118,8 @@ public class MainMenuPanel extends JPanel {
                     "UP: W / Up arrow key\n" +
                     "DOWN: S / Down arrow key\n" +
                     "LEFT: A / Left arrow key\n" +
-                    "RIGHT: D / Right arrow key", center);
+                    "RIGHT: D / Right arrow key" +
+                    "Pause/Continue: P", center);
         } catch (Exception e) {
             e.printStackTrace();
         }

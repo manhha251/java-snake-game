@@ -36,7 +36,6 @@ public class GamePanel extends JPanel {
         setBackground(Color.black);
     }
 
-
     @Override
     public int getWidth() {
         return width;
@@ -61,26 +60,10 @@ public class GamePanel extends JPanel {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D)g;
 
-        paintBackGround(g2d);
-
         for (RenderObject o: objectList) {
 
             o.paint(g2d);
         }
     }
 
-    /*
-     * paint white border between cells in background
-     */
-    private void paintBackGround(Graphics2D g2d) {
-
-        g2d.setColor(Color.white.darker());
-        g2d.setStroke(new BasicStroke(0.2f));
-        for (int i = 0; i < width; i += scale) {
-            for (int j = 0; j < height; j += scale) {
-                g2d.drawLine(i, j, i + scale - 1, j);
-                g2d.drawLine(i, j, i, j + scale - 1);
-            }
-        }
-    }
 }

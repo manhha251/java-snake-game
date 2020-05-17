@@ -132,9 +132,18 @@ public class View extends JFrame{
         scorePanel.initTimer();
     }
 
+    public void pauseTimer() {
+
+        scorePanel.pauseTimer();
+    }
+
     public void stopTimer() {
 
         scorePanel.stopTimer();
+    }
+
+    public void resumeTimer() {
+        scorePanel.resumeTimer();
     }
 
     public void gameOver() {
@@ -163,7 +172,6 @@ public class View extends JFrame{
        if (!scorePanel.isVisible())
             scorePanel.setVisible(true);
     }
-
 
     public void displayClock() {
         scorePanel.displayClock();

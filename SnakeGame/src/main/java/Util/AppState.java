@@ -13,6 +13,7 @@ public enum AppState {
     MainMenu,
     GameStart,
     Pause,
+    Continue,
     GameOver,
     Options,
     Ranking

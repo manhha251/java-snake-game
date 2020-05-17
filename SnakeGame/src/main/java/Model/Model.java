@@ -28,7 +28,6 @@ public class Model {
     private final View view;
 
     private boolean keyPressed;
-    private GameMode mode;
 
     public Model(View view) {
 
@@ -144,36 +143,38 @@ public class Model {
     /*
      * Handling key event for game
      */
-    public void keyPressed(KeyEvent e) {
-        int keyCode = e.getKeyCode();
+    public void keyPressed(int keyCode) {
+
+        if(keyPressed)
+            return;
 
         Direction currentDirection = snake.getDirection();
         switch (keyCode) {
 
             case KeyEvent.VK_W:
             case KeyEvent.VK_UP:
-                if (!keyPressed && currentDirection != Direction.DOWN) {
+                if (currentDirection != Direction.DOWN) {
                     snake.setDirection(Direction.UP);
                     keyPressed = true;
                 }
                 break;
             case KeyEvent.VK_S:
             case KeyEvent.VK_DOWN:
-                if (!keyPressed && currentDirection != Direction.UP) {
+                if (currentDirection != Direction.UP) {
                     snake.setDirection(Direction.DOWN);
                     keyPressed = true;
                 }
                 break;
             case KeyEvent.VK_A:
             case KeyEvent.VK_LEFT:
-                if (!keyPressed && currentDirection != Direction.RIGHT) {
+                if (currentDirection != Direction.RIGHT) {
                     snake.setDirection(Direction.LEFT);
                     keyPressed = true;
                 }
                 break;
             case KeyEvent.VK_D:
             case KeyEvent.VK_RIGHT:
-                if (!keyPressed && currentDirection != Direction.LEFT) {
+                if (currentDirection != Direction.LEFT) {
                     snake.setDirection(Direction.RIGHT);
                     keyPressed = true;
                 }
@@ -190,7 +191,6 @@ public class Model {
 
     public void setMode(GameMode mode) {
 
-        this.mode = mode;
         player.setMode(mode);
     }
 }

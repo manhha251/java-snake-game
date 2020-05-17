@@ -11,6 +11,7 @@ import org.bson.Document;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
+import java.security.Key;
 import java.util.List;
 
 /*
@@ -31,9 +32,10 @@ public class Controller {
 
     private GameMode mode;
 
-    private String dbConnectionString = "mongodb+srv://admin:admin@snakegamedb-0i6e1.mongodb.net/test?retryWrites=true&w=majority";
-    private String dbName = "SnakeGameDB";
+    private final String dbConnectionString = "mongodb+srv://admin:admin@snakegamedb-0i6e1.mongodb.net/test?retryWrites=true&w=majority";
+    private final String dbName = "SnakeGameDB";
 
+    private AppState state;
 
     public Controller() {
 
@@ -50,13 +52,10 @@ public class Controller {
 
     public void initScreen() {
 
-        //loadData();
-        //view.updatePlayerName(model.getPlayerName());
+        state = AppState.Login;
         view.initScreen();
 
-        updateRank = new Timer(1000 * 60, e -> {
-           view.updateRankingBoard();
-        });
+        updateRank = new Timer(1000 * 60, e -> view.updateRankingBoard());
 
         updateRank.setInitialDelay(0);
     }
@@ -101,6 +100,9 @@ public class Controller {
             case Pause:
                 pause();
                 break;
+            case Continue:
+                resume();
+                break;
             case GameOver:
 
                 int finalScore = model.getScore();
@@ -116,14 +118,18 @@ public class Controller {
             default:
                 break;
         }
+        this.state = state;
     }
 
     private GameMode chooseMode() {
 
         String[] options = {"Easy", "Normal", "Hard"};
 
-        int choice = JOptionPane.showOptionDialog(view, "Choose your difficulty !"
-                , "Select difficulty", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+        int choice = JOptionPane.showOptionDialog(view,
+                "Choose your difficulty !"
+                , "Select difficulty",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
                 null, options, options[0]);
 
         switch (choice) {
@@ -170,22 +176,38 @@ public class Controller {
     }
 
     private void pause() {
-        timer.stop();
+
+        if (timer.isRunning())
+            timer.stop();
+
+        view.pauseTimer();
     }
 
     private void resume() {
 
         timer.start();
+        view.resumeTimer();
     }
 
     public void stop() {
 
         timer.stop();
+        view.stopTimer();
     }
 
     public void keyPressed(KeyEvent e) {
 
-        model.keyPressed(e);
+        int keyCode = e.getKeyCode();
+        if (state == AppState.Pause) {
+            if (keyCode == KeyEvent.VK_P)
+                changeState(AppState.Continue);
+        }
+        else if (state == AppState.Continue || state == AppState.GameStart) {
+            if(keyCode == KeyEvent.VK_P) {
+                changeState(AppState.Pause);
+            } else
+                model.keyPressed(keyCode);
+        }
     }
 
     public void keyReleased(KeyEvent e) {
