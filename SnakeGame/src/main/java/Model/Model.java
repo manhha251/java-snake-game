@@ -27,7 +27,7 @@ public class Model {
 
     private final View view;
 
-    private boolean keyPressed;
+    private boolean iskeyPressed;
 
     public Model(View view) {
 
@@ -40,7 +40,7 @@ public class Model {
 
     public void init() {
 
-        keyPressed = false;
+        iskeyPressed = false;
         generateSnake();
         generateApple();
     }
@@ -145,7 +145,7 @@ public class Model {
      */
     public void keyPressed(int keyCode) {
 
-        if(keyPressed)
+        if(iskeyPressed)
             return;
 
         Direction currentDirection = snake.getDirection();
@@ -155,28 +155,28 @@ public class Model {
             case KeyEvent.VK_UP:
                 if (currentDirection != Direction.DOWN) {
                     snake.setDirection(Direction.UP);
-                    keyPressed = true;
+                    iskeyPressed = true;
                 }
                 break;
             case KeyEvent.VK_S:
             case KeyEvent.VK_DOWN:
                 if (currentDirection != Direction.UP) {
                     snake.setDirection(Direction.DOWN);
-                    keyPressed = true;
+                    iskeyPressed = true;
                 }
                 break;
             case KeyEvent.VK_A:
             case KeyEvent.VK_LEFT:
                 if (currentDirection != Direction.RIGHT) {
                     snake.setDirection(Direction.LEFT);
-                    keyPressed = true;
+                    iskeyPressed = true;
                 }
                 break;
             case KeyEvent.VK_D:
             case KeyEvent.VK_RIGHT:
                 if (currentDirection != Direction.LEFT) {
                     snake.setDirection(Direction.RIGHT);
-                    keyPressed = true;
+                    iskeyPressed = true;
                 }
                 break;
             default:
@@ -186,7 +186,7 @@ public class Model {
 
     public void keyReleased(KeyEvent e) {
 
-        keyPressed = false;
+        iskeyPressed = false;
     }
 
     public void setMode(GameMode mode) {

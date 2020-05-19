@@ -30,12 +30,17 @@ import java.util.List;
 
 public class View extends JFrame{
 
+    private final int width = Config.BOARD_COLUMNS * Config.SCALE;
+    private final int height = Config.BOARD_COLUMNS * Config.SCALE;
+
     private final GamePanel gamePanel;
     private final ScorePanel scorePanel;
     private final MainMenuPanel mainMenuPanel;
     private final LoginPanel loginPanel;
     private final RegisterPanel registerPanel;
     private final RankingPanel rankingPanel;
+
+    private final JDialog pauseDialog;
 
     private final Controller controller;
 
@@ -53,11 +58,8 @@ public class View extends JFrame{
 
         setTitle("Snake");
 
-        int width = Config.BOARD_COLUMNS * Config.SCALE;
-        int height = Config.BOARD_COLUMNS * Config.SCALE;
-
         scorePanel = new ScorePanel(this,width / 2, height);
-        gamePanel = new GamePanel(width, height, Config.SCALE);
+        gamePanel = new GamePanel(width, height);
         mainMenuPanel = new MainMenuPanel(this,width, height);
         loginPanel = new LoginPanel(this, width, height);
         registerPanel = new RegisterPanel(this, width, height);
@@ -89,6 +91,34 @@ public class View extends JFrame{
             }
         });
 
+        pauseDialog = new JDialog(this, "", Dialog.ModalityType.APPLICATION_MODAL);
+        pauseDialog.getContentPane().add(new PausePanel(this));
+        pauseDialog.setUndecorated(true);
+        pauseDialog.pack();
+        pauseDialog.setLocationRelativeTo(this);
+        pauseDialog.setVisible(false);
+        pauseDialog.setFocusable(false);
+        pauseDialog.setFocusableWindowState(false);
+
+        //setGlassPane(createGlassPane());
+    }
+
+    private JPanel createGlassPane() {
+
+        JPanel glassPane = new JPanel(){
+            @Override
+            public void paintComponent(Graphics g) {
+
+                super.paintComponent(g);
+                g.setColor(new Color(0, 0, 0, 175));
+                g.fillRect(0, 0, width, height);
+            }
+        };
+
+        glassPane.setOpaque(false);
+        glassPane.setBackground(null);
+        glassPane.setVisible(false);
+        return glassPane;
     }
 
     public void initScreen() {
@@ -135,15 +165,24 @@ public class View extends JFrame{
     public void pauseTimer() {
 
         scorePanel.pauseTimer();
+        //getGlassPane().setVisible(true);
+        if (!pauseDialog.isVisible())
+            pauseDialog.setVisible(true);
     }
 
     public void stopTimer() {
 
         scorePanel.stopTimer();
+        //getGlassPane().setVisible(false);
+        if (pauseDialog.isVisible())
+            pauseDialog.setVisible(false);
     }
 
     public void resumeTimer() {
+
         scorePanel.resumeTimer();
+        if (pauseDialog.isVisible())
+            pauseDialog.setVisible(false);
     }
 
     public void gameOver() {
@@ -196,5 +235,9 @@ public class View extends JFrame{
     public List<Document> getRankingBoard() {
 
         return controller.getRankingBoard();
+    }
+
+    public AppState getCurrentState() {
+        return controller.getCurrentState();
     }
 }

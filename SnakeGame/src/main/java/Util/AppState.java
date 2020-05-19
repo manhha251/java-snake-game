@@ -16,5 +16,5 @@ public enum AppState {
     Continue,
     GameOver,
     Options,
-    Ranking
+    Quit, Ranking
 }

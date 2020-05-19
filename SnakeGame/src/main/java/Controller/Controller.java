@@ -65,6 +65,11 @@ public class Controller {
         model.setPlayer(player);
     }
 
+    public AppState getCurrentState() {
+
+        return state;
+    }
+
     public void changeState(AppState state) {
 
         switch (state) {
@@ -99,17 +104,18 @@ public class Controller {
                 break;
             case Pause:
                 pause();
-                break;
+                return;
             case Continue:
                 resume();
+                break;
+            case Quit:
+                quit();
                 break;
             case GameOver:
 
                 int finalScore = model.getScore();
 
                 stop();
-                view.stopTimer();
-                view.hideClock();
                 model.updateHighScore();
                 saveData();
                 JOptionPane.showMessageDialog(view, "Game Over\nScore: " + finalScore);
@@ -193,6 +199,13 @@ public class Controller {
 
         timer.stop();
         view.stopTimer();
+        view.hideClock();
+    }
+
+    public void quit() {
+
+        stop();
+        changeState(AppState.MainMenu);
     }
 
     public void keyPressed(KeyEvent e) {

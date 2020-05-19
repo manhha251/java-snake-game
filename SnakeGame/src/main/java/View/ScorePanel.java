@@ -1,6 +1,9 @@
 package main.java.View;
 
+import main.java.Controller.Controller;
+import main.java.Database.Database;
 import main.java.Model.Player;
+import main.java.Util.AppState;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,12 +26,11 @@ public class ScorePanel extends JPanel {
     private final JLabel playerName;
     private final JLabel playerNamePlaceHolder;
     private final JLabel score;
-    private final JLabel highScore;
     private final JLabel timer;
 
     private final Font defaultFont = new Font("Monospaced", Font.BOLD, 20);
 
-    private Timer clockTimer;
+    private final Timer clockTimer;
 
     private boolean running;
 
@@ -42,7 +44,6 @@ public class ScorePanel extends JPanel {
         playerName = new JLabel("Player Name: ");
         playerNamePlaceHolder = new JLabel();
         score = new JLabel("Score: 0");
-        highScore = new JLabel();
         timer = new JLabel("");
 
         playerName.setFont(defaultFont);
@@ -50,9 +51,6 @@ public class ScorePanel extends JPanel {
 
         playerNamePlaceHolder.setFont(defaultFont);
         playerNamePlaceHolder.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        highScore.setFont(defaultFont);
-        highScore.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         score.setFont(defaultFont);
         score.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -63,7 +61,6 @@ public class ScorePanel extends JPanel {
         add(playerName);
         add(playerNamePlaceHolder);
         add(score);
-        add(highScore);
         add(timer);
 
         clockTimer = new Timer(1000, new ActionListener() {
@@ -79,7 +76,6 @@ public class ScorePanel extends JPanel {
             }
         });
 
-        //clockTimer.setRepeats(false);
         clockTimer.setInitialDelay(0);
     }
 
@@ -99,7 +95,6 @@ public class ScorePanel extends JPanel {
 
     public void resumeTimer() {
         running = true;
-        //clockTimer.start();
     }
 
     public void stopTimer() {
@@ -123,13 +118,15 @@ public class ScorePanel extends JPanel {
     }
 
     public void displayClock() {
-        if (!timer.isVisible())
+        if (!timer.isVisible()) {
             timer.setVisible(true);
+        }
     }
 
     public void hideClock() {
-        if (timer.isVisible())
+        if (timer.isVisible()) {
             timer.setVisible(false);
+        }
     }
 
 }

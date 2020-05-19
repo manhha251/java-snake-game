@@ -21,15 +21,13 @@ public class GamePanel extends JPanel {
 
     private int width;
     private int height;
-    private final int scale;
 
     private List<RenderObject> objectList = new LinkedList<>();
 
-    public GamePanel(int width, int height, int scale) {
+    public GamePanel(int width, int height) {
 
         this.width = width;
         this.height = height;
-        this.scale = scale;
         setPreferredSize(new Dimension(width, height));
 
         setFocusable(true);
