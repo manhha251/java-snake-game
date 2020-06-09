@@ -8,7 +8,12 @@ import main.java.Util.AppState;
 import main.java.Util.GameMode;
 import main.java.View.View;
 import org.bson.Document;
+import java.io.File;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.security.Key;
@@ -37,7 +42,7 @@ public class Controller {
 
     private AppState state;
 
-    public Controller() {
+        public Controller() {
 
         view = new View(this);
         model = new Model(view);
@@ -51,6 +56,7 @@ public class Controller {
     }
 
     public void initScreen() {
+
 
         state = AppState.Login;
         view.initScreen();
@@ -79,6 +85,7 @@ public class Controller {
                 updateRank.stop();
                 break;
             case Register:
+                view.hideScorePanel();
                 view.display("REGISTER");
                 break;
             case MainMenu:
@@ -88,8 +95,11 @@ public class Controller {
                 view.display("MAINMENU");
                 break;
             case Options:
+                view.hideScorePanel();
+                view.display("SETTING");
                 break;
             case Ranking:
+                view.showScorePanel();
                 view.display("RANKING");
                 break;
             case GameStart:
@@ -242,4 +252,33 @@ public class Controller {
     public List<Document> getRankingBoard() {
         return Database.getPlayerList();
     }
+
+    public Clip setMusic(String musicLocation)
+    {
+        try {
+            File musicFile = new File(musicLocation);
+            if (musicFile.exists())
+            {
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicFile);
+                Clip clip  = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.start();
+                return clip;
+            }
+            else {
+                System.out.print("can not find");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void setVolume(Clip sound, double vol)
+    {
+        FloatControl gain = (FloatControl)sound.getControl(FloatControl.Type.MASTER_GAIN);
+        float dB = (float)(Math.log(vol) / Math.log(10) * 20);
+        gain.setValue(dB);
+    }
+
 }

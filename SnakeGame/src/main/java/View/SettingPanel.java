@@ -33,6 +33,11 @@ public class SettingPanel extends JPanel {
         title.setForeground(Color.green);
         title.setAlignmentX(CENTER_ALIGNMENT);
 
+        JButton btnMute = new JButton("Mute");
+        btnMute.setAlignmentX(CENTER_ALIGNMENT);
+
+
+
         GridLayout grid = new GridLayout(0, 2);
         grid.setHgap(Config.SCALE / 2);
         grid.setVgap(Config.SCALE / 2);
@@ -69,10 +74,17 @@ public class SettingPanel extends JPanel {
         System.out.println(label_4.getLocation().x);
         pnSetting.add(label_4);
         volume = new JSlider(JSlider.HORIZONTAL, 100,0);
-        volume.setMajorTickSpacing(10);
+        volume.setMajorTickSpacing(25);
         volume.setPaintLabels(true);
         volume.setPaintTicks(true);
         pnSetting.add(volume);
+
+        pnSetting.add(btnMute);
+
+        JPanel btnPanel = new JPanel(new GridBagLayout());
+        btnPanel.setPreferredSize(new Dimension(width, height/6));
+        btnPanel.setBackground(Color.black);
+
 
         btnApply = new JButton("Apply");
         btnApply.addActionListener(e ->{
@@ -94,9 +106,20 @@ public class SettingPanel extends JPanel {
 
         btnReturn = new JButton("Return");
         btnReturn.addActionListener(e -> view.changeState(AppState.MainMenu));
-        pnSetting.add(btnReturn);
+        btnPanel.add(btnReturn);
+
+        JPanel paddingLeft = new JPanel();
+        paddingLeft.setPreferredSize(new Dimension(width / 6, height));
+        paddingLeft.setBackground(Color.black);
+
+        JPanel paddingRight = new JPanel();
+        paddingRight.setPreferredSize(new Dimension(width / 6, height));
+        paddingRight.setBackground(Color.black);
 
         add(title, BorderLayout.PAGE_START);
         add(pnSetting, BorderLayout.CENTER);
+        add(btnPanel, BorderLayout.PAGE_END);
+        add(paddingLeft, BorderLayout.LINE_START);
+        add(paddingRight, BorderLayout.LINE_END);
     }
 }
