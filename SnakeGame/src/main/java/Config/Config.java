@@ -40,6 +40,26 @@ public class Config {
     /*
      * Store necessary configuration from config txt file
      */
+
+    public  static void setSize(String size)
+    {
+        switch (size) {
+            case "Small":
+                SCALE = 20;
+                break;
+            case "Normal":
+                SCALE = 40;
+                break;
+            case "Large":
+                SCALE = 60;
+                break;
+        }
+    }
+
+    public  static void setSOUND(int volume)
+    {
+        SOUND = volume;
+    }
     public static void loadConfig() {
 
         try (InputStream input = new FileInputStream("./SnakeConfig.txt")) {
