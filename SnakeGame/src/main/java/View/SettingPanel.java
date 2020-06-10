@@ -33,11 +33,6 @@ public class SettingPanel extends JPanel {
         title.setForeground(Color.green);
         title.setAlignmentX(CENTER_ALIGNMENT);
 
-        JButton btnMute = new JButton("Mute");
-        btnMute.setAlignmentX(CENTER_ALIGNMENT);
-
-
-
         GridLayout grid = new GridLayout(0, 2);
         grid.setHgap(Config.SCALE / 2);
         grid.setVgap(Config.SCALE / 2);
@@ -61,14 +56,6 @@ public class SettingPanel extends JPanel {
         comboWindowSize.setRenderer(listRenderer);
         pnSetting.add(comboWindowSize);
 
-        String Level[]={"Easy","Normal","Hard", "Very Hard"};
-        JLabel label_3 =new JLabel("Difficult: ");
-        label_3.setFont( font.deriveFont(Font.BOLD, 16));
-        pnSetting.add(label_3);
-        comboLevel = new JComboBox(Level);
-        comboLevel.setRenderer(listRenderer);
-        pnSetting.add(comboLevel);
-
         JLabel label_4 =new JLabel("Volume: ");
         label_4.setFont( font.deriveFont(Font.BOLD, 16));
         System.out.println(label_4.getLocation().x);
@@ -79,12 +66,9 @@ public class SettingPanel extends JPanel {
         volume.setPaintTicks(true);
         pnSetting.add(volume);
 
-        pnSetting.add(btnMute);
-
         JPanel btnPanel = new JPanel(new GridBagLayout());
         btnPanel.setPreferredSize(new Dimension(width, height/6));
         btnPanel.setBackground(Color.black);
-
 
         btnApply = new JButton("Apply");
         btnApply.addActionListener(e ->{
@@ -106,7 +90,7 @@ public class SettingPanel extends JPanel {
 
         btnReturn = new JButton("Return");
         btnReturn.addActionListener(e -> view.changeState(AppState.MainMenu));
-        btnPanel.add(btnReturn);
+        pnSetting.add(btnReturn);
 
         JPanel paddingLeft = new JPanel();
         paddingLeft.setPreferredSize(new Dimension(width / 6, height));
