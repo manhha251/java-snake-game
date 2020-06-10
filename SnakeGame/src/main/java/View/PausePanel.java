@@ -1,5 +1,6 @@
 package main.java.View;
 
+import main.java.Config.Config;
 import main.java.Util.AppState;
 
 import javax.swing.*;
@@ -10,6 +11,8 @@ import java.awt.event.KeyListener;
 public class PausePanel extends JPanel implements KeyListener {
 
     private JButton btnResume, btnForfeit;
+
+    private final Font defaultFont = Config.DEFAULT_FONT;
 
     public PausePanel(View view) {
 
@@ -29,7 +32,6 @@ public class PausePanel extends JPanel implements KeyListener {
 
         btnResume = new JButton("RESUME");
         btnResume.addActionListener(e -> {
-           // transferFocus();
             Component comp = (Component) e.getSource();
             Window win = SwingUtilities.getWindowAncestor(comp);
             win.dispose();

@@ -8,7 +8,6 @@ import main.java.Util.AppState;
 import main.java.Util.GameMode;
 import main.java.View.View;
 import org.bson.Document;
-import java.io.File;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -16,7 +15,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
-import java.security.Key;
+import java.io.File;
 import java.util.List;
 
 /*
@@ -42,13 +41,14 @@ public class Controller {
 
     private AppState state;
 
-        public Controller() {
+    public Controller() {
+
+        Config.loadConfig();
 
         view = new View(this);
         model = new Model(view);
 
         Database.connect(dbConnectionString, dbName);
-        Config.loadConfig();
     }
 
     public void initModel() {
@@ -56,7 +56,6 @@ public class Controller {
     }
 
     public void initScreen() {
-
 
         state = AppState.Login;
         view.initScreen();
@@ -85,21 +84,18 @@ public class Controller {
                 updateRank.stop();
                 break;
             case Register:
-                view.hideScorePanel();
                 view.display("REGISTER");
                 break;
             case MainMenu:
                 if (!updateRank.isRunning())
                     updateRank.start();
-                view.showScorePanel();
                 view.display("MAINMENU");
                 break;
             case Options:
-                view.hideScorePanel();
                 view.display("SETTING");
                 break;
             case Ranking:
-                view.showScorePanel();
+                //view.showScorePanel();
                 view.display("RANKING");
                 break;
             case GameStart:
@@ -109,6 +105,7 @@ public class Controller {
                     model.setMode(mode);
                     view.displayClock();
                     view.display("GAMEBOARD");
+                    view.showScorePanel();
                     start();
                 }
                 break;
@@ -210,6 +207,7 @@ public class Controller {
         timer.stop();
         view.stopTimer();
         view.hideClock();
+        view.hideScorePanel();
     }
 
     public void quit() {

@@ -1,5 +1,6 @@
 package main.java.View;
 
+import main.java.Config.Config;
 import main.java.Util.AppState;
 
 import javax.swing.*;
@@ -21,7 +22,7 @@ public class MainMenuPanel extends JPanel {
 
     private View view;
 
-    private Font font = new Font("monospaced", Font.PLAIN, 20);
+    private final Font defaultFont = Config.DEFAULT_FONT;
     private JTextPane help;
     private JFrame helpFrame;
 
@@ -41,32 +42,32 @@ public class MainMenuPanel extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
 
         JLabel title = new JLabel("SNAKE GAME", SwingConstants.CENTER);
-        title.setFont(font.deriveFont(Font.BOLD, 48));
+        title.setFont(defaultFont.deriveFont(Font.BOLD, (float) (Config.SCALE * 2.5)));
         title.setForeground(Color.green);
         title.setAlignmentX(CENTER_ALIGNMENT);
 
         JButton btnGameStart = new JButton("Game Start");
-        btnGameStart.setFont(font);
+        btnGameStart.setFont(defaultFont);
         btnGameStart.addActionListener(e->view.changeState(AppState.GameStart));
 
         JButton btnHelp = new JButton("How to play");
-        btnHelp.setFont(font);
+        btnHelp.setFont(defaultFont);
         btnHelp.addActionListener(e -> showHelp());
 
         JButton btnOptions = new JButton("Options");
-        btnOptions.setFont(font);
+        btnOptions.setFont(defaultFont);
         btnOptions.addActionListener(e->view.changeState(AppState.Options));
 
         JButton btnRanking = new JButton("Leaderboard");
-        btnRanking.setFont(font);
+        btnRanking.setFont(defaultFont);
         btnRanking.addActionListener(e->view.changeState(AppState.Ranking));
 
         JButton btnLogOut = new JButton("Log out");
-        btnLogOut.setFont(font);
+        btnLogOut.setFont(defaultFont);
         btnLogOut.addActionListener(e -> view.changeState(AppState.Login));
 
-        int padHor = width / 5;
-        int padVer = height / 5 / 10;
+        int padHor = width / 3;
+        int padVer = height / 4 / 10;
 
         int startRows = 0;
 
@@ -106,7 +107,7 @@ public class MainMenuPanel extends JPanel {
         helpFrame.setResizable(false);
 
         help = new JTextPane();
-        help.setFont(font);
+        help.setFont(defaultFont);
         help.setEditable(false);
 
         StyledDocument doc = help.getStyledDocument();
@@ -126,7 +127,7 @@ public class MainMenuPanel extends JPanel {
         doc.setParagraphAttributes(0, doc.getLength() - 1, center, false);
 
         JButton btnClose = new JButton("OK");
-        btnClose.setFont(font);
+        btnClose.setFont(defaultFont);
         btnClose.addActionListener(e -> helpFrame.setVisible(false));
 
         helpFrame.add(help, BorderLayout.CENTER);

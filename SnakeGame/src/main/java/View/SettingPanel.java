@@ -1,7 +1,6 @@
 package main.java.View;
 
 import main.java.Config.Config;
-import main.java.Database.Database;
 import main.java.Util.AppState;
 
 import javax.swing.*;
@@ -10,11 +9,11 @@ import java.awt.*;
 public class SettingPanel extends JPanel {
     private View view;
 
-    private Font font = new Font("monospaced", Font.PLAIN, 20);
+    private final Font defaultFont = Config.DEFAULT_FONT;
 
-    private JTextField username;
+    private JTextField playerName;
     private JSlider volume;
-    private JComboBox comboLevel,comboWindowSize;
+    private JComboBox comboWindowSize;
     private JButton btnApply, btnReturn;
     private DefaultListCellRenderer listRenderer;
 
@@ -29,7 +28,7 @@ public class SettingPanel extends JPanel {
         setLayout(new BorderLayout());
 
         JLabel title = new JLabel("SNAKE GAME", SwingConstants.CENTER);
-        title.setFont(font.deriveFont(Font.BOLD, 48));
+        title.setFont(defaultFont.deriveFont(Font.BOLD, (float) (Config.SCALE * 2.5)));
         title.setForeground(Color.green);
         title.setAlignmentX(CENTER_ALIGNMENT);
 
@@ -41,29 +40,31 @@ public class SettingPanel extends JPanel {
         pnSetting.setName("Setting");
         pnSetting.setBorder(BorderFactory.createTitledBorder("Setting Form"));
 
-        username = new JTextField(20);
-        username.setHorizontalAlignment(0);
+        playerName = new JTextField(20);
+        playerName.setHorizontalAlignment(0);
         JLabel label_1 =new JLabel("Display Name: ");
-        label_1.setFont( font.deriveFont(Font.BOLD, 16));
+        label_1.setFont(defaultFont.deriveFont(Font.BOLD, 16));
         pnSetting.add(label_1);
-        pnSetting.add(username);
+        pnSetting.add(playerName);
 
         JLabel label_2 =new JLabel("Window size: ");
-        label_2.setFont( font.deriveFont(Font.BOLD, 16));
+        label_2.setFont(defaultFont.deriveFont(Font.BOLD, 16));
         pnSetting.add(label_2);
-        String WindowSize[]={"Small","Normal","Large"};
+        String WindowSize[]={"Small", "Normal", "Large"};
         comboWindowSize = new JComboBox(WindowSize);
         comboWindowSize.setRenderer(listRenderer);
+        comboWindowSize.setSelectedItem(Config.getSize());
         pnSetting.add(comboWindowSize);
 
         JLabel label_4 =new JLabel("Volume: ");
-        label_4.setFont( font.deriveFont(Font.BOLD, 16));
+        label_4.setFont(defaultFont.deriveFont(Font.BOLD, 16));
         System.out.println(label_4.getLocation().x);
         pnSetting.add(label_4);
-        volume = new JSlider(JSlider.HORIZONTAL, 100,0);
+        volume = new JSlider(JSlider.HORIZONTAL, 100,Config.SOUND);
         volume.setMajorTickSpacing(25);
         volume.setPaintLabels(true);
         volume.setPaintTicks(true);
+
         pnSetting.add(volume);
 
         JPanel btnPanel = new JPanel(new GridBagLayout());
@@ -72,19 +73,22 @@ public class SettingPanel extends JPanel {
 
         btnApply = new JButton("Apply");
         btnApply.addActionListener(e ->{
-            System.out.println(username.getText().toString());
+            System.out.println(playerName.getText());
             System.out.println(comboWindowSize.getSelectedItem().toString());
-            System.out.println(comboLevel.getSelectedItem().toString());
             System.out.println(volume.getValue());
 
             Config.setSize(comboWindowSize.getSelectedItem().toString());
-            Config.setSOUND(volume.getValue());
+            Config.setSound(volume.getValue());
+            Config.saveConfig();
 
             int width_1 = Config.BOARD_COLUMNS * Config.SCALE;
             int height_1 = Config.BOARD_ROWS * Config.SCALE;
 
             System.out.println(width_1);
             System.out.println(height_1);
+
+            JOptionPane.showMessageDialog(view, "Settings saved. Change will be made after reset.");
+
         });
         pnSetting.add(btnApply);
 
@@ -105,5 +109,9 @@ public class SettingPanel extends JPanel {
         add(btnPanel, BorderLayout.PAGE_END);
         add(paddingLeft, BorderLayout.LINE_START);
         add(paddingRight, BorderLayout.LINE_END);
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName.setText(playerName);
     }
 }

@@ -22,11 +22,10 @@ import java.util.Map;
 public class RankingPanel extends JPanel {
 
     private JTabbedPane rankingPanel;
-    private JLabel easy, normal, hard;
-    private JList easyTable, normalTable, hardTable;
     private JPanel easyPanel, normalPanel, hardPanel;
     private View view;
-    private final Font font = new Font("monospaced", Font.PLAIN, 15);
+
+    private final Font defaultFont = Config.DEFAULT_FONT;
     private final GridBagConstraints gbc = new GridBagConstraints();
 
     private final Comparator<Map.Entry<String, Integer>> comp =
@@ -42,34 +41,14 @@ public class RankingPanel extends JPanel {
         setBackground(Color.black);
 
         JLabel title = new JLabel("SNAKE GAME");
-        title.setFont(new Font("Monospaced", Font.BOLD, 48));
+        title.setFont(defaultFont.deriveFont(Font.BOLD, (float) (Config.SCALE * 2.5)));
         title.setForeground(Color.green);
         title.setHorizontalAlignment(JLabel.CENTER);
 
-        /*
-        easy = new JLabel();
-        easy.setFont(new Font("Monospaced", Font.PLAIN, 20));
-        normal = new JLabel();
-        normal.setFont(new Font("Monospaced", Font.PLAIN, 20));
-        hard = new JLabel();
-        hard.setFont(new Font("Monospaced", Font.PLAIN, 20));
-         */
-
         JLabel tips = new JLabel("Leaderboard will be refresh every 1 minutes",
                                 SwingConstants.CENTER);
-        tips.setFont(font);
+        tips.setFont(defaultFont);
         tips.setForeground(Color.white);
-
-        /*
-        easyTable = new JList();
-        easyTable.setFont(new Font("Monospaced", Font.PLAIN, 20));
-
-        normalTable = new JList();
-        normalTable.setFont(new Font("Monospaced", Font.PLAIN, 20));
-
-        hardTable = new JList();
-        hardTable.setFont(new Font("Monospaced", Font.PLAIN, 20));
-        */
 
         createRankingPanel(width);
         JButton btnRefresh = new JButton("Refresh");
@@ -108,16 +87,16 @@ public class RankingPanel extends JPanel {
         hardPanel.setLayout(new GridBagLayout());
 
         JLabel easyLabel = new JLabel("Easy", SwingConstants.CENTER);
-        easyLabel.setPreferredSize(new Dimension(width / 4, Config.SCALE));
-        easyLabel.setFont(font.deriveFont(Font.BOLD));
+        easyLabel.setPreferredSize(new Dimension(width / 3, Config.SCALE));
+        easyLabel.setFont(defaultFont.deriveFont(Font.BOLD));
 
         JLabel normalLabel = new JLabel("Normal", SwingConstants.CENTER);
-        normalLabel.setPreferredSize(new Dimension(width / 4, Config.SCALE));
-        normalLabel.setFont(font.deriveFont(Font.BOLD));
+        normalLabel.setPreferredSize(new Dimension(width / 3, Config.SCALE));
+        normalLabel.setFont(defaultFont.deriveFont(Font.BOLD));
 
         JLabel hardLabel = new JLabel("Hard", SwingConstants.CENTER);
-        hardLabel.setPreferredSize(new Dimension(width / 4, Config.SCALE));
-        hardLabel.setFont(font.deriveFont(Font.BOLD));
+        hardLabel.setPreferredSize(new Dimension(width / 3, Config.SCALE));
+        hardLabel.setFont(defaultFont.deriveFont(Font.BOLD));
 
         rankingPanel.addTab("Easy", easyPanel);
         rankingPanel.addTab("Normal", normalPanel);
@@ -174,13 +153,13 @@ public class RankingPanel extends JPanel {
         //panel.repaint();
 
         JLabel rank = new JLabel("RANK", SwingConstants.CENTER);
-        rank.setFont(font.deriveFont(Font.BOLD, 20));
+        rank.setFont(defaultFont.deriveFont(Font.BOLD));
 
         JLabel playerName = new JLabel("PLAYER NAME", SwingConstants.CENTER);
-        playerName.setFont(font.deriveFont(Font.BOLD, 20));
+        playerName.setFont(defaultFont.deriveFont(Font.BOLD));
 
         JLabel highScore = new JLabel("SCORE", SwingConstants.CENTER);
-        highScore.setFont(font.deriveFont(Font.BOLD, 20));
+        highScore.setFont(defaultFont.deriveFont(Font.BOLD));
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridy = 0;
@@ -212,9 +191,9 @@ public class RankingPanel extends JPanel {
         JLabel lbPlayerName = new JLabel(playerName, SwingConstants.CENTER);
         JLabel lbHighScore = new JLabel(entry.getValue().toString(), SwingConstants.CENTER);
 
-        lbRank.setFont(font);
-        lbPlayerName.setFont(font);
-        lbHighScore.setFont(font);
+        lbRank.setFont(defaultFont);
+        lbPlayerName.setFont(defaultFont);
+        lbHighScore.setFont(defaultFont);
 
         if (currentUsername.compareTo(username) == 0) {
             lbRank.setOpaque(true);

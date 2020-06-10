@@ -1,5 +1,6 @@
 package main.java.View;
 
+import main.java.Config.Config;
 import main.java.Controller.Controller;
 import main.java.Database.Database;
 import main.java.Model.Player;
@@ -28,7 +29,7 @@ public class ScorePanel extends JPanel {
     private final JLabel score;
     private final JLabel timer;
 
-    private final Font defaultFont = new Font("Monospaced", Font.BOLD, 20);
+    private final Font defaultFont = Config.DEFAULT_FONT;
 
     private final Timer clockTimer;
 

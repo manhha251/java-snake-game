@@ -24,6 +24,8 @@ public class LoginPanel extends JPanel implements KeyListener {
     private View view;
     private JButton btnLogin, btnQuit;
 
+    private final Font defaultFont = Config.DEFAULT_FONT;
+
     public LoginPanel(View view, int width, int height) {
 
         this.view = view;
@@ -33,7 +35,7 @@ public class LoginPanel extends JPanel implements KeyListener {
 
         setBackground(Color.black);
         JLabel title = new JLabel("SNAKE GAME");
-        title.setFont(new Font("Monospaced", Font.BOLD, 48));
+        title.setFont(defaultFont.deriveFont(Font.BOLD, (float) (Config.SCALE * 2.5)));
         title.setForeground(Color.green);
         title.setHorizontalAlignment(JLabel.CENTER);
 

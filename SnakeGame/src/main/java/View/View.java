@@ -39,6 +39,7 @@ public class View extends JFrame{
     private final LoginPanel loginPanel;
     private final RegisterPanel registerPanel;
     private final RankingPanel rankingPanel;
+    private final SettingPanel settingPanel;
 
     private final JDialog pauseDialog;
 
@@ -64,12 +65,14 @@ public class View extends JFrame{
         loginPanel = new LoginPanel(this, width, height);
         registerPanel = new RegisterPanel(this, width, height);
         rankingPanel = new RankingPanel(this, width, height);
+        settingPanel = new SettingPanel(this, width, height);
 
         cardPanel.add(loginPanel, "LOGIN");
         cardPanel.add(registerPanel, "REGISTER");
         cardPanel.add(mainMenuPanel, "MAINMENU");
         cardPanel.add(gamePanel, "GAMEBOARD");
         cardPanel.add(rankingPanel, "RANKING");
+        cardPanel.add(settingPanel, "SETTING");
 
         add(cardPanel, BorderLayout.CENTER);
         add(scorePanel, BorderLayout.EAST);
@@ -225,6 +228,7 @@ public class View extends JFrame{
         scorePanel.updatePlayerInfo(player);
         scorePanel.updateScore(0);
         controller.setPlayer(player);
+        settingPanel.setPlayerName(player.getName());
     }
 
     public void updateRankingBoard() {
@@ -237,7 +241,4 @@ public class View extends JFrame{
         return controller.getRankingBoard();
     }
 
-    public AppState getCurrentState() {
-        return controller.getCurrentState();
-    }
 }
